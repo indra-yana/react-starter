@@ -1,3 +1,9 @@
+
+// TODO: 
+class ContactRepository {
+
+}
+
 let users = [
     {
         id: "dsknfseilerywq",

@@ -14,7 +14,7 @@ export async function action({ request, params }) {
     });
 }
 
-function Contact() {
+function ShowContact() {
     const contact = useLoaderData();
 
     return (
@@ -94,4 +94,4 @@ function Favorite({ contact }) {
     );
 }
 
-export default Contact;
+export default ShowContact;

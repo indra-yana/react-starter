@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import { loader as rootLoader, action as rootAction } from './layouts/Root';
 import App from './App';
 import CommonError from './pages/error/CommonError';
-import Contact, { loader as contactLoader, action as contactAction, } from './pages/contact/Contact';
+import ShowContact, { loader as contactLoader, action as contactAction, } from './pages/contact/ShowContact';
 import EditContact, { action as editContactAction } from './pages/contact/EditContact';
 import ErrorPage from './pages/error/ErrorPage';
 import React from 'react';
@@ -15,35 +15,36 @@ const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <App />,
-		errorElement: <CommonError/>,
+		errorElement: <CommonError />,
 		loader: rootLoader,
 		action: rootAction,
 		children: [
 			{
-				index: true,
-				element: <Index/>,
-				errorElement: <ErrorPage/>,
+				errorElement: <ErrorPage />,
+				children: [
+					{
+						index: true,
+						element: <Index />,
+					},
+					{
+						path: 'contacts/:id',
+						element: <ShowContact />,
+						loader: contactLoader,
+						action: contactAction,
+					},
+					{
+						path: 'contacts/:id/edit',
+						element: <EditContact />,
+						loader: contactLoader,
+						action: editContactAction,
+					},
+					{
+						path: 'contacts/:id/destroy',
+						action: destroyAction,
+					},
+				],
 			},
-			{
-				path: 'contacts/:id',
-				element: <Contact/>,
-				loader: contactLoader,
-				action: contactAction,
-				errorElement: <ErrorPage/>,
-			},
-			{
-				path: 'contacts/:id/edit',
-				element: <EditContact />,
-				loader: contactLoader,
-				action: editContactAction,
-				errorElement: <ErrorPage/>,
-			},
-			{
-				path: 'contacts/:id/destroy',
-				action: destroyAction,
-				errorElement: <ErrorPage/>,
-			}
-		]
+		],
 	},
 ])
 
