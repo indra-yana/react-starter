@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Help(props) {
     return (
         <>
-            <div>
+            <section className="d-grid gap-3">
                 <div className="bg-light p-5 rounded">
                     <div className="col-sm-8 mx-auto">
                         <h1>Help (Need any help?)</h1>
@@ -17,7 +17,7 @@ function Help(props) {
                         </p>
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     )
 }

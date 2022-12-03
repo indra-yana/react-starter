@@ -7,7 +7,9 @@ export default function AuthLayout(props) {
         <>
             <div className="container">
                 <PageNavbar/>
-                <Outlet/>
+                <main className="vh-100">
+                    <Outlet/>
+                </main>
             </div>
         </>
     )

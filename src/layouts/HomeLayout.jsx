@@ -8,9 +8,9 @@ export default function HomeLayout(props) {
         <>
             <div className="container">
                 <HomeNavbar/>
-                <div className="pb-5 min-vh-100">
+                <main className="pb-5 vh-100">
                     <Outlet/>
-                </div>
+                </main>
                 <BottomAppBar/>
             </div>
         </>

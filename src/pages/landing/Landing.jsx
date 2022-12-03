@@ -6,7 +6,7 @@ function Landing(props) {
 
     return (
         <>
-            <div className="d-grid gap-3">
+            <section className="d-grid gap-3">
                 <div className="bg-light p-5 rounded ">
                     <div className="col-sm-8 mx-auto">
                         <h1>Welcome Back!</h1>
@@ -22,7 +22,7 @@ function Landing(props) {
 
                 <hr className="featurette-divider" />
 
-                {/* <div className="container marketing">
+                <div className="container marketing">
                     <div className="row">
                         <div className="col-lg-4">
                             <svg className="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
@@ -46,8 +46,8 @@ function Landing(props) {
                             <p><a className="btn btn-secondary" href="#">View details »</a></p>
                         </div>
                     </div>
-                </div> */}
-            </div>
+                </div>
+            </section>
         </>
     )
 }
