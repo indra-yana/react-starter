@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export default function Login(props) {
-
-    const  [email, setEmail] = useState("");
+    const  [email, setEmail] = useLocalStorage("email", "");
 
     function handleChange(e) {
         setEmail(e.target.value);
