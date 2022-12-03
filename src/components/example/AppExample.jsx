@@ -1,18 +1,18 @@
-import './App.css'
-import { useContext, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import Clock from './components/example/Clock'
-import Counter from './components/example/Counter'
-import LoginControl from './components/example/LoginControl'
-import Toggle from './components/example/Toggle'
-import NumberList from './components/example/NumberList'
-import TextForm from './components/example/TextForm'
-import TextAreaForm from './components/example/TextAreaForm'
-import SelectForm from './components/example/SelectForm'
-import MultiInputForm from './components/example/MultiInputForm'
-import TemperatureCalculator from './components/example/TemperatureCalculator'
-import { AuthContext, auth } from './utils/AuthContext'
-import Greeting from './components/example/Greeting'
+import '../../assets/css/app.css';
+import { useContext, useState } from 'react';
+import reactLogo from '../../assets/react.svg';
+import Clock from './Clock';
+import Counter from './Counter';
+import LoginControl from './LoginControl';
+import Toggle from './Toggle';
+import NumberList from './NumberList';
+import TextForm from './TextForm';
+import TextAreaForm from './TextAreaForm';
+import SelectForm from './SelectForm';
+import MultiInputForm from './MultiInputForm';
+import TemperatureCalculator from './TemperatureCalculator';
+import { AuthContext, auth } from '../../context/AuthContext';
+import Greeting from './Greeting';
 
 function App() {
   const [
