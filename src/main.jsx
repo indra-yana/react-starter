@@ -1,16 +1,18 @@
 import './assets/css/styles.css';
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { action as destroyAction } from './pages/contact/DestroyContact';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
-import Root, { loader as rootLoader, action as rootAction } from './layouts/Root';
 import App from './App';
 import CommonError from './pages/error/CommonError';
-import ShowContact, { loader as contactLoader, action as contactAction, } from './pages/contact/ShowContact';
 import EditContact, { action as editContactAction } from './pages/contact/EditContact';
 import ErrorPage from './pages/error/ErrorPage';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
 import Index from './pages/contact/Index';
 import Landing from './pages/landing/Landing';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Root, { loader as rootLoader, action as rootAction } from './layouts/Root';
+import ShowContact, { loader as contactLoader, action as contactAction, } from './pages/contact/ShowContact';
 
 const router = createBrowserRouter([
 	{
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'contacts',
-				element: <Root/>,
+				element: <Root />,
 				loader: rootLoader,
 				action: rootAction,
 				children: [
