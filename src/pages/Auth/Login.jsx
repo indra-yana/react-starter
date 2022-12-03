@@ -4,8 +4,8 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { usePageTitle } from "../../hooks/usePageTitle";
 
 export default function Login(props) {
-    const  [email, setEmail] = useLocalStorage("email", "");
     usePageTitle('Login');
+    const  [email, setEmail] = useLocalStorage("email", "");
 
     function handleChange(e) {
         setEmail(e.target.value);
