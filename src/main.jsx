@@ -1,6 +1,8 @@
-import './assets/css/styles.css';
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import './assets/css/styles.css';
 import { action as destroyAction } from './pages/contact/DestroyContact';
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import App from './App';
@@ -13,6 +15,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Root, { loader as rootLoader, action as rootAction } from './layouts/Root';
 import ShowContact, { loader as contactLoader, action as contactAction, } from './pages/contact/ShowContact';
+import HomeLayout from './layouts/HomeLayout';
+import Help from './pages/help/Help';
+import AuthLayout from './layouts/AuthLayout';
+import Login from './pages/Auth/Login';
 
 const router = createBrowserRouter([
 	{
@@ -23,8 +29,27 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Landing />,
-				index: true,
+				element: <HomeLayout />,
+				children: [
+					{
+						index:true,
+						element: <Landing/>,
+					},
+					{
+						path:'help',
+						element: <Help/>,
+					},
+				]
+			},
+			{
+				path: 'auth',
+				element: <AuthLayout />,
+				children: [
+					{
+						path:'login',
+						element: <Login/>,
+					},
+				]
 			},
 			{
 				path: 'contacts',

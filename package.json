@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "@sweetalert2/theme-wordpress-admin": "^5.0.15",
     "axios": "^1.2.0",
     "bootstrap": "^5.2.3",

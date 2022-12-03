@@ -29,11 +29,6 @@ body {
     color: #121212;
 }
 
-/* #root {
-    margin: 0 auto;
-    padding: 1.5rem;
-} */
-
 textarea,
 input,
 button {
@@ -46,6 +41,10 @@ button {
     background-color: white;
     line-height: 1.5;
     margin: 0;
+}
+
+a {
+    text-decoration: none !important;
 }
 
 button {
@@ -112,7 +111,19 @@ form[action$="destroy"] button {
     display: flex;
     height: 100%;
     width: 100%;
-    padding: 2rem;
+    padding: 1.5rem;
+}
+
+@media (max-width: 767.98px) { 
+    #root {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    #root {
+        padding: 0.5 0 0 0;
+    }
 }
 
 #sidebar {
@@ -403,3 +414,24 @@ i {
     justify-content: center;
     width: 100%;
 }
+
+
+/* auth */
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
