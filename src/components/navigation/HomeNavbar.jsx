@@ -7,8 +7,8 @@ export default function HomeNavbar(props) {
 
     return (
         <>
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark shadow-sm mb-3 rounded">
-                <div className="container">
+            <div className="container sticky-top p-0">
+                <nav className="navbar navbar-expand-md navbar-dark bg-dark shadow-sm mb-3 px-3 rounded">
                     <a className="navbar-brand ">
                         <img src={reactLogo} alt="avatar" width="32" height="32" className="rounded-circle border border-1 border-secondary" />
                     </a>
@@ -63,8 +63,8 @@ export default function HomeNavbar(props) {
                                 </li>}
                         </ul>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </>
     )
 }

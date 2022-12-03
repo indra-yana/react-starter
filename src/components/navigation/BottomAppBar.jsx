@@ -25,12 +25,13 @@ export default function BottomAppBar(props) {
                                 <span className="small d-block">Others</span>
                             </Link>
 
-                            <div className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuProfile">
-                                <a className="dropdown-item" href="#">Edit Profile</a>
-                                <a className="dropdown-item" href="#">Notification</a>
-                                <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="#">Logout</a>
-                            </div>
+                            <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end d-grid gap-1 p-2 rounded-3 mx-0 border-0 shadow w-220px" aria-labelledby="dropdownMenuProfile">
+                                <li><a className="dropdown-item rounded-2 active" href="#">Edit Profile</a></li>
+                                <li><a className="dropdown-item rounded-2" href="#">Notification</a></li>
+                                <li><a className="dropdown-item rounded-2" href="#">Something else here</a></li>
+                                <li><hr className="dropdown-divider"/></li>
+                                <li><a className="dropdown-item rounded-2" href="#">Separated link</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
