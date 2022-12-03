@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { usePageTitle } from "../../hooks/usePageTitle";
 
-export default function Login(props) {
-    const  [email, setEmail] = useLocalStorage("email", "");
-    usePageTitle('Login');
-
-    function handleChange(e) {
-        setEmail(e.target.value);
-    }
+export default function Register(props) {
+    usePageTitle('Register');
 
     return (
         <>
@@ -21,7 +15,7 @@ export default function Login(props) {
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form>
                             <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                <p className="lead fw-normal mb-0 me-3">Sign in with</p>
+                                <p className="lead fw-normal mb-0 me-3">Register Using</p>
                                 <button type="button" className="btn btn-primary btn-floating mx-1">
                                     <i className="fab fa-facebook-f text-white"></i>
                                 </button>
@@ -40,29 +34,29 @@ export default function Login(props) {
                             </div>
 
                             <div className="form-outline mb-4">
+                                <label className="form-label" htmlFor="name">Name <span className="text-danger">*</span></label>
+                                <input type="text" name="name" id="name" className="form-control form-control-md" placeholder="Enter your name" required />
+                            </div>
+                            
+                            <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="email">Email address <span className="text-danger">*</span></label>
-                                <input type="email" name="email" value={email} onChange={handleChange} id="email" className="form-control form-control-md" placeholder="Enter a valid email address" required />
+                                <input type="email" name="email" id="email" className="form-control form-control-md" placeholder="Enter a valid email address" required />
                             </div>
 
                             <div className="form-outline mb-3">
                                 <label className="form-label" htmlFor="password">Password <span className="text-danger">*</span></label>
                                 <input type="password" name="password" id="password" className="form-control form-control-md" placeholder="Enter password" required />
                             </div>
-
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div className="form-check mb-0">
-                                    <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                                    <label className="form-check-label" htmlFor="form2Example3">
-                                        Remember me
-                                    </label>
-                                </div>
-                                <a href="#!" className="text-body">Forgot password?</a>
+                            
+                            <div className="form-outline mb-3">
+                                <label className="form-label" htmlFor="password_confirmation">Repeat Password <span className="text-danger">*</span></label>
+                                <input type="password" name="password_confirmation" id="password_confirmation" className="form-control form-control-md" placeholder="Enter password confirmation" required />
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" className="btn btn-outline-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}>Login</button>
-                                <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
-                                    <Link to={'/auth/register'} className="link-danger"> Register</Link>
+                                <button type="submit" className="btn btn-outline-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}>Register</button>
+                                <p className="small fw-bold mt-2 pt-1 mb-0">Already have an account?
+                                    <Link to={'/auth/login'} className="link-danger"> Login</Link>
                                 </p>
                             </div>
                         </form>
