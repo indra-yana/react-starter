@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import reactLogo from "../../assets/react.svg"
 
 export default function HomeNavbar(props) {
@@ -19,7 +19,7 @@ export default function HomeNavbar(props) {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto">
                             <li>
-                                <Link to={'/help'} className="nav-link px-2 active">Help?</Link>
+                                <NavLink to={'/help'} className="nav-link px-2">Help?</NavLink>
                             </li>
                             {/* <li><a href="#" className="nav-link px-2 active">Home</a></li>
                                 <li><a href="#" className="nav-link px-2">About</a></li>
@@ -45,7 +45,7 @@ export default function HomeNavbar(props) {
                             {!isLogin &&
                                 <li className="nav-item mt-2 mt-sm-0">
                                     <div className="d-flex gap-2">
-                                        <Link to={'/auth/login'} className="btn btn-outline-light">Login</Link>
+                                        <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
                                         <button type="button" className="btn btn-warning me-2" >Sign-up</button>
                                     </div>
                                 </li>}

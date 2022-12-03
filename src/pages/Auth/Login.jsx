@@ -32,12 +32,12 @@ export default function Login(props) {
 
                                 <div className="form-outline mb-4">
                                     <label className="form-label" htmlFor="form3Example3">Email address</label>
-                                    <input type="email" id="form3Example3" className="form-control form-control-lg" placeholder="Enter a valid email address" />
+                                    <input type="email" id="form3Example3" className="form-control form-control-lg" placeholder="Enter a valid email address" required />
                                 </div>
 
                                 <div className="form-outline mb-3">
                                     <label className="form-label" htmlFor="form3Example4">Password</label>
-                                    <input type="password" id="form3Example4" className="form-control form-control-lg" placeholder="Enter password" />
+                                    <input type="password" id="form3Example4" className="form-control form-control-lg" placeholder="Enter password" required />
                                 </div>
 
                                 <div className="d-flex justify-content-between align-items-center">
@@ -51,8 +51,8 @@ export default function Login(props) {
                                 </div>
 
                                 <div className="text-center text-lg-start mt-4 pt-2">
-                                    <button type="button" className="btn btn-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}>Login</button>
-                                    <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? 
+                                    <button type="submit" className="btn btn-outline-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}>Login</button>
+                                    <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                                         <a href="#!" className="link-danger"> Register</a>
                                     </p>
                                 </div>
