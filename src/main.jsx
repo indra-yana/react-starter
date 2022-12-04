@@ -23,6 +23,7 @@ import Register from './pages/Auth/Register';
 import Forgot from './pages/Auth/Password/Forgot';
 import Reset from './pages/Auth/Password/Reset';
 import Confirm from './pages/Auth/Password/Confirm';
+import Verify from './pages/Auth/Verify';
 
 const router = createBrowserRouter([
 	{
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
 					{
 						path:'confirm',
 						element: <Confirm/>,
+					},
+					{
+						path:'verify',
+						element: <Verify/>,
 					},
 				]
 			},
