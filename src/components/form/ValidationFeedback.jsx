@@ -5,8 +5,8 @@ export default function ValidationFeedback(props) {
     )
 
     return (
-        <div class="invalid-feedback mt-1">
-            <ul className="p-0">{validationItems}</ul>
+        <div className="invalid-feedback mt-1">
+            <ul>{validationItems}</ul>
         </div>
     )
 }
