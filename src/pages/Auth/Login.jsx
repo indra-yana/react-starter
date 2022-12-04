@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import { sleep } from "../../repository/contact-repository";
 
 export default function Login(props) {
     usePageTitle('Login');
-    const  [email, setEmail] = useLocalStorage("email", "");
     const { setIsLoading } = useOutletContext();
 
-    function handleChange(e) {
-        setEmail(e.target.value);
-    }
+    const [credential, setCredential] = useState("");
+    const [password, setPassword] = useState("");
+    const [remember, setRemember] = useState(false);
 
-    async function handleSubmit() {
+    useEffect(() => {
+        
+    }, []);
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
         // Some expensive operation
         setIsLoading(true);
         await sleep(3000);
@@ -49,19 +53,19 @@ export default function Login(props) {
                             </div>
 
                             <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="email">Email address <span className="text-danger">*</span></label>
-                                <input type="email" name="email" value={email} onChange={handleChange} id="email" className="form-control form-control-md" placeholder="Enter a valid email address" required />
+                                <label className="form-label" htmlFor="credential">Email address / Username <span className="text-danger">*</span></label>
+                                <input type="text" name="credential" value={credential} onChange={(e) => setCredential(e.target.value)} id="credential" className="form-control form-control-md" placeholder="Enter a valid email address" required />
                             </div>
 
                             <div className="form-outline mb-3">
                                 <label className="form-label" htmlFor="password">Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password" id="password" className="form-control form-control-md" placeholder="Enter password" required />
+                                <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} id="password" className="form-control form-control-md" placeholder="Enter password" required />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="form-check mb-0">
-                                    <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                                    <label className="form-check-label" htmlFor="form2Example3">
+                                    <input className="form-check-input me-2" type="checkbox" name="remember" checked={remember} onChange={(e) => setRemember(e.target.checked)} id="remember" />
+                                    <label className="form-check-label" htmlFor="remember">
                                         Remember me
                                     </label>
                                 </div>
@@ -69,7 +73,7 @@ export default function Login(props) {
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="button" onClick={handleSubmit} className="btn btn-outline-primary px-5">Login</button>
+                                <button type="submit" onClick={handleSubmit} className="btn btn-outline-primary px-5">Login</button>
                                 <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                                     <Link to={'/auth/register'} className="link-danger"> Register</Link>
                                 </p>
