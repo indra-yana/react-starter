@@ -54,7 +54,7 @@ export default function Register(props) {
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" className="btn btn-outline-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}>Register</button>
+                                <button type="submit" className="btn btn-outline-primary px-5">Register</button>
                                 <p className="small fw-bold mt-2 pt-1 mb-0">Already have an account?
                                     <Link to={'/auth/login'} className="link-danger"> Login</Link>
                                 </p>

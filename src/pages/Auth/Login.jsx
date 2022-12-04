@@ -56,11 +56,11 @@ export default function Login(props) {
                                         Remember me
                                     </label>
                                 </div>
-                                <a href="#!" className="text-body">Forgot password?</a>
+                                <Link to={'/auth/forgot'} className="text-body"> Forgot password?</Link>
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" className="btn btn-outline-primary btn-lg" style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}>Login</button>
+                                <button type="submit" className="btn btn-outline-primary px-5">Login</button>
                                 <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                                     <Link to={'/auth/register'} className="link-danger"> Register</Link>
                                 </p>

@@ -46,7 +46,7 @@ export default function HomeNavbar(props) {
                                 <li className="nav-item mt-2 mt-sm-0">
                                     <div className="d-flex gap-2">
                                         <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
-                                        <button type="button" className="btn btn-warning me-2" >Sign-up</button>
+                                        <NavLink to={'/auth/register'} className="btn btn-warning">Sign-up</NavLink>
                                     </div>
                                 </li>}
                             {isLogin &&

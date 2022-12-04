@@ -20,6 +20,8 @@ import Help from './pages/help/Help';
 import AuthLayout from './layouts/AuthLayout';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
+import Forgot from './pages/Auth/Password/Forgot';
+import Reset from './pages/Auth/Password/Reset';
 
 const router = createBrowserRouter([
 	{
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
 					{
 						path:'register',
 						element: <Register/>,
+					},
+					{
+						path:'forgot',
+						element: <Forgot/>,
+					},
+					{
+						path:'reset/:token',
+						element: <Reset/>,
 					},
 				]
 			},
