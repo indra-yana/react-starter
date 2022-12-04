@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { usePageTitle } from "../../hooks/usePageTitle";
+import { sleep } from "../../repository/contact-repository";
 
 export default function Login(props) {
     usePageTitle('Login');
     const  [email, setEmail] = useLocalStorage("email", "");
+    const { setIsLoading } = useOutletContext();
 
     function handleChange(e) {
         setEmail(e.target.value);
+    }
+
+    async function handleSubmit() {
+        // Some expensive operation
+        setIsLoading(true);
+        await sleep(3000);
+        setIsLoading(false);
     }
 
     return (
@@ -60,7 +69,7 @@ export default function Login(props) {
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" className="btn btn-outline-primary px-5">Login</button>
+                                <button type="button" onClick={handleSubmit} className="btn btn-outline-primary px-5">Login</button>
                                 <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                                     <Link to={'/auth/register'} className="link-danger"> Register</Link>
                                 </p>
