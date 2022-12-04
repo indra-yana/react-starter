@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useOutletContext } from "react-router-dom";
+import ValidationFeedback from "../../components/form/ValidationFeedback";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import { sleep } from "../../repository/contact-repository";
 
@@ -7,6 +8,7 @@ export default function Login(props) {
     usePageTitle('Login');
     const { setIsLoading } = useOutletContext();
 
+    const [validation, setValidation] = useState({});
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [remember, setRemember] = useState(false);
@@ -54,12 +56,14 @@ export default function Login(props) {
 
                             <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="credential">Email address / Username <span className="text-danger">*</span></label>
-                                <input type="text" name="credential" value={credential} onChange={(e) => setCredential(e.target.value)} id="credential" className="form-control form-control-md" placeholder="Enter a valid email address" required />
+                                <input type="text" name="credential" value={credential} onChange={(e) => setCredential(e.target.value)} id="credential" className={`form-control ${validation.credential ? 'is-invalid' : ''}`} placeholder="Enter a valid email address" required />
+                                <ValidationFeedback validation={validation.credential} />
                             </div>
 
                             <div className="form-outline mb-3">
                                 <label className="form-label" htmlFor="password">Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} id="password" className="form-control form-control-md" placeholder="Enter password" required />
+                                <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} id="password" className={`form-control ${validation.password ? 'is-invalid' : ''}`} placeholder="Enter password" required />
+                                <ValidationFeedback validation={validation.password} />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center">
