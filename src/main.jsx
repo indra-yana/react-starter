@@ -22,6 +22,7 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import Forgot from './pages/Auth/Password/Forgot';
 import Reset from './pages/Auth/Password/Reset';
+import Confirm from './pages/Auth/Password/Confirm';
 
 const router = createBrowserRouter([
 	{
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
 					{
 						path:'reset/:token',
 						element: <Reset/>,
+					},
+					{
+						path:'confirm',
+						element: <Confirm/>,
 					},
 				]
 			},
