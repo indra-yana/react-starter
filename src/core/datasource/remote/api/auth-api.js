@@ -18,37 +18,37 @@ export async function register(payloads) {
 }
 
 export async function sendVerificationLink(email) {
-    await apiClient.post('/v1/auth/verify/resend', {
+    return await apiClient.post('/v1/auth/verify/resend', {
         email,
     });
 }
 
 export async function verify(token, email) {
-    await apiClient.put('/v1/auth/verify', {
+    return await apiClient.put('/v1/auth/verify', {
         token,
         email
     });
 }
 
 export async function sendResetPasswordLink(email) {
-    await apiClient.post('/v1/auth/password/email', {
+    return await apiClient.post('/v1/auth/password/email', {
         email,
     });
 }
 
 export async function resetPassword(password, password_confirmation) {
-    await apiClient.post('/v1/auth/password/email', {
+    return await apiClient.post('/v1/auth/password/reset', {
         password,
         password_confirmation,
     });
 }
 
 export async function refreshToken(refreshToken) {
-    await apiClient.post('/v1/auth/refreshToken', {
+    return await apiClient.post('/v1/auth/refreshToken', {
         refreshToken,
     });
 }
 
 export async function whoami() {
-    await apiClient.get('/v1/auth/whoami');
+    return await apiClient.get('/v1/auth/whoami');
 }

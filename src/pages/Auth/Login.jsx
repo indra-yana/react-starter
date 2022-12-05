@@ -40,10 +40,10 @@ export default function Login(props) {
         setIsLoading(true);
 
         const result = await authRepository.login(credential, password);
-        const { message, data = {}, error = {} } = result;
+        const { message, status, data = {}, error = {} } = result;
 
         setIsLoading(false);
-        if (Object.keys(error).length) {
+        if (status === 'error') {
             setValidation(error);
             Toast.error(message);
             return;
@@ -62,7 +62,7 @@ export default function Login(props) {
                         <img src="/assets/img/draw2.webp" className="img-fluid" alt="Sample image" />
                     </div>
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form action="" method="POST" onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                                 <p className="lead fw-normal mb-0 me-3">Sign in with</p>
                                 <button type="button" className="btn btn-primary btn-floating mx-1">

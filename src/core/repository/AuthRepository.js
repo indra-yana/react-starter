@@ -35,9 +35,11 @@ export class AuthRepository {
 
     async verify(token, email) {
         return await verify(token, email)
+            .then(success)
+            .catch(error);
     }
 
-    async sendVerificationLink(email) {
+    async sendResetPasswordLink(email) {
         return await sendResetPasswordLink(email)
             .then(success)
             .catch(error);
