@@ -43,20 +43,13 @@ export default function Login(props) {
         const { message, data = {}, error = {} } = result;
 
         setIsLoading(false);
-        if (error) {
+        if (Object.keys(error).length) {
             setValidation(error);
-            Toast.fire({
-                icon: 'error',
-                title: message
-            });
-
+            Toast.error(message);
             return;
         }
 
-        Toast.fire({
-            icon: 'success',
-            title: message
-        });
+        Toast.success(message);
 
         console.log(data);
     }
@@ -69,7 +62,7 @@ export default function Login(props) {
                         <img src="/assets/img/draw2.webp" className="img-fluid" alt="Sample image" />
                     </div>
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form>
+                        <form action="" method="POST" onSubmit={handleSubmit}>
                             <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                                 <p className="lead fw-normal mb-0 me-3">Sign in with</p>
                                 <button type="button" className="btn btn-primary btn-floating mx-1">
@@ -112,7 +105,7 @@ export default function Login(props) {
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" onClick={handleSubmit} className="btn btn-outline-primary px-5">Login</button>
+                                <button type="submit" className="btn btn-outline-primary px-5">Login</button>
                                 <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                                     <Link to={'/auth/register'} className="link-danger"> Register</Link>
                                 </p>

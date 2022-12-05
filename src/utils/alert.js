@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-const Toast = Swal.mixin({
+export const SwalMixin = Swal.mixin({
 	toast: true,
 	position: 'top-end',
 	showConfirmButton: true,
@@ -25,7 +25,24 @@ const ToastDelete = Swal.mixin({
 	buttonsStyling: false
 });
 
-export {
-	Toast,
-	ToastDelete
+export const Toast = {
+	error: (message) => {
+		SwalMixin.fire({
+			icon: 'error',
+			title: message
+		});
+	},
+	success: (message) => {
+		SwalMixin.fire({
+			icon: 'success',
+			title: message
+		});
+	},
+	warning: (message) => {
+		SwalMixin.fire({
+			icon: 'warning',
+			title: message
+		});
+	},
+	confirmDelete: ToastDelete,
 };
