@@ -1,12 +1,12 @@
+import { handleInputType } from "../../../utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
-import { RepositoryFactory } from "../../../core/repository/RepositoryFactory";
 import { Toast } from "../../../utils/alert";
+import { useAuthViewModel } from "../../../core/viewmodel/useAuthViewModel";
+import { useEffect } from "react";
 import { usePageTitle } from "../../../hooks/usePageTitle";
 import { useState } from "react";
 import React from "react";
-import { handleInputType } from "../../../utils/input-helper";
 
-const authRepository = RepositoryFactory.get('auth');
 const defaultForm = {
     email: "",
 }
@@ -17,6 +17,8 @@ export default function Forgot(props) {
     
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
+    
+    const [state, sendResetPasswordLink] = useAuthViewModel();
 
     function handleInputChange(e) {
         const { name } = e.target;
@@ -31,15 +33,23 @@ export default function Forgot(props) {
         });
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        setIsLoading(true);
+    useEffect(() => {
+        setIsLoading(state.loading);
 
-        const result = await authRepository.sendResetPasswordLink(form.email);
-        const { message, status, data = {}, error = {} } = result;
+        if (state.success) {
+            const { message, data = {} } = state.result;
+            setAlert({
+                show: true,
+                type: 'success',
+                autoClose: true,
+                message,
+            });
 
-        setIsLoading(false);
-        if (status === 'error') {
+            Toast.success(message);
+            resetForm();
+            console.log(data);
+        } else if (state.error) {
+            const { message, error = {} } = state.result;
             setValidation(error);
 
             setAlert({
@@ -49,19 +59,13 @@ export default function Forgot(props) {
             });
 
             Toast.error(message);
-            return;
         }
 
-        setAlert({
-            show: true,
-            type: 'success',
-            autoClose: true,
-            message,
-        });
-        Toast.success(message);
+    }, [state])
 
-        resetForm();
-        console.log(result);
+    async function handleSubmit(e) {
+        e.preventDefault();
+        await sendResetPasswordLink(form.email);
     }
 
     function resetForm() {
