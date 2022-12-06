@@ -1,13 +1,11 @@
+import { AuthViewModel } from "../../core/viewmodel/AuthViewModel";
 import { handleInputType } from "../../utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
-import { RepositoryFactory } from "../../core/repository/RepositoryFactory";
 import { Toast } from "../../utils/alert";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import React, { useState } from "react";
 import ValidationFeedback from "../../components/form/ValidationFeedback";
-import { AuthViewModel } from "../../core/viewmodel/AuthViewModel";
 
-const authRepository = RepositoryFactory.get('auth');
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {
     name: "",
