@@ -1,7 +1,7 @@
 import { handleInputType } from "../../../utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../utils/alert";
-import { useAuthViewModel } from "../../../core/viewmodel/useAuthViewModel";
+import { AuthViewModel } from "../../../core/viewmodel/AuthViewModel";
 import { useEffect } from "react";
 import { usePageTitle } from "../../../hooks/usePageTitle";
 import { useState } from "react";
@@ -18,7 +18,7 @@ export default function Forgot(props) {
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
     
-    const [state, sendResetPasswordLink] = useAuthViewModel();
+    const [state, sendResetPasswordLink] = AuthViewModel();
 
     function handleInputChange(e) {
         const { name } = e.target;
@@ -34,10 +34,10 @@ export default function Forgot(props) {
     }
 
     useEffect(() => {
-        setIsLoading(state.loading);
+        setIsLoading(state.LOADING);
 
-        if (state.success) {
-            const { message, data = {} } = state.result;
+        if (state.SUCCESS) {
+            const { message, data = {} } = state.RESULT;
             setAlert({
                 show: true,
                 type: 'success',
@@ -48,8 +48,8 @@ export default function Forgot(props) {
             Toast.success(message);
             resetForm();
             console.log(data);
-        } else if (state.error) {
-            const { message, error = {} } = state.result;
+        } else if (state.ERROR) {
+            const { message, error = {} } = state.RESULT;
             setValidation(error);
 
             setAlert({
