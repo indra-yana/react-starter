@@ -9,7 +9,7 @@ const authRepository = RepositoryFactory.get('auth');
 
 export default function Forgot(props) {
     usePageTitle('Forgot Password');
-    const { setIsLoading } = useOutletContext();
+    const { setIsLoading, setAlert } = useOutletContext();
     
     const [validation, setValidation] = useState({});
     const [email, setEmail] = useState("");
@@ -37,10 +37,23 @@ export default function Forgot(props) {
         setIsLoading(false);
         if (status === 'error') {
             setValidation(error);
+
+            setAlert({
+                show: true,
+                type: 'danger',
+                message,
+            });
+
             Toast.error(message);
             return;
         }
 
+        setAlert({
+            show: true,
+            type: 'success',
+            autoClose: true,
+            message,
+        });
         Toast.success(message);
 
         console.log(result);
