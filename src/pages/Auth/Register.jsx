@@ -1,9 +1,84 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { handleInputType } from "../../utils/input-helper";
+import { Link, useOutletContext } from "react-router-dom";
+import { RepositoryFactory } from "../../core/repository/RepositoryFactory";
+import { Toast } from "../../utils/alert";
 import { usePageTitle } from "../../hooks/usePageTitle";
+import React, { useState } from "react";
+import ValidationFeedback from "../../components/form/ValidationFeedback";
+
+const authRepository = RepositoryFactory.get('auth');
+const defaultPreview = '/assets/img/user.png';
+const defaultForm = {
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    avatar: null,
+}
 
 export default function Register(props) {
     usePageTitle('Register');
+    const { setIsLoading, setAlert } = useOutletContext();
+
+    const [validation, setValidation] = useState({});
+    const [avatarPreview, setAvatarPreview] = useState(defaultPreview);
+    const [form, setForm] = useState(defaultForm);
+
+    function handleInputChange(e) {
+        const { name } = e.target;
+        const value = handleInputType(e);
+        delete validation[name];
+
+        setForm((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            }
+        });
+
+        if (name === 'avatar' && value) {
+            setAvatarPreview(URL.createObjectURL(value));
+        }
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        setIsLoading(true);
+
+        const result = await authRepository.register(form);
+        const { message, status, data = {}, error = {} } = result;
+
+        setIsLoading(false);
+        if (status === 'error') {
+            setValidation(error);
+
+            setAlert({
+                show: true,
+                type: 'danger',
+                message,
+            });
+
+            Toast.error(message);
+            return;
+        }
+
+        setAlert({
+            show: true,
+            type: 'success',
+            autoClose: true,
+            message,
+        });
+        Toast.success(message);
+
+        resetForm();
+        console.log(result);
+    }
+
+    function resetForm() {
+        setForm(defaultForm);
+        setAvatarPreview(defaultPreview);
+    }
 
     return (
         <>
@@ -12,8 +87,8 @@ export default function Register(props) {
                     <div className="col-md-9 col-lg-6 col-xl-5">
                         <img src="/assets/img/draw2.webp" className="img-fluid" alt="Sample image" />
                     </div>
-                    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form>
+                    <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 py-4">
+                        <form onSubmit={handleSubmit}>
                             <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                                 <p className="lead fw-normal mb-0 me-3">Register Using</p>
                                 <button type="button" className="btn btn-primary btn-floating mx-1">
@@ -35,22 +110,40 @@ export default function Register(props) {
 
                             <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="name">Name <span className="text-danger">*</span></label>
-                                <input type="text" name="name" id="name" className="form-control form-control-md" placeholder="Enter your name" required />
+                                <input type="text" name="name" id="name" value={form.name} onChange={handleInputChange} className={`form-control ${validation.name && 'is-invalid'}`} placeholder="Enter your name" required />
+                                <ValidationFeedback validation={validation.name} />
                             </div>
-                            
+
+                            <div className="form-outline mb-4">
+                                <label className="form-label" htmlFor="username">Username <span className="text-danger">*</span></label>
+                                <input type="text" name="username" id="username" value={form.username} onChange={handleInputChange} className={`form-control ${validation.username && 'is-invalid'}`} placeholder="Enter your unique name" required />
+                                <ValidationFeedback validation={validation.username} />
+                            </div>
+
                             <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="email">Email address <span className="text-danger">*</span></label>
-                                <input type="email" name="email" id="email" className="form-control form-control-md" placeholder="Enter a valid email address" required />
+                                <input type="email" name="email" id="email" value={form.email} onChange={handleInputChange} className={`form-control ${validation.email && 'is-invalid'}`} placeholder="Enter a valid email address" required />
+                                <ValidationFeedback validation={validation.email} />
                             </div>
 
                             <div className="form-outline mb-3">
                                 <label className="form-label" htmlFor="password">Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password" id="password" className="form-control form-control-md" placeholder="Enter password" required />
+                                <input type="password" name="password" id="password" value={form.password} onChange={handleInputChange} className={`form-control ${validation.password && 'is-invalid'}`} placeholder="Enter password" required />
+                                <ValidationFeedback validation={validation.password} />
                             </div>
-                            
+
                             <div className="form-outline mb-3">
                                 <label className="form-label" htmlFor="password_confirmation">Repeat Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password_confirmation" id="password_confirmation" className="form-control form-control-md" placeholder="Enter password confirmation" required />
+                                <input type="password" name="password_confirmation" id="password_confirmation" value={form.password_confirmation} onChange={handleInputChange} className={`form-control ${validation.password_confirmation && 'is-invalid'}`} placeholder="Enter password confirmation" required />
+                                <ValidationFeedback validation={validation.password_confirmation} />
+                            </div>
+
+                            <div className="form-outline mb-3">
+                                <label className="form-label" htmlFor="avatar">Avatar</label>
+                                <input type="file" name="avatar" id="avatar" onChange={handleInputChange} className={`form-control ${validation.avatar && 'is-invalid'}`} accept="image/*" />
+                                <ValidationFeedback validation={validation.avatar} />
+                                <br />
+                                <img className="img-fluid rounded-circle border border-1 border-secondary avatar-95" src={avatarPreview} id="img-preview" alt="Avatar" />
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">

@@ -114,7 +114,7 @@ form[action$="destroy"] button {
     padding: 1.5rem;
 }
 
-@media (max-width: 767.98px) { 
+@media (max-width: 767.98px) {
     #root {
         padding: 0.5rem;
     }
@@ -272,14 +272,21 @@ i {
     width: 100%;
 }
 
-#detail.loading, #main.loading {
+.avatar-95 {
+    width: 95px;
+    height: 95px;
+    object-fit: cover;
+}
+
+#detail.loading,
+#main.loading {
     opacity: 0.25;
     transition: opacity 200ms;
     transition-delay: 200ms;
     pointer-events: none;
     user-select: none;
-    -webkit-user-select: none; 
-    -moz-user-select: none; 
+    -webkit-user-select: none;
+    -moz-user-select: none;
     -ms-user-select: none;
 }
 
