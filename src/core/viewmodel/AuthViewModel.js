@@ -1,6 +1,6 @@
 import { RepositoryFactory } from "../repository/RepositoryFactory";
 import { useState } from "react";
-import { STATE } from "../../utils/constant";
+import { STATE } from "../../utils/view-state";
 
 const authRepository = RepositoryFactory.get('auth');
 
@@ -9,7 +9,9 @@ export function AuthViewModel() {
 
     async function sendResetPasswordLink(email) {
         setState(STATE.Loading);
+        
         const result = await authRepository.sendResetPasswordLink(email);
+
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;

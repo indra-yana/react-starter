@@ -1,4 +1,4 @@
-export const VIEW_STATE = {
+const VIEW_STATE = {
     LOADING: false,
     SUCCESS: false,
     ERROR: false,
