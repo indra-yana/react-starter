@@ -4,34 +4,38 @@ import { Toast } from "../../../utils/alert";
 import { usePageTitle } from "../../../hooks/usePageTitle";
 import { useState } from "react";
 import React from "react";
+import { handleInputType } from "../../../utils/input-helper";
 
 const authRepository = RepositoryFactory.get('auth');
+const defaultForm = {
+    email: "",
+}
 
 export default function Forgot(props) {
     usePageTitle('Forgot Password');
     const { setIsLoading, setAlert } = useOutletContext();
     
     const [validation, setValidation] = useState({});
-    const [email, setEmail] = useState("");
+    const [form, setForm] = useState(defaultForm);
 
     function handleInputChange(e) {
-        const { name: inputName, value = "" } = e.target;
-        delete validation[inputName];
+        const { name } = e.target;
+        const value = handleInputType(e);
+        delete validation[name];
 
-        switch (inputName) {
-            case 'email':
-                setEmail(value);
-                break;
-            default:
-                break;
-        }
+        setForm((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            }
+        });
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
 
-        const result = await authRepository.sendResetPasswordLink(email);
+        const result = await authRepository.sendResetPasswordLink(form.email);
         const { message, status, data = {}, error = {} } = result;
 
         setIsLoading(false);
@@ -40,7 +44,7 @@ export default function Forgot(props) {
 
             setAlert({
                 show: true,
-                type: 'danger',
+                type: 'error',
                 message,
             });
 
@@ -56,7 +60,12 @@ export default function Forgot(props) {
         });
         Toast.success(message);
 
+        resetForm();
         console.log(result);
+    }
+
+    function resetForm() {
+        setForm(defaultForm);
     }
 
     return (
@@ -74,7 +83,7 @@ export default function Forgot(props) {
 
                             <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="email">Email address <span className="text-danger">*</span></label>
-                                <input type="email" name="email" id="email" value={email} onChange={handleInputChange} className="form-control form-control-md" placeholder="Enter a valid email address" required />
+                                <input type="email" name="email" id="email" value={form.email} onChange={handleInputChange} className="form-control form-control-md" placeholder="Enter a valid email address" required />
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">

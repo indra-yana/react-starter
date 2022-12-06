@@ -55,7 +55,7 @@ export default function Register(props) {
 
             setAlert({
                 show: true,
-                type: 'danger',
+                type: 'error',
                 message,
             });
 

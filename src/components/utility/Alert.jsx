@@ -1,7 +1,15 @@
 import { useEffect } from "react";
+import { Toast } from "../../utils/alert";
 
 export default function Alert(props) {
-    const { type = 'info', title = null, message, show = false, autoClose = false } = props.alert;
+    const { 
+        type = 'info', 
+        title = null, 
+        message = "", 
+        show = false, 
+        autoClose = false, 
+        toast = false, 
+    } = props.alert;
 
     let alertType;
     let alertTitle;
@@ -14,7 +22,7 @@ export default function Alert(props) {
             alertType = 'alert-success';
             alertTitle = title || 'Well done!';
             break;
-        case 'danger':
+        case 'error':
             alertType = 'alert-danger';
             alertTitle = title || 'Oh no! something went wrong';
             break;
@@ -24,6 +32,13 @@ export default function Alert(props) {
             alertTitle = title || 'FYI!';
             break;
     }
+
+    useEffect(() => {
+        // TODO: Hot fix, this is rendered twice
+        if (show && toast) {
+            Toast[type](message);
+        }
+    })
 
     useEffect(() => {
         let closeTimeout = null;

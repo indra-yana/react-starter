@@ -4,54 +4,70 @@ import { Toast } from "../../utils/alert";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import React, { useEffect, useState } from "react";
 import ValidationFeedback from "../../components/form/ValidationFeedback";
+import { handleInputType } from "../../utils/input-helper";
 
 const authRepository = RepositoryFactory.get('auth');
+const defaultForm = {
+    credential: "",
+    password: "",
+    remember: false,
+}
 
 export default function Login(props) {
     usePageTitle('Login');
-    const { setIsLoading } = useOutletContext();
+    const { setIsLoading, setAlert } = useOutletContext();
 
     const [validation, setValidation] = useState({});
-    const [credential, setCredential] = useState("");
-    const [password, setPassword] = useState("");
-    const [remember, setRemember] = useState(false);
+    const [form, setForm] = useState(defaultForm);
 
     function handleInputChange(e) {
-        const { name: inputName, value = "", checked = false } = e.target;
-        delete validation[inputName];
+        const { name } = e.target;
+        const value = handleInputType(e);
+        delete validation[name];
 
-        switch (inputName) {
-            case 'credential':
-                setCredential(value);
-                break;
-            case 'password':
-                setPassword(value);
-                break;
-            case 'remember':
-                setRemember(checked);
-                break;
-            default:
-                break;
-        }
+        setForm((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            }
+        });
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
 
-        const result = await authRepository.login(credential, password);
+        const result = await authRepository.login(form.credential, form.password);
         const { message, status, data = {}, error = {} } = result;
 
         setIsLoading(false);
         if (status === 'error') {
             setValidation(error);
+
+            setAlert({
+                show: true,
+                type: 'error',
+                message,
+            });
+
             Toast.error(message);
             return;
         }
 
+        setAlert({
+            show: true,
+            type: 'success',
+            autoClose: true,
+            message,
+        });
         Toast.success(message);
 
-        console.log(data);
+        resetForm();
+        console.log(result);
+    }
+
+    function resetForm() {
+        setForm(defaultForm);
     }
 
     return (
@@ -84,19 +100,19 @@ export default function Login(props) {
 
                             <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="credential">Email address / Username <span className="text-danger">*</span></label>
-                                <input type="text" name="credential" value={credential} onChange={handleInputChange} id="credential" className={`form-control ${validation.credential ? 'is-invalid' : ''}`} placeholder="Enter a valid email address" required />
+                                <input type="text" name="credential" value={form.credential} onChange={handleInputChange} id="credential" className={`form-control ${validation.credential ? 'is-invalid' : ''}`} placeholder="Enter a valid email address" required />
                                 <ValidationFeedback validation={validation.credential} />
                             </div>
 
                             <div className="form-outline mb-3">
                                 <label className="form-label" htmlFor="password">Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password" value={password} onChange={handleInputChange} id="password" className={`form-control ${validation.password ? 'is-invalid' : ''}`} placeholder="Enter password" required />
+                                <input type="password" name="password" value={form.password} onChange={handleInputChange} id="password" className={`form-control ${validation.password ? 'is-invalid' : ''}`} placeholder="Enter password" required />
                                 <ValidationFeedback validation={validation.password} />
                             </div>
 
                             <div className="d-flex justify-content-between align-items-center">
                                 <div className="form-check mb-0">
-                                    <input className="form-check-input me-2" type="checkbox" name="remember" checked={remember} onChange={handleInputChange} id="remember" />
+                                    <input className="form-check-input me-2" type="checkbox" name="remember" checked={form.remember} onChange={handleInputChange} id="remember" />
                                     <label className="form-check-label" htmlFor="remember">
                                         Remember me
                                     </label>
