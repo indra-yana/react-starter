@@ -1,7 +1,7 @@
+import { AuthViewModel } from "../../../core/viewmodel/AuthViewModel";
 import { handleInputType } from "../../../utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../utils/alert";
-import { AuthViewModel } from "../../../core/viewmodel/AuthViewModel";
 import { useEffect } from "react";
 import { usePageTitle } from "../../../hooks/usePageTitle";
 import { useState } from "react";
@@ -17,7 +17,6 @@ export default function Forgot(props) {
     
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
-    
     const [state, sendResetPasswordLink] = AuthViewModel();
 
     function handleInputChange(e) {

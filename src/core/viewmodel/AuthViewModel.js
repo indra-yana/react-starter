@@ -20,5 +20,22 @@ export function AuthViewModel() {
         setState(STATE.Success(result));
     }
 
-    return [state, sendResetPasswordLink];
+    async function login(credential, password) {
+        setState(STATE.Loading);
+        
+        const result = await authRepository.login(credential, password);
+
+        if (result.status === 'error') {
+            setState(STATE.Error(result));
+            return;
+        }
+
+        setState(STATE.Success(result));
+    }
+
+    return [
+        state,
+        login, 
+        sendResetPasswordLink
+    ];
 }
