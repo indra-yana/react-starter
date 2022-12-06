@@ -18,7 +18,9 @@ export class AuthRepository {
     }
 
     async logout() {
-        return await logout();
+        return await logout()
+            .then(success)
+            .catch(error);;
     }
 
     async register(payloads) {
