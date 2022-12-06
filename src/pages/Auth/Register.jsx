@@ -5,6 +5,7 @@ import { Toast } from "../../utils/alert";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import React, { useState } from "react";
 import ValidationFeedback from "../../components/form/ValidationFeedback";
+import { AuthViewModel } from "../../core/viewmodel/AuthViewModel";
 
 const authRepository = RepositoryFactory.get('auth');
 const defaultPreview = '/assets/img/user.png';
@@ -21,9 +22,40 @@ export default function Register(props) {
     usePageTitle('Register');
     const { setIsLoading, setAlert } = useOutletContext();
 
+    const [state, register] = AuthViewModel();
     const [validation, setValidation] = useState({});
     const [avatarPreview, setAvatarPreview] = useState(defaultPreview);
     const [form, setForm] = useState(defaultForm);
+
+    useEffect(() => {
+        setIsLoading(state.LOADING);
+
+        if (state.SUCCESS) {
+            const { message, data = {} } = state.RESULT;
+            setAlert({
+                show: true,
+                type: 'success',
+                autoClose: true,
+                message,
+            });
+
+            Toast.success(message);
+            resetForm();
+            console.log(data);
+        } else if (state.ERROR) {
+            const { message, error = {} } = state.RESULT;
+            setValidation(error);
+
+            setAlert({
+                show: true,
+                type: 'error',
+                message,
+            });
+
+            Toast.error(message);
+        }
+
+    }, [state])
 
     function handleInputChange(e) {
         const { name } = e.target;
@@ -44,35 +76,7 @@ export default function Register(props) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        setIsLoading(true);
-
-        const result = await authRepository.register(form);
-        const { message, status, data = {}, error = {} } = result;
-
-        setIsLoading(false);
-        if (status === 'error') {
-            setValidation(error);
-
-            setAlert({
-                show: true,
-                type: 'error',
-                message,
-            });
-
-            Toast.error(message);
-            return;
-        }
-
-        setAlert({
-            show: true,
-            type: 'success',
-            autoClose: true,
-            message,
-        });
-        Toast.success(message);
-
-        resetForm();
-        console.log(result);
+        await register(form);
     }
 
     function resetForm() {

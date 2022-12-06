@@ -15,22 +15,9 @@ export default function Forgot(props) {
     usePageTitle('Forgot Password');
     const { setIsLoading, setAlert } = useOutletContext();
     
+    const [state, sendResetPasswordLink] = AuthViewModel();
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
-    const [state, sendResetPasswordLink] = AuthViewModel();
-
-    function handleInputChange(e) {
-        const { name } = e.target;
-        const value = handleInputType(e);
-        delete validation[name];
-
-        setForm((prevState) => {
-            return {
-                ...prevState,
-                [name]: value,
-            }
-        });
-    }
 
     useEffect(() => {
         setIsLoading(state.LOADING);
@@ -61,6 +48,19 @@ export default function Forgot(props) {
         }
 
     }, [state])
+    
+    function handleInputChange(e) {
+        const { name } = e.target;
+        const value = handleInputType(e);
+        delete validation[name];
+
+        setForm((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            }
+        });
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();

@@ -33,9 +33,23 @@ export function AuthViewModel() {
         setState(STATE.Success(result));
     }
 
+    async function register(payloads) {
+        setState(STATE.Loading);
+        
+        const result = await authRepository.register(payloads);
+
+        if (result.status === 'error') {
+            setState(STATE.Error(result));
+            return;
+        }
+
+        setState(STATE.Success(result));
+    }
+
     return [
         state,
-        login, 
-        sendResetPasswordLink
+        login,
+        register,
+        sendResetPasswordLink,
     ];
 }
