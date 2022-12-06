@@ -8,7 +8,7 @@ import {
     sendVerificationLink, 
     verify, 
     whoami 
-} from "../datasource/remote/api/auth-api";
+} from "../datasource/remote/api/auth";
 
 export class AuthRepository {
     async login(credential, password) {
