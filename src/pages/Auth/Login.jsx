@@ -15,8 +15,8 @@ const defaultForm = {
 export default function Login(props) {
     usePageTitle('Login');
     const { setIsLoading, setAlert } = useOutletContext();
+    const { state, login } = AuthViewModel();
 
-    const [state, login] = AuthViewModel();
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
 

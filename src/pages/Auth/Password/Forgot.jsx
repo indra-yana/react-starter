@@ -14,8 +14,8 @@ const defaultForm = {
 export default function Forgot(props) {
     usePageTitle('Forgot Password');
     const { setIsLoading, setAlert } = useOutletContext();
-    
-    const [state, sendResetPasswordLink] = AuthViewModel();
+    const { state, sendResetPasswordLink } = AuthViewModel();
+
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
 

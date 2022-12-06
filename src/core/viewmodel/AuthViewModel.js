@@ -124,7 +124,7 @@ export function AuthViewModel() {
         setState(STATE.Success(result));
     }
 
-    return [
+    return {
         state,
         login,
         logout,
@@ -135,5 +135,5 @@ export function AuthViewModel() {
         verify,
         refreshToken,
         whoami,
-    ];
+    };
 }

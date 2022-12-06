@@ -20,8 +20,8 @@ const defaultForm = {
 export default function Register(props) {
     usePageTitle('Register');
     const { setIsLoading, setAlert } = useOutletContext();
+    const { state, register } = AuthViewModel();
 
-    const [state, register] = AuthViewModel();
     const [validation, setValidation] = useState({});
     const [avatarPreview, setAvatarPreview] = useState(defaultPreview);
     const [form, setForm] = useState(defaultForm);
