@@ -11,7 +11,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.sendResetPasswordLink(email);
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
@@ -24,7 +23,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.resetPassword(password, password_confirmation);
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
@@ -37,7 +35,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.login(credential, password);
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
@@ -50,7 +47,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.logout();
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
@@ -63,7 +59,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.register(payloads);
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
@@ -76,7 +71,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.sendVerificationLink(email);
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
@@ -89,7 +83,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.verify(token, email);
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
@@ -102,7 +95,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.refreshToken(refreshToken);
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
@@ -115,7 +107,6 @@ export function AuthViewModel() {
         setState(STATE.Loading);
         
         const result = await authRepository.whoami();
-
         if (result.status === 'error') {
             setState(STATE.Error(result));
             return;
