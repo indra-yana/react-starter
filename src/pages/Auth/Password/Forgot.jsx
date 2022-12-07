@@ -14,16 +14,16 @@ const defaultForm = {
 export default function Forgot(props) {
     usePageTitle('Forgot Password');
     const { setIsLoading, setAlert } = useOutletContext();
-    const { state, sendResetPasswordLink } = AuthViewModel();
+    const { sendResetLinkState, sendResetPasswordLink } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
 
     useEffect(() => {
-        setIsLoading(state.LOADING);
+        setIsLoading(sendResetLinkState.LOADING);
 
-        if (state.SUCCESS) {
-            const { message, data = {} } = state.RESULT;
+        if (sendResetLinkState.SUCCESS) {
+            const { message, data = {} } = sendResetLinkState.RESULT;
             setAlert({
                 show: true,
                 type: 'success',
@@ -34,8 +34,8 @@ export default function Forgot(props) {
             Toast.success(message);
             resetForm();
             console.log(data);
-        } else if (state.ERROR) {
-            const { message, error = {} } = state.RESULT;
+        } else if (sendResetLinkState.ERROR) {
+            const { message, error = {} } = sendResetLinkState.RESULT;
             setValidation(error);
 
             setAlert({
@@ -47,7 +47,7 @@ export default function Forgot(props) {
             Toast.error(message);
         }
 
-    }, [state])
+    }, [sendResetLinkState])
     
     function handleInputChange(e) {
         const { name } = e.target;

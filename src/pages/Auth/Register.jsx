@@ -20,17 +20,17 @@ const defaultForm = {
 export default function Register(props) {
     usePageTitle('Register');
     const { setIsLoading, setAlert } = useOutletContext();
-    const { state, register } = AuthViewModel();
+    const { registerState, register } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
     const [avatarPreview, setAvatarPreview] = useState(defaultPreview);
     const [form, setForm] = useState(defaultForm);
 
     useEffect(() => {
-        setIsLoading(state.LOADING);
+        setIsLoading(registerState.LOADING);
 
-        if (state.SUCCESS) {
-            const { message, data = {} } = state.RESULT;
+        if (registerState.SUCCESS) {
+            const { message, data = {} } = registerState.RESULT;
             setAlert({
                 show: true,
                 type: 'success',
@@ -41,8 +41,8 @@ export default function Register(props) {
             Toast.success(message);
             resetForm();
             console.log(data);
-        } else if (state.ERROR) {
-            const { message, error = {} } = state.RESULT;
+        } else if (registerState.ERROR) {
+            const { message, error = {} } = registerState.RESULT;
             setValidation(error);
 
             setAlert({
@@ -54,7 +54,7 @@ export default function Register(props) {
             Toast.error(message);
         }
 
-    }, [state])
+    }, [registerState])
 
     function handleInputChange(e) {
         const { name } = e.target;

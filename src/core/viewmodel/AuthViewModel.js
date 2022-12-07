@@ -5,118 +5,137 @@ import { useState } from "react";
 const authRepository = RepositoryFactory.get('auth');
 
 export function AuthViewModel() {
-    const [state, setState] = useState(STATE.Default);
+    const [sendResetLinkState, setSendResetLinkState] = useState(STATE.Default);
+    const [resetPasswordState, setResetPasswordState] = useState(STATE.Default);
+    const [loginState, setLoginState] = useState(STATE.Default)
+    const [logoutState, setLogoutState] = useState(STATE.Default)
+    const [registerState, setRegisterState] = useState(STATE.Default)
+    const [sendVerificationLinkState, setSendVerificationLinkState] = useState(STATE.Default)
+    const [verifyState, setVerifyState] = useState(STATE.Default)
+    const [refreshTokenState, setRefreshTokenState] = useState(STATE.Default)
+    const [whoamiState, setWhoamiState] = useState(STATE.Default)
 
     async function sendResetPasswordLink(email) {
-        setState(STATE.Loading);
-        
+        setSendResetLinkState(STATE.Loading);
+
         const result = await authRepository.sendResetPasswordLink(email);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setSendResetLinkState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setSendResetLinkState(STATE.Success(result));
     }
 
     async function resetPassword(password, password_confirmation) {
-        setState(STATE.Loading);
-        
+        setResetPasswordState(STATE.Loading);
+
         const result = await authRepository.resetPassword(password, password_confirmation);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setResetPasswordState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setResetPasswordState(STATE.Success(result));
     }
 
     async function login(credential, password) {
-        setState(STATE.Loading);
-        
+        setLoginState(STATE.Loading);
+
         const result = await authRepository.login(credential, password);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setLoginState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setLoginState(STATE.Success(result));
     }
 
     async function logout() {
-        setState(STATE.Loading);
-        
+        setLogoutState(STATE.Loading);
+
         const result = await authRepository.logout();
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setLogoutState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setLogoutState(STATE.Success(result));
     }
 
     async function register(payloads) {
-        setState(STATE.Loading);
-        
+        setRegisterState(STATE.Loading);
+
         const result = await authRepository.register(payloads);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setRegisterState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setRegisterState(STATE.Success(result));
     }
-    
+
     async function sendVerificationLink(email) {
-        setState(STATE.Loading);
-        
+        setSendVerificationLinkState(STATE.Loading);
+
         const result = await authRepository.sendVerificationLink(email);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setSendVerificationLinkState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setSendVerificationLinkState(STATE.Success(result));
     }
 
     async function verify(token, email) {
-        setState(STATE.Loading);
-        
+        setVerifyState(STATE.Loading);
+
         const result = await authRepository.verify(token, email);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setVerifyState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setVerifyState(STATE.Success(result));
     }
 
     async function refreshToken(refreshToken) {
-        setState(STATE.Loading);
-        
+        setRefreshTokenState(STATE.Loading);
+
         const result = await authRepository.refreshToken(refreshToken);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setRefreshTokenState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setRefreshTokenState(STATE.Success(result));
     }
 
     async function whoami() {
-        setState(STATE.Loading);
-        
+        setWhoamiState(STATE.Loading);
+
         const result = await authRepository.whoami();
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setWhoamiState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setWhoamiState(STATE.Success(result));
     }
 
     return {
-        state,
+        // State holder
+        sendResetLinkState,
+        resetPasswordState,
+        loginState,
+        logoutState,
+        registerState,
+        sendVerificationLinkState,
+        verifyState,
+        refreshTokenState,
+        whoamiState,
+
+        // Method
         login,
         logout,
         register,

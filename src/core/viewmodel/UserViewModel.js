@@ -5,70 +5,81 @@ import { useState } from "react";
 const userRepository = RepositoryFactory.get('user');
 
 export function UserViewModel() {
-    const [state, setState] = useState(STATE.Default);
+    const [listState, setListState] = useState(STATE.Default);
+    const [showState, setShowState] = useState(STATE.Default);
+    const [createState, setCreateState] = useState(STATE.Default);
+    const [updateState, setUpdateState] = useState(STATE.Default);
+    const [deleteState, setDeleteState] = useState(STATE.Default);
 
     async function list() {
-        setState(STATE.Loading);
+        setListState(STATE.Loading);
         
         const result = await userRepository.list();
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setListState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setListState(STATE.Success(result));
     }
 
     async function show(id) {
-        setState(STATE.Loading);
+        setShowState(STATE.Loading);
         
         const result = await userRepository.show(id);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setShowState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setShowState(STATE.Success(result));
     }
 
     async function create(payloads) {
-        setState(STATE.Loading);
+        setCreateState(STATE.Loading);
         
         const result = await userRepository.create(payloads);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setCreateState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setCreateState(STATE.Success(result));
     }
     
     async function update(payloads) {
-        setState(STATE.Loading);
+        setUpdateState(STATE.Loading);
         
         const result = await userRepository.update(payloads);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setUpdateState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setUpdateState(STATE.Success(result));
     }
     
     async function deleteData(id) {
-        setState(STATE.Loading);
+        setDeleteState(STATE.Loading);
         
         const result = await userRepository.deleteData(id);
         if (result.status === 'error') {
-            setState(STATE.Error(result));
+            setDeleteState(STATE.Error(result));
             return;
         }
 
-        setState(STATE.Success(result));
+        setDeleteState(STATE.Success(result));
     }
 
     return {
-        state,
+        // State holder
+        listState,
+        showState,
+        createState,
+        updateState,
+        deleteState,
+
+        // Method
         list,
         show,
         create,

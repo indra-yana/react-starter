@@ -15,16 +15,16 @@ const defaultForm = {
 export default function Login(props) {
     usePageTitle('Login');
     const { setIsLoading, setAlert } = useOutletContext();
-    const { state, login } = AuthViewModel();
+    const { loginState, login } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
 
     useEffect(() => {
-        setIsLoading(state.LOADING);
+        setIsLoading(loginState.LOADING);
 
-        if (state.SUCCESS) {
-            const { message, data = {} } = state.RESULT;
+        if (loginState.SUCCESS) {
+            const { message, data = {} } = loginState.RESULT;
             setAlert({
                 show: true,
                 type: 'success',
@@ -35,8 +35,8 @@ export default function Login(props) {
             Toast.success(message);
             resetForm();
             console.log(data);
-        } else if (state.ERROR) {
-            const { message, error = {} } = state.RESULT;
+        } else if (loginState.ERROR) {
+            const { message, error = {} } = loginState.RESULT;
             setValidation(error);
 
             setAlert({
@@ -48,7 +48,7 @@ export default function Login(props) {
             Toast.error(message);
         }
 
-    }, [state])
+    }, [loginState])
 
     function handleInputChange(e) {
         const { name } = e.target;

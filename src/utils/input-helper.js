@@ -11,7 +11,7 @@ export function handleInputType(e) {
             return files[0];
         case 'checkbox':
         case 'radio':
-            return checked;
+            return checked ? value : "";
         case 'text': 
         case 'number': 
         case 'email':
