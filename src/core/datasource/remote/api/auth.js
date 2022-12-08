@@ -40,6 +40,10 @@ export async function resetPassword(payloads) {
     return await apiClient.post('/v1/auth/password/reset', payloads);
 }
 
+export async function confirmPassword(password) {
+    return await apiClient.post('/v1/auth/password/confirm', { password });
+}
+
 export async function refreshToken(refreshToken) {
     return await apiClient.post('/v1/auth/refreshToken', {
         refreshToken,

@@ -7,6 +7,7 @@ const authRepository = RepositoryFactory.get('auth');
 export function AuthViewModel() {
     const [sendResetLinkState, setSendResetLinkState] = useState(STATE.Default);
     const [resetPasswordState, setResetPasswordState] = useState(STATE.Default);
+    const [confirmPasswordState, setConfirmPasswordState] = useState(STATE.Default);
     const [loginState, setLoginState] = useState(STATE.Default)
     const [logoutState, setLogoutState] = useState(STATE.Default)
     const [registerState, setRegisterState] = useState(STATE.Default)
@@ -37,6 +38,18 @@ export function AuthViewModel() {
         }
 
         setResetPasswordState(STATE.Success(result));
+    }
+
+    async function confirmPassword(password) {
+        setConfirmPasswordState(STATE.Loading);
+
+        const result = await authRepository.confirmPassword(password);
+        if (result.status === 'error') {
+            setConfirmPasswordState(STATE.Error(result));
+            return;
+        }
+
+        setConfirmPasswordState(STATE.Success(result));
     }
 
     async function login(credential, password) {
@@ -127,6 +140,7 @@ export function AuthViewModel() {
         // State holder
         sendResetLinkState,
         resetPasswordState,
+        confirmPasswordState,
         loginState,
         logoutState,
         registerState,
@@ -141,6 +155,7 @@ export function AuthViewModel() {
         register,
         sendResetPasswordLink,
         resetPassword,
+        confirmPassword,
         sendVerificationLink,
         verify,
         refreshToken,

@@ -1,5 +1,6 @@
 import { error, success } from "../../utils/response";
 import { 
+    confirmPassword,
     login, 
     logout, 
     register, 
@@ -49,6 +50,12 @@ export class AuthRepository {
 
     async resetPassword(payloads) {
         return await resetPassword(payloads)
+            .then(success)
+            .catch(error);
+    }
+
+    async confirmPassword(password) {
+        return await confirmPassword(password)
             .then(success)
             .catch(error);
     }
