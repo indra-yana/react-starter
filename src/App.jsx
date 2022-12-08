@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom'
-import { useLocalStorage } from './hooks/useLocalStorage';
+import { useAuth } from './hooks/useAuth';
 
 function App() {
-	const [auth, setAuth] = useLocalStorage('auth', {});
+	const [auth, setAuth] = useAuth();
 
 	return <Outlet context={{
 		auth,

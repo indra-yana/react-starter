@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { NavLink, useOutletContext } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import reactLogo from "../../assets/react.svg"
+import { useAuthContext } from "../../hooks/useAuthContext";
 import ProfileControl from "../utility/ProfileControl";
 
 export default function HomeNavbar(props) {
-    const { auth } = useOutletContext();
+    const { auth } = useAuthContext();
 
     return (
         <>

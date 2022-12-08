@@ -1,11 +1,12 @@
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useLoadingState } from "../hooks/useLoadingState";
 import Alert from "../components/utility/Alert";
 import PageNavbar from "../components/navigation/PageNavbar";
 import React, { useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function AuthLayout(props) {
-    const { auth, setAuth } = useOutletContext();
+    const { auth, setAuth } = useAuthContext();
 
     const [navTitle, setNavTitle] = useState("");
     const [alert, setAlert] = useState({});

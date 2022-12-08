@@ -6,6 +6,7 @@ import { usePageTitle } from "../../hooks/usePageTitle";
 import React, { useEffect, useState } from "react";
 import ValidationFeedback from "../../components/form/ValidationFeedback";
 import ButtonSpinner from "../../components/button/ButtonSpinner";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const defaultForm = {
     credential: "",
@@ -15,7 +16,8 @@ const defaultForm = {
 
 export default function Login(props) {
     usePageTitle('Login');
-    const { isLoading, setIsLoading, setAlert, setAuth } = useOutletContext();
+    const { isLoading, setIsLoading, setAlert } = useOutletContext();
+    const { setAuth } = useAuthContext();
     const { loginState, login } = AuthViewModel();
 
     const [validation, setValidation] = useState({});

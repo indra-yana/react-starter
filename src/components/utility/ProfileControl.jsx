@@ -1,7 +1,7 @@
-import { useOutletContext } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 export default function ProfileControl(props) {
-    const { auth, setAuth } = useOutletContext();
+    const { auth, setAuth } = useAuthContext();
 
     function handleLogout(e) {
         e.preventDefault();
