@@ -1,4 +1,4 @@
-import { AuthViewModel } from "../../../core/viewmodel/AuthViewModel";
+import AuthViewModel from "../../../core/viewmodel/AuthViewModel";
 import { handleInputType } from "../../../utils/input-helper";
 import { Toast } from "../../../utils/alert";
 import { useOutletContext, useParams, useSearchParams } from "react-router-dom";

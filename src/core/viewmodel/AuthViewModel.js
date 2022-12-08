@@ -4,17 +4,18 @@ import { useState } from "react";
 
 const authRepository = RepositoryFactory.get('auth');
 
-export function AuthViewModel() {
+export default function AuthViewModel() {
     const [sendResetLinkState, setSendResetLinkState] = useState(STATE.Default);
     const [resetPasswordState, setResetPasswordState] = useState(STATE.Default);
     const [confirmPasswordState, setConfirmPasswordState] = useState(STATE.Default);
-    const [loginState, setLoginState] = useState(STATE.Default)
-    const [logoutState, setLogoutState] = useState(STATE.Default)
-    const [registerState, setRegisterState] = useState(STATE.Default)
-    const [sendVerificationLinkState, setSendVerificationLinkState] = useState(STATE.Default)
-    const [verifyState, setVerifyState] = useState(STATE.Default)
-    const [refreshTokenState, setRefreshTokenState] = useState(STATE.Default)
-    const [whoamiState, setWhoamiState] = useState(STATE.Default)
+    const [loginState, setLoginState] = useState(STATE.Default);
+    const [logoutState, setLogoutState] = useState(STATE.Default);
+    const [registerState, setRegisterState] = useState(STATE.Default);
+    const [sendVerificationLinkState, setSendVerificationLinkState] = useState(STATE.Default);
+    const [verifyState, setVerifyState] = useState(STATE.Default);
+    const [refreshTokenState, setRefreshTokenState] = useState(STATE.Default);
+    const [whoamiState, setWhoamiState] = useState(STATE.Default);
+    const [auth, setAuth] = authRepository.authSession();
 
     async function sendResetPasswordLink(email) {
         setSendResetLinkState(STATE.Loading);
@@ -148,6 +149,8 @@ export function AuthViewModel() {
         verifyState,
         refreshTokenState,
         whoamiState,
+        auth, 
+        setAuth,
 
         // Method
         login,

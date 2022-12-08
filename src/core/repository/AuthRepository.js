@@ -1,4 +1,5 @@
 import { error, success } from "../../utils/response";
+import { useLocalStorage } from "../datasource/local/local-storage";
 import { 
     confirmPassword,
     login, 
@@ -11,7 +12,7 @@ import {
     whoami 
 } from "../datasource/remote/api/auth";
 
-export class AuthRepository {
+export default class AuthRepository {
     async login(credential, password) {
         return await login(credential, password)
             .then(success)
@@ -70,5 +71,10 @@ export class AuthRepository {
         return await whoami()
             .then(success)
             .catch(error);
+    }
+
+    authSession() {
+        const [auth, setAuth] = useLocalStorage('auth', {});
+        return [auth, setAuth];
     }
 }

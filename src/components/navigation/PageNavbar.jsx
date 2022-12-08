@@ -17,7 +17,7 @@ export default function PageNavbar(props) {
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item">
+                        <li className="nav-item my-auto">
                             <span className="fs-5 fw-semibold text-white text-center">{props.navTitle}</span>
                         </li>
                         <ProfileControl />

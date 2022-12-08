@@ -7,7 +7,7 @@ import {
     update 
 } from "../datasource/remote/api/user";
 
-export class UserRepository {
+export default class UserRepository {
     async list() {
         return await list()
             .then(success)
