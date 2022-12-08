@@ -15,7 +15,12 @@ export default function AuthLayout(props) {
                 <PageNavbar navTitle={navTitle} />
                 <main id="main" className="vh-100">
                     <Alert className="mt-4" alert={alert} onAlertCloseClick={() => setAlert({})} />
-                    <Outlet context={{ setNavTitle, setAlert, setIsLoading }}/>
+                    <Outlet context={{ 
+                        setNavTitle, 
+                        setAlert, 
+                        setIsLoading, 
+                        isLoading 
+                    }}/>
                 </main>
             </div>
         </>

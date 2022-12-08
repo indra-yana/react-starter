@@ -27,10 +27,10 @@ export function AuthViewModel() {
         setSendResetLinkState(STATE.Success(result));
     }
 
-    async function resetPassword(password, password_confirmation) {
+    async function resetPassword(payloads) {
         setResetPasswordState(STATE.Loading);
 
-        const result = await authRepository.resetPassword(password, password_confirmation);
+        const result = await authRepository.resetPassword(payloads);
         if (result.status === 'error') {
             setResetPasswordState(STATE.Error(result));
             return;

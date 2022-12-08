@@ -47,8 +47,8 @@ export class AuthRepository {
             .catch(error);
     }
 
-    async resetPassword(password, password_confirmation) {
-        return await resetPassword(password, password_confirmation)
+    async resetPassword(payloads) {
+        return await resetPassword(payloads)
             .then(success)
             .catch(error);
     }
