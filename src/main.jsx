@@ -18,12 +18,12 @@ import ShowContact, { loader as contactLoader, action as contactAction, } from '
 import HomeLayout from './layouts/HomeLayout';
 import Help from './pages/help/Help';
 import AuthLayout from './layouts/AuthLayout';
-import Login from './pages/auth-temp/Login';
-import Register from './pages/auth-temp/Register';
-import Forgot from './pages/auth-temp/password/Forgot';
-import Reset from './pages/auth-temp/password/Reset';
-import Confirm from './pages/auth-temp/password/Confirm';
-import Verify from './pages/auth-temp/Verify';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import Forgot from './pages/auth/password/Forgot';
+import Reset from './pages/auth/password/Reset';
+import Confirm from './pages/auth/password/Confirm';
+import Verify from './pages/auth/Verify';
 
 const router = createBrowserRouter([
 	{
