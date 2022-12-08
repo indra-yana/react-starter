@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import React, { useState } from "react";
 import ValidationFeedback from "../../components/form/ValidationFeedback";
+import ButtonSpinner from "../../components/button/ButtonSpinner";
 
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {
@@ -19,7 +20,7 @@ const defaultForm = {
 
 export default function Register(props) {
     usePageTitle('Register');
-    const { setIsLoading, setAlert } = useOutletContext();
+    const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { registerState, register } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
@@ -150,7 +151,7 @@ export default function Register(props) {
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" className="btn btn-outline-primary px-5">Register</button>
+                                <ButtonSpinner type="submit" isLoading={isLoading} text="Register" />
                                 <p className="small fw-bold mt-2 pt-1 mb-0">Already have an account?
                                     <Link to={'/auth/login'} className="link-danger"> Login</Link>
                                 </p>

@@ -5,6 +5,7 @@ import { Toast } from "../../utils/alert";
 import { usePageTitle } from "../../hooks/usePageTitle";
 import React, { useEffect, useState } from "react";
 import ValidationFeedback from "../../components/form/ValidationFeedback";
+import ButtonSpinner from "../../components/button/ButtonSpinner";
 
 const defaultForm = {
     credential: "",
@@ -14,7 +15,7 @@ const defaultForm = {
 
 export default function Login(props) {
     usePageTitle('Login');
-    const { setIsLoading, setAlert } = useOutletContext();
+    const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { loginState, login } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
@@ -123,7 +124,7 @@ export default function Login(props) {
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" className="btn btn-outline-primary px-5">Login</button>
+                                <ButtonSpinner type="submit" isLoading={isLoading} text="Login" />
                                 <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
                                     <Link to={'/auth/register'} className="link-danger"> Register</Link>
                                 </p>

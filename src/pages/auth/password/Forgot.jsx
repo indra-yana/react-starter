@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { usePageTitle } from "../../../hooks/usePageTitle";
 import { useState } from "react";
 import React from "react";
+import ButtonSpinner from "../../../components/button/ButtonSpinner";
 
 const defaultForm = {
     email: "",
@@ -13,7 +14,7 @@ const defaultForm = {
 
 export default function Forgot(props) {
     usePageTitle('Forgot Password');
-    const { setIsLoading, setAlert } = useOutletContext();
+    const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { sendResetLinkState, sendResetPasswordLink } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
@@ -90,7 +91,7 @@ export default function Forgot(props) {
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" className="btn btn-outline-primary px-5">Send Reset Link</button>
+                                <ButtonSpinner type="submit" isLoading={isLoading} text="Send Reset Link" />
                                 <p className="small fw-bold mt-2 pt-1 mb-0">Already remember your password?
                                     <Link to={'/auth/login'} className="link-danger"> Back to Login</Link>
                                 </p>

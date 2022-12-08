@@ -2,6 +2,7 @@ import { AuthViewModel } from "../../core/viewmodel/AuthViewModel";
 import { Link, useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import { Toast } from "../../utils/alert";
 import { usePageTitle } from "../../hooks/usePageTitle";
+import ButtonSpinner from "../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
 
 const defaultForm = {
@@ -11,7 +12,7 @@ const defaultForm = {
 
 export default function Verify(props) {
     usePageTitle('Verify Account');
-    const { setIsLoading, setAlert } = useOutletContext();
+    const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { verifyState, sendVerificationLinkState, verify, sendVerificationLink } = AuthViewModel();
     const { token } = useParams();
     const [searchParams] = useSearchParams();
@@ -113,7 +114,7 @@ export default function Verify(props) {
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" className="btn btn-outline-primary px-5">Verify</button>
+                                <ButtonSpinner type="submit" isLoading={isLoading} text="Verify" />
                                 <p className="small fw-bold mt-2 pt-1 mb-0 me-2">Or resend verification link.&nbsp;
                                     <a type="button" className="link-danger" onClick={handleResendVerificationLink}> Resend</a>
                                 </p>
