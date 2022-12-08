@@ -1,5 +1,5 @@
 import { error, success } from "../../utils/response";
-import { useLocalStorage } from "../datasource/local/local-storage";
+import { authSession } from "../datasource/local/local-storage";
 import { 
     confirmPassword,
     login, 
@@ -74,7 +74,6 @@ export default class AuthRepository {
     }
 
     authSession() {
-        const [auth, setAuth] = useLocalStorage('auth', {});
-        return [auth, setAuth];
+        return authSession();
     }
 }
