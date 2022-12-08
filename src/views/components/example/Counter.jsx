@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../App.css'
 
 class Counter extends React.Component {
   constructor(props) {

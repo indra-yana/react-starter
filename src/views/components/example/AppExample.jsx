@@ -1,6 +1,6 @@
-import '../../assets/css/app.css';
+import '../../../assets/css/app.css';
 import { useContext, useState } from 'react';
-import reactLogo from '../../assets/react.svg';
+import reactLogo from '../../../assets/react.svg';
 import Clock from './Clock';
 import Counter from './Counter';
 import LoginControl from './LoginControl';
@@ -11,7 +11,7 @@ import TextAreaForm from './TextAreaForm';
 import SelectForm from './SelectForm';
 import MultiInputForm from './MultiInputForm';
 import TemperatureCalculator from './TemperatureCalculator';
-import { AuthContext, auth } from '../../context/AuthContext';
+import { AuthContext, auth } from '../../../context/AuthContext';
 import Greeting from './Greeting';
 
 function App() {

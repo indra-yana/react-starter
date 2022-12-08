@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Toast } from "../../utils/alert";
+import { Toast } from "../../../utils/alert";
 
 export default function Alert(props) {
     const { 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import reactLogo from "../../assets/react.svg"
-import { useAuthContext } from "../../hooks/useAuthContext";
+import reactLogo from "../../../assets/react.svg"
+import { useAuthContext } from "../../../hooks/useAuthContext";
 import ProfileControl from "../utility/ProfileControl";
 
 export default function HomeNavbar(props) {

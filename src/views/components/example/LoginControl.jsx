@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthContext } from "../../utils/AuthContext";
+import { AuthContext } from "../../../context/AuthContext";
 import { LoginButton, LogoutButton } from "./Button";
 import Greeting from "./Greeting";
 

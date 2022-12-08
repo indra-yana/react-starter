@@ -1,29 +1,28 @@
-import AuthViewModel from "../../../core/viewmodel/AuthViewModel";
-import { handleInputType } from "../../../utils/input-helper";
+import { handleInputType } from "../../../../utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
-import { Toast } from "../../../utils/alert";
-import { usePageTitle } from "../../../hooks/usePageTitle";
+import { Toast } from "../../../../utils/alert";
+import { usePageTitle } from "../../../../hooks/usePageTitle";
+import AuthViewModel from "../../../../core/viewmodel/AuthViewModel";
 import ButtonSpinner from "../../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
-import ValidationFeedback from "../../../components/form/ValidationFeedback";
 
 const defaultForm = {
-    password: "",
+    email: "",
 }
 
-export default function Confirm(props) {
-    usePageTitle('Password Confirmation');
+export default function Forgot(props) {
+    usePageTitle('Forgot Password');
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
-    const { confirmPasswordState, confirmPassword } = AuthViewModel();
+    const { sendResetLinkState, sendResetPasswordLink } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
 
     useEffect(() => {
-        setIsLoading(confirmPasswordState.LOADING);
+        setIsLoading(sendResetLinkState.LOADING);
 
-        if (confirmPasswordState.SUCCESS) {
-            const { message, data = {} } = confirmPasswordState.RESULT;
+        if (sendResetLinkState.SUCCESS) {
+            const { message, data = {} } = sendResetLinkState.RESULT;
             setAlert({
                 show: true,
                 type: 'success',
@@ -34,8 +33,8 @@ export default function Confirm(props) {
             Toast.success(message);
             resetForm();
             console.log(data);
-        } else if (confirmPasswordState.ERROR) {
-            const { message, error = {} } = confirmPasswordState.RESULT;
+        } else if (sendResetLinkState.ERROR) {
+            const { message, error = {} } = sendResetLinkState.RESULT;
             setValidation(error);
 
             setAlert({
@@ -47,22 +46,24 @@ export default function Confirm(props) {
             Toast.error(message);
         }
 
-    }, [confirmPasswordState])
-
+    }, [sendResetLinkState])
+    
     function handleInputChange(e) {
         const { name } = e.target;
         const value = handleInputType(e);
         delete validation[name];
 
-        setForm((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
+        setForm((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            }
+        });
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
-        await confirmPassword(form.password);
+        await sendResetPasswordLink(form.email);
     }
 
     function resetForm() {
@@ -79,19 +80,18 @@ export default function Confirm(props) {
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleSubmit}>
                             <div className="divider d-flex align-items-center my-4">
-                                <p className="text-center fw-bold mx-3 mb-0 fs-5">Password Confirmation</p>
+                                <p className="text-center fw-bold mx-3 mb-0 fs-5">Forgot Password</p>
                             </div>
 
-                            <div className="form-outline mb-3">
-                                <label className="form-label" htmlFor="password">Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password" value={form.password} onChange={handleInputChange} id="password" className={`form-control ${validation.password ? 'is-invalid' : ''}`} placeholder="Enter your password" required autoComplete="new-password" />
-                                <ValidationFeedback validation={validation.password} />
+                            <div className="form-outline mb-4">
+                                <label className="form-label" htmlFor="email">Email address <span className="text-danger">*</span></label>
+                                <input type="email" name="email" id="email" value={form.email} onChange={handleInputChange} className="form-control form-control-md" placeholder="Enter a valid email address" required />
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <ButtonSpinner type="submit" isLoading={isLoading} text="Confirm" />
-                                <p className="small fw-bold mt-2 pt-1 mb-0">Forgot your password?
-                                    <Link to={'/auth/forgot'} className="link-danger"> Reset Password</Link>
+                                <ButtonSpinner type="submit" isLoading={isLoading} text="Send Reset Link" />
+                                <p className="small fw-bold mt-2 pt-1 mb-0">Already remember your password?
+                                    <Link to={'/auth/login'} className="link-danger"> Back to Login</Link>
                                 </p>
                             </div>
                         </form>

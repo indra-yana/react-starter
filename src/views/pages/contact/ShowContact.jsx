@@ -1,5 +1,5 @@
 import { Form, useFetcher, useLoaderData } from "react-router-dom";
-import { find, updateContact } from "../../core/repository/contact-repository";
+import { find, updateContact } from "../../../core/repository/contact-repository";
 
 export async function loader({ params }) {
     const contact = await find(params.id)
