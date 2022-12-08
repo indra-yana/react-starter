@@ -1,5 +1,6 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import ProfileControl from "../utility/ProfileControl";
+import React from "react";
 
 export default function PageNavbar(props) {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function PageNavbar(props) {
                         <li className="nav-item">
                             <span className="fs-5 fw-semibold text-white text-center">{props.navTitle}</span>
                         </li>
+                        <ProfileControl />
                     </ul>
                 </nav>
             </div>

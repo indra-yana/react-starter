@@ -1,26 +1,30 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
-import PageNavbar from "../components/navigation/PageNavbar";
-import Alert from "../components/utility/Alert";
+import { Outlet, useOutletContext } from "react-router-dom";
 import { useLoadingState } from "../hooks/useLoadingState";
+import Alert from "../components/utility/Alert";
+import PageNavbar from "../components/navigation/PageNavbar";
+import React, { useState } from "react";
 
 export default function AuthLayout(props) {
+    const { auth, setAuth } = useOutletContext();
+
     const [navTitle, setNavTitle] = useState("");
     const [alert, setAlert] = useState({});
     const [isLoading, setIsLoading] = useLoadingState(false);
 
-    return(
+    return (
         <>
             <div className="container">
                 <PageNavbar navTitle={navTitle} />
                 <main id="main" className="vh-100">
                     <Alert className="mt-4" alert={alert} onAlertCloseClick={() => setAlert({})} />
-                    <Outlet context={{ 
-                        setNavTitle, 
-                        setAlert, 
-                        setIsLoading, 
-                        isLoading 
-                    }}/>
+                    <Outlet context={{
+                        setNavTitle,
+                        setAlert,
+                        setIsLoading,
+                        isLoading,
+                        auth,
+                        setAuth,
+                    }} />
                 </main>
             </div>
         </>

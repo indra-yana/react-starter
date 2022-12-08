@@ -1,10 +1,10 @@
 import React from "react";
 
 const auth = {
-    authenticated: true,
-    setAuthenticated: (auth) => {},
+    authenticated: false,
+    setAuthenticated: (auth) => { },
 }
- 
+
 const AuthContext = React.createContext(auth);
 
 export {

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useOutletContext } from "react-router-dom";
 import reactLogo from "../../assets/react.svg"
+import ProfileControl from "../utility/ProfileControl";
 
 export default function HomeNavbar(props) {
-    const { isLogin, setIsLogin } = useState();
+    const { auth } = useOutletContext();
 
     return (
         <>
@@ -42,25 +43,14 @@ export default function HomeNavbar(props) {
                                     {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
                                 </form>
                             </li>
-                            {!isLogin &&
+                            {!auth.isLogin &&
                                 <li className="nav-item mt-2 mt-sm-0">
                                     <div className="d-flex gap-2">
                                         <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
                                         <NavLink to={'/auth/register'} className="btn btn-warning">Sign-up</NavLink>
                                     </div>
                                 </li>}
-                            {isLogin &&
-                                <li className="nav-item dropdown mt-2 mt-sm-0">
-                                    <a id="navbarDropdown" className="nav-link dropdown-toggle p-1" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                        <img src="/vite.svg" alt="avatar" width="32" height="32" className="rounded-circle border border-1 border-secondary" />
-                                    </a>
-                                    <div className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <li><a className="dropdown-item" href="#">Name</a></li>
-                                        <li><a className="dropdown-item" href="#">Email</a></li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" style={{ cursor: 'pointer', }}>Logout</a></li>
-                                    </div>
-                                </li>}
+                            <ProfileControl />
                         </ul>
                     </div>
                 </nav>

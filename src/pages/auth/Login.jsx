@@ -15,7 +15,7 @@ const defaultForm = {
 
 export default function Login(props) {
     usePageTitle('Login');
-    const { isLoading, setIsLoading, setAlert } = useOutletContext();
+    const { isLoading, setIsLoading, setAlert, setAuth } = useOutletContext();
     const { loginState, login } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
@@ -35,7 +35,12 @@ export default function Login(props) {
 
             Toast.success(message);
             resetForm();
+
             console.log(data);
+            setAuth({
+                ...data,
+                isLogin: true,
+            });
         } else if (loginState.ERROR) {
             const { message, error = {} } = loginState.RESULT;
             setValidation(error);
