@@ -2,7 +2,7 @@ import { handleInputType } from "../../../../utils/input-helper";
 import { Toast } from "../../../../utils/alert";
 import { useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import { usePageTitle } from "../../../../hooks/usePageTitle";
-import AuthService from "../../../../core/viewmodel/AuthService";
+import AuthService from "../../../../core/service/AuthService";
 import ButtonSpinner from "../../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
 import ValidationFeedback from "../../../components/form/ValidationFeedback";

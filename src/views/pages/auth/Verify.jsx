@@ -2,7 +2,7 @@ import { Toast } from "../../../utils/alert";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import { usePageTitle } from "../../../hooks/usePageTitle";
-import AuthService from "../../../core/viewmodel/AuthService";
+import AuthService from "../../../core/service/AuthService";
 import ButtonSpinner from "../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
 

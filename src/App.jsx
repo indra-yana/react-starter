@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import AuthService from './core/viewmodel/AuthService';
+import AuthService from './core/service/AuthService';
 
 function App() {
 	const { auth, setAuth } = AuthService();

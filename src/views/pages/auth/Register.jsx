@@ -3,7 +3,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../utils/alert";
 import { useEffect } from "react";
 import { usePageTitle } from "../../../hooks/usePageTitle";
-import AuthService from "../../../core/viewmodel/AuthService";
+import AuthService from "../../../core/service/AuthService";
 import ButtonSpinner from "../../components/button/ButtonSpinner";
 import React, { useState } from "react";
 import ValidationFeedback from "../../components/form/ValidationFeedback";
