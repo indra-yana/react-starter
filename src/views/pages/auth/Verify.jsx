@@ -2,7 +2,7 @@ import { Toast } from "../../../utils/alert";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import { usePageTitle } from "../../../hooks/usePageTitle";
-import AuthViewModel from "../../../core/viewmodel/AuthViewModel";
+import AuthService from "../../../core/viewmodel/AuthService";
 import ButtonSpinner from "../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
 
@@ -15,7 +15,7 @@ export default function Verify(props) {
     usePageTitle('Verify Account');
     const { auth, setAuth } = useAuthContext();
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
-    const { verifyState, sendVerificationLinkState, verify, sendVerificationLink } = AuthViewModel();
+    const { verifyState, sendVerificationLinkState, verify, sendVerificationLink } = AuthService();
     const { token } = useParams();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();

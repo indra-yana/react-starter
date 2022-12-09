@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom'
-import AuthViewModel from './core/viewmodel/AuthViewModel';
+import AuthService from './core/viewmodel/AuthService';
 
 function App() {
-	const { auth, setAuth } = AuthViewModel();
+	const { auth, setAuth } = AuthService();
 
 	return <Outlet context={{
 		auth,

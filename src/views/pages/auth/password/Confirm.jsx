@@ -2,7 +2,7 @@ import { handleInputType } from "../../../../utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../../utils/alert";
 import { usePageTitle } from "../../../../hooks/usePageTitle";
-import AuthViewModel from "../../../../core/viewmodel/AuthViewModel";
+import AuthService from "../../../../core/viewmodel/AuthService";
 import ButtonSpinner from "../../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
 import ValidationFeedback from "../../../components/form/ValidationFeedback";
@@ -14,7 +14,7 @@ const defaultForm = {
 export default function Confirm(props) {
     usePageTitle('Password Confirmation');
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
-    const { confirmPasswordState, confirmPassword } = AuthViewModel();
+    const { confirmPasswordState, confirmPassword } = AuthService();
 
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);

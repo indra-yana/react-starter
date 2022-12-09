@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const userRepository = RepositoryFactory.get('user');
 
-export function UserViewModel() {
+export function UserService() {
     const [listState, setListState] = useState(STATE.Default);
     const [showState, setShowState] = useState(STATE.Default);
     const [createState, setCreateState] = useState(STATE.Default);

@@ -2,7 +2,7 @@ import { handleInputType } from "../../../../utils/input-helper";
 import { Toast } from "../../../../utils/alert";
 import { useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import { usePageTitle } from "../../../../hooks/usePageTitle";
-import AuthViewModel from "../../../../core/viewmodel/AuthViewModel";
+import AuthService from "../../../../core/viewmodel/AuthService";
 import ButtonSpinner from "../../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
 import ValidationFeedback from "../../../components/form/ValidationFeedback";
@@ -17,7 +17,7 @@ const defaultForm = {
 export default function Reset(props) {
     usePageTitle('Reset Password');
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
-    const { resetPasswordState, resetPassword } = AuthViewModel();
+    const { resetPasswordState, resetPassword } = AuthService();
     const { token } = useParams();
     const [searchParams] = useSearchParams();
     const [validation, setValidation] = useState({});

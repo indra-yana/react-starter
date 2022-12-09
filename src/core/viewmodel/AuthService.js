@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const authRepository = RepositoryFactory.get('auth');
 
-export default function AuthViewModel() {
+export default function AuthService() {
     const [sendResetLinkState, setSendResetLinkState] = useState(STATE.Default);
     const [resetPasswordState, setResetPasswordState] = useState(STATE.Default);
     const [confirmPasswordState, setConfirmPasswordState] = useState(STATE.Default);

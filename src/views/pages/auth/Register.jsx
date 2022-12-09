@@ -3,7 +3,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../utils/alert";
 import { useEffect } from "react";
 import { usePageTitle } from "../../../hooks/usePageTitle";
-import AuthViewModel from "../../../core/viewmodel/AuthViewModel";
+import AuthService from "../../../core/viewmodel/AuthService";
 import ButtonSpinner from "../../components/button/ButtonSpinner";
 import React, { useState } from "react";
 import ValidationFeedback from "../../components/form/ValidationFeedback";
@@ -21,7 +21,7 @@ const defaultForm = {
 export default function Register(props) {
     usePageTitle('Register');
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
-    const { registerState, register } = AuthViewModel();
+    const { registerState, register } = AuthService();
 
     const [validation, setValidation] = useState({});
     const [avatarPreview, setAvatarPreview] = useState(defaultPreview);
