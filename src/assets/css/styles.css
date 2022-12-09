@@ -427,6 +427,10 @@ i {
     width: 100%;
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}
+
 /* Auth */
 .divider:after,
 .divider:before {

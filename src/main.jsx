@@ -24,6 +24,8 @@ import Forgot from './views/pages/auth/password/Forgot';
 import Reset from './views/pages/auth/password/Reset';
 import Confirm from './views/pages/auth/password/Confirm';
 import Verify from './views/pages/auth/Verify';
+import DashboardLayout from './views/layouts/DashboardLayout';
+import Dashboard from './views/pages/dashboard/index/Dashboard';
 
 const router = createBrowserRouter([
 	{
@@ -37,12 +39,12 @@ const router = createBrowserRouter([
 				element: <HomeLayout />,
 				children: [
 					{
-						index:true,
-						element: <Landing/>,
+						index: true,
+						element: <Landing />,
 					},
 					{
-						path:'help',
-						element: <Help/>,
+						path: 'help',
+						element: <Help />,
 					},
 				]
 			},
@@ -51,28 +53,38 @@ const router = createBrowserRouter([
 				element: <AuthLayout />,
 				children: [
 					{
-						path:'login',
-						element: <Login/>,
+						path: 'login',
+						element: <Login />,
 					},
 					{
-						path:'register',
-						element: <Register/>,
+						path: 'register',
+						element: <Register />,
 					},
 					{
-						path:'forgot',
-						element: <Forgot/>,
+						path: 'forgot',
+						element: <Forgot />,
 					},
 					{
-						path:'reset/:token',
-						element: <Reset/>,
+						path: 'reset/:token',
+						element: <Reset />,
 					},
 					{
-						path:'confirm',
-						element: <Confirm/>,
+						path: 'confirm',
+						element: <Confirm />,
 					},
 					{
-						path:'verify/:token',
-						element: <Verify/>,
+						path: 'verify/:token',
+						element: <Verify />,
+					},
+				]
+			},
+			{
+				path: 'dashboard',
+				element: <DashboardLayout />,
+				children: [
+					{
+						index: true,
+						element: <Dashboard />,
 					},
 				]
 			},

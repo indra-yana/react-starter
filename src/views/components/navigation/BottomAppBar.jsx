@@ -14,7 +14,7 @@ export default function BottomAppBar(props) {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to={'/contacts'} className="nav-link text-center">
+                            <NavLink to={'/dashboard'} className="nav-link text-center">
                                 <i className="fas fa-dashboard"></i>
                                 <span className="small d-block">Dashboard</span>
                             </NavLink>
