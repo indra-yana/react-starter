@@ -61,7 +61,7 @@ export default function Login(props) {
 
     useEffect(() => {
         if (auth.isLogin) {
-            navigate('/dashboard');
+            setTimeout(() => navigate('/dashboard'), 2000);
         }
     }, [auth]);
 

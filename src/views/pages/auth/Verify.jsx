@@ -22,6 +22,7 @@ export default function Verify(props) {
 
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
+    const email = auth.user ? auth.user.email : searchParams.get('email');
 
     useEffect(() => {
         if (!auth.isLogin) {
@@ -33,7 +34,7 @@ export default function Verify(props) {
         if (token !== 'undefined') {
             setForm({
                 token,
-                email: searchParams.get('email'),
+                email,
             });
         }
     }, []);
@@ -61,7 +62,7 @@ export default function Verify(props) {
                 }
             }));
             
-            navigate('/dashboard');
+            setTimeout(() => navigate('/dashboard'), 2000);
         } else if (verifyState.ERROR) {
             const { message, error = {} } = verifyState.RESULT;
             setValidation(error);
@@ -111,7 +112,7 @@ export default function Verify(props) {
 
     async function handleResendVerificationLink(e) {
         e.preventDefault();
-        await sendVerificationLink(form.email);
+        await sendVerificationLink(email);
     }
 
     return (
@@ -128,7 +129,7 @@ export default function Verify(props) {
                             </div>
                             <div className="row mb-3">
                                 <div className="col-sm-12 col-form-label text-md-right">
-                                    <h5>Hi <span className="fst-italic">{form.email}</span></h5>
+                                    <h5>Hi <span className="fst-italic">{email}</span></h5>
                                     <h5>Before continuing, please check your email for a verification link.</h5>
                                     <p className="m-0">If you did not receive the email, click <cite>Resend</cite> verification bellow.</p>
                                 </div>

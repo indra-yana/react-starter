@@ -45,13 +45,15 @@ export default function HomeNavbar(props) {
                                 </form>
                             </li>
                             {!auth.isLogin &&
-                                <li className="nav-item mt-2 mt-sm-0">
-                                    <div className="d-flex gap-2">
-                                        <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
-                                        <NavLink to={'/auth/register'} className="btn btn-warning">Sign-up</NavLink>
-                                    </div>
-                                </li>}
-                            <ProfileControl />
+                            <li className="nav-item mt-2 mt-sm-0">
+                                <div className="d-flex gap-2">
+                                    <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
+                                    <NavLink to={'/auth/register'} className="btn btn-warning">Sign-up</NavLink>
+                                </div>
+                            </li>}
+                            <li className="nav-item dropdown mt-2 mt-sm-0 ms-2">
+                                <ProfileControl />
+                            </li>
                         </ul>
                     </div>
                 </nav>

@@ -14,7 +14,7 @@ export default function ProfileControl(props) {
     return (
         <>
             {auth.isLogin &&
-                <li className="nav-item dropdown mt-2 mt-sm-0 ms-2">
+                <>
                     <a id="navbarDropdown" className="nav-link dropdown-toggle p-1" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <img src={auth.user.avatar || "/vite.svg"} alt="avatar" width="32" height="32" className="rounded-circle border border-1 border-secondary" />
                     </a>
@@ -24,7 +24,7 @@ export default function ProfileControl(props) {
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item rounded-2" style={{ cursor: 'pointer', }} onClick={handleLogout}>Logout</a></li>
                     </ul>
-                </li>
+                </>
             }
         </>
     )
