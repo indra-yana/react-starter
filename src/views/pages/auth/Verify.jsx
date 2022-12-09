@@ -1,5 +1,6 @@
 import { Toast } from "../../../utils/alert";
-import { useOutletContext, useParams, useSearchParams } from "react-router-dom";
+import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import { usePageTitle } from "../../../hooks/usePageTitle";
 import AuthViewModel from "../../../core/viewmodel/AuthViewModel";
 import ButtonSpinner from "../../components/button/ButtonSpinner";
@@ -12,20 +13,30 @@ const defaultForm = {
 
 export default function Verify(props) {
     usePageTitle('Verify Account');
+    const { auth, setAuth } = useAuthContext();
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { verifyState, sendVerificationLinkState, verify, sendVerificationLink } = AuthViewModel();
     const { token } = useParams();
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
 
     useEffect(() => {
-        setForm({
-            token,
-            email: searchParams.get('email'),
-        });
-    }, [])
+        if (!auth.isLogin) {
+            navigate('/auth/login');
+        }
+    }, [auth.isLogin]);
+
+    useEffect(() => {
+        if (token !== 'undefined') {
+            setForm({
+                token,
+                email: searchParams.get('email'),
+            });
+        }
+    }, []);
 
     useEffect(() => {
         setIsLoading(verifyState.LOADING);
@@ -41,6 +52,16 @@ export default function Verify(props) {
 
             Toast.success(message);
             console.log(data);
+
+            setAuth((prevAuth) => ({
+                ...prevAuth,
+                user: {
+                    ...auth.user,
+                    ...data.user,
+                }
+            }));
+            
+            navigate('/dashboard');
         } else if (verifyState.ERROR) {
             const { message, error = {} } = verifyState.RESULT;
             setValidation(error);
@@ -112,13 +133,16 @@ export default function Verify(props) {
                                     <p className="m-0">If you did not receive the email, click <cite>Resend</cite> verification bellow.</p>
                                 </div>
                             </div>
-
-                            <div className="text-center text-lg-start mt-4 pt-2">
-                                <ButtonSpinner type="submit" isLoading={isLoading} text="Verify" />
-                                <p className="small fw-bold mt-2 pt-1 mb-0 me-2">Or resend verification link.&nbsp;
-                                    <a type="button" className="link-danger" onClick={handleResendVerificationLink}> Resend</a>
-                                </p>
-                            </div>
+                            
+                            {token !== 'undefined' 
+                                ? (<div className="text-center text-lg-start mt-4 pt-2">
+                                    <ButtonSpinner type="submit" isLoading={isLoading} text="Verify" />
+                                    <p className="small fw-bold mt-2 pt-1 mb-0 me-2">Or resend verification link.&nbsp;
+                                        <a type="button" className="link-danger" onClick={handleResendVerificationLink}> Resend</a>
+                                    </p>
+                                    </div>)
+                                : (<ButtonSpinner type="button" isLoading={isLoading} text="Resend" onClick={handleResendVerificationLink}/>)
+                            }
                         </form>
                     </div>
                 </div>
