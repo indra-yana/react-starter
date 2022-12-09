@@ -1,11 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 
 export default function ProfileControl(props) {
     const { auth, setAuth } = useAuthContext();
+    const navigate = useNavigate();
 
     function handleLogout(e) {
         e.preventDefault();
         setAuth({});
+        navigate('/auth/login');
     }
 
     return (

@@ -1,5 +1,5 @@
 import { handleInputType } from "../../../utils/input-helper";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../utils/alert";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { usePageTitle } from "../../../hooks/usePageTitle";
@@ -16,8 +16,9 @@ const defaultForm = {
 
 export default function Login(props) {
     usePageTitle('Login');
+    const navigate = useNavigate();
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
-    const { setAuth } = useAuthContext();
+    const { auth, setAuth } = useAuthContext();
     const { loginState, login } = AuthViewModel();
 
     const [validation, setValidation] = useState({});
@@ -56,7 +57,13 @@ export default function Login(props) {
             Toast.error(message);
         }
 
-    }, [loginState])
+    }, [loginState]);
+
+    useEffect(() => {
+        if (auth.isLogin) {
+            navigate('/dashboard');
+        }
+    }, [auth]);
 
     function handleInputChange(e) {
         const { name } = e.target;

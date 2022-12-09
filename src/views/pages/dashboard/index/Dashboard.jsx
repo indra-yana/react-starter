@@ -1,10 +1,13 @@
 import { useLocation } from "react-router-dom";
+import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { usePageTitle } from "../../../../hooks/usePageTitle"
 import Breadcrumb from "../../../components/utility/Breadcrumb";
 import BreadcrumbItem from "../../../components/utility/BreadcrumbItem";
 
 export default function Dashboard(props) {
     usePageTitle('Dashboard');
+    const { auth } = useAuthContext();
+    const { isLogin = false, user = {} } = auth;
 
     return (
         <>
@@ -15,12 +18,12 @@ export default function Dashboard(props) {
                 </Breadcrumb>
                 <div className="row">
                     <div className="col-md-12">
-                        <div class="card">
-                            <h5 class="card-header">Featured</h5>
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div className="card">
+                            <h5 className="card-header">Overview</h5>
+                            <div className="card-body">
+                                <h5 className="card-title">Welcome back <i>{user.name || ''}</i></h5>
+                                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" className="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>
                     </div>
