@@ -83,9 +83,16 @@ const router = createBrowserRouter([
 				element: <DashboardLayout />,
 				children: [
 					{
-						index: true,
-						element: <Dashboard />,
-					},
+						errorElement: <ErrorPage />,
+						children: [
+							{
+								index: true,
+								element: <Dashboard />,
+								errorElement: <ErrorPage />,
+							},
+
+						]
+					}
 				]
 			},
 			{
