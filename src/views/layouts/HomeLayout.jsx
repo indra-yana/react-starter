@@ -13,7 +13,7 @@ export default function HomeLayout(props) {
         <>
             <div className="container">
                 <HomeNavbar />
-                <main id="main" className="pb-5 vh-100">
+                <main id="main" className="pb-5">
                     <Outlet context={{
                         setIsLoading,
                         isLoading,
@@ -21,7 +21,7 @@ export default function HomeLayout(props) {
                         setAuth,
                     }} />
                 </main>
-                <BottomAppBar />
+                {/* <BottomAppBar /> */}
             </div>
         </>
     )

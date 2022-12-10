@@ -1,27 +1,41 @@
-import ProfileControl from "../utility/ProfileControl";
 import React from "react";
-import BackControl from "../utility/BackControl";
+import { NavLink } from "react-router-dom";
 
 export default function DashboardNavbar(props) {
+
+    function handleToggleMenuClick(e) {
+        document.getElementById("sidebar-wrapper").classList.toggle("active");
+        document.getElementById("content").classList.toggle("active-content");
+    }
+
     return (
         <>
-            <div className="container sticky-top p-0">
-                <nav className="navbar navbar-expand-md navbar-dark bg-dark shadow-sm mb-3 rounded px-3 ">
-                    <ul className="navbar-nav me-auto">
-                        <li className="nav-item">
-                            <BackControl />
-                        </li>
-                    </ul>
-                    <ul className="navbar-nav ms-auto">
-                        <li className="nav-item my-auto">
-                            <span className="fs-5 fw-semibold text-white text-center">{props.navTitle}</span>
-                        </li>
-                        <li className="nav-item dropdown mt-2 mt-sm-0 ms-2">
-                            <ProfileControl />
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light rounded shadow">
+                <div className="container-fluid">
+                    <button type="button" id="sidebarCollapse" className="btn btn-dark" onClick={handleToggleMenuClick}>
+                        <i className="text-white fa-solid fa-bars"></i>
+                        <span className="sr-only">Toggle Menu</span>
+                    </button>
+                    <button className="btn btn-outline-light d-inline-block d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i className="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="nav navbar-nav ms-auto">
+                            <li className="nav-item">
+                                <NavLink to={'/'} className="nav-link text-center fw-bold">
+                                    Home
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink to={'/help'} className="nav-link fw-bold">
+                                    Help?
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </>
     )
 }

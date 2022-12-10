@@ -20,6 +20,10 @@ export default function HomeNavbar(props) {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto">
+                            {auth.isLogin &&
+                                <li>
+                                    <NavLink to={'/dashboard'} className="nav-link px-2">Dashboard</NavLink>
+                                </li>}
                             <li>
                                 <NavLink to={'/help'} className="nav-link px-2">Help?</NavLink>
                             </li>
@@ -45,12 +49,12 @@ export default function HomeNavbar(props) {
                                 </form>
                             </li>
                             {!auth.isLogin &&
-                            <li className="nav-item mt-2 mt-sm-0">
-                                <div className="d-flex gap-2">
-                                    <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
-                                    <NavLink to={'/auth/register'} className="btn btn-warning">Sign-up</NavLink>
-                                </div>
-                            </li>}
+                                <li className="nav-item mt-2 mt-sm-0">
+                                    <div className="d-flex gap-2">
+                                        <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
+                                        <NavLink to={'/auth/register'} className="btn btn-warning">Sign-up</NavLink>
+                                    </div>
+                                </li>}
                             <li className="nav-item dropdown mt-2 mt-sm-0 ms-2">
                                 <ProfileControl />
                             </li>
