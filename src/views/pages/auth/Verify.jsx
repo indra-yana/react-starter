@@ -51,18 +51,13 @@ export default function Verify(props) {
                 message,
             });
 
+            const { user = {} } = data;
+            if (user.emailVerifiedAt) {
+                redirectToDashboard(user);
+            }
+
             Toast.success(message);
             console.log(data);
-
-            setAuth((prevAuth) => ({
-                ...prevAuth,
-                user: {
-                    ...auth.user,
-                    ...data.user,
-                }
-            }));
-            
-            setTimeout(() => navigate('/dashboard'), 2000);
         } else if (verifyState.ERROR) {
             const { message, error = {} } = verifyState.RESULT;
             setValidation(error);
@@ -89,6 +84,11 @@ export default function Verify(props) {
                 message,
             });
 
+            const { user = {} } = data;
+            if (user.emailVerifiedAt) {
+                redirectToDashboard(user);
+            }
+
             Toast.success(message);
             console.log(data);
         } else if (sendVerificationLinkState.ERROR) {
@@ -104,6 +104,18 @@ export default function Verify(props) {
             Toast.error(message);
         }
     }, [sendVerificationLinkState]);
+
+    function redirectToDashboard(newUser) {
+        setAuth((prevAuth) => ({
+            ...prevAuth,
+            user: {
+                ...auth.user,
+                emailVerifiedAt: newUser.emailVerifiedAt,
+            }
+        }));
+        
+        setTimeout(() => navigate('/dashboard'), 2000);
+    }
 
     async function handleVerify(e) {
         e.preventDefault();
