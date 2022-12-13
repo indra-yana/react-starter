@@ -13,9 +13,12 @@ const apiClient = axios.create({
 });
 
 const requestHandler = (request) => {
-	// TODO: Change this from local storage or state
-	request.headers['Authorization'] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IklKOWZGWE5jVWVGci1FVDkiLCJuYW1lIjoiSW5kcmEgTXVsaWFuYSIsInVzZXJuYW1lIjoic3VwdXNlciIsImVtYWlsIjoiaW5kcmEubmRyYTI2QGdtYWlsLmNvbSIsImVtYWlsVmVyaWZpZWRBdCI6bnVsbCwiY3JlYXRlZEF0IjoiMjAyMi0xMi0wNlQwNzo0MjoxMS44NTVaIiwidXBkYXRlZEF0IjoiMjAyMi0xMi0wOFQwMDoyMDoyNy4xNjhaIiwiaWF0IjoxNjcwNDg2MTEwLCJleHAiOjE2NzMwNzgxMTB9.2pQcLxyVPDkDJjpzpjLIkzP_VtJ2xDBadr6gIty_vy0	`;
-	request.headers['Accept-Language'] = 'id';
+	const auth = JSON.parse(localStorage.getItem('auth'));
+	const { accessToken = '' } = auth.token || {};
+	const { lang = 'id' } = auth.setting || {};
+
+	request.headers['Authorization'] = `Bearer ${accessToken}`;
+	request.headers['Accept-Language'] = lang;
 
 	return request;
 }
