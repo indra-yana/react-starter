@@ -38,8 +38,8 @@ export default function DashboardLayout(props) {
                             <ProfileControl className="mb-2" size="avatar-95" title={true} />
                         </div>
                         <hr />
-                        <form className="d-flex mb-3" role="search" action="#">
-                            <input className="form-control form-control-xs" type="search" placeholder="Search" aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <form className="d-flex mb-3" role="search" onSubmit={(e) => e.preventDefault()}>
+                            <input className="form-control form-control-xs" type="search" placeholder="Search Menu" aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                             {/* <button className="btn btn-outline-light ms-2" type="submit">
                                 <i className="fas fa-search"></i>
                             </button> */}
