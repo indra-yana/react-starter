@@ -26,6 +26,8 @@ import Confirm from './views/pages/auth/password/Confirm';
 import Verify from './views/pages/auth/Verify';
 import DashboardLayout from './views/layouts/DashboardLayout';
 import Dashboard from './views/pages/dashboard/index/Dashboard';
+import ManageUser from './views/pages/dashboard/user/manage/ManageUser';
+import Role from './views/pages/dashboard/user/role/Role';
 
 const router = createBrowserRouter([
 	{
@@ -88,9 +90,24 @@ const router = createBrowserRouter([
 							{
 								index: true,
 								element: <Dashboard />,
-								errorElement: <ErrorPage />,
+								handle: {
+									routeName: 'dashboard.index'
+								},
 							},
-
+							{
+								path: 'user/manage',
+								element: <ManageUser />,
+								handle: {
+									routeName: 'dashboard.user.manage'
+								},
+							},
+							{
+								path: 'user/role',
+								element: <Role />,
+								handle: {
+									routeName: 'dashboard.user.role'
+								},
+							},
 						]
 					}
 				]

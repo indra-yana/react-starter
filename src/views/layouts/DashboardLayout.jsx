@@ -1,27 +1,29 @@
-import { Form, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useEffect } from "react";
 import { useLoadingState } from "../../hooks/useLoadingState";
 import { useState } from "react";
 import Alert from "../components/utility/Alert";
-import ProfileControl from "../components/utility/ProfileControl";
 import DashboardNavbar from "../components/navigation/DashboardNavbar";
+import ProfileControl from "../components/utility/ProfileControl";
+import SideBarMenu from "../components/navigation/SideBarMenu";
 
 export default function DashboardLayout(props) {
-    const { auth, setAuth } = useAuthContext();
-    const [isLoading, setIsLoading] = useLoadingState(false);
     const [navTitle, setNavTitle] = useState("");
+    const [isLoading, setIsLoading] = useLoadingState(false);
     const [alert, setAlert] = useState({});
-    const [isSearching, seIsSearching] = useState(false);
+    const [search, setSearch] = useState('');
     const navigate = useNavigate();
-    const user = auth.user || {};
+
+    const { auth, setAuth } = useAuthContext();
+    const { isLogin = false, user = {} } = auth;
 
     useEffect(() => {
-        if (!auth.isLogin) {
+        if (!isLogin) {
             navigate('/auth/login');
         } else {
-            if (auth.user.emailVerifiedAt === null) {
-                navigate(`/auth/verify/undefined?email=${auth.user.email}`);
+            if (user.emailVerifiedAt === null) {
+                navigate(`/auth/verify/undefined?email=${user.email}`);
             }
         }
     }, [auth.isLogin]);
@@ -37,30 +39,14 @@ export default function DashboardLayout(props) {
                         </div>
                         <hr />
                         <form className="d-flex mb-3" role="search" action="#">
-                            <input className="form-control form-control-xs me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <input className="form-control form-control-xs me-2" type="search" placeholder="Search" aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                             <button className="btn btn-outline-light" type="submit">
                                 <i className="fas fa-search"></i>
                             </button>
                         </form>
-                        <ul className="list-unstyled components mb-5">
-                            <li className="active">
-                                <a className="nav-main" href="#">Dashboard</a>
-                            </li>
-                            <li>
-                                <a className="nav-main dropdown-toggle" href="#pageSubmenu" data-bs-toggle="collapse" aria-expanded="true">User</a>
-                                <ul className="collapse list-unstyled" id="pageSubmenu">
-                                    <li>
-                                        <a className="nav-link nav-sub" href="#"> Manage</a>
-                                    </li>
-                                    <li>
-                                        <a className="nav-link nav-sub" href="#"> Role</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a className="nav-main" href="#">About</a>
-                            </li>
-                        </ul>
+
+                        <SideBarMenu search={search} />
+
                     </div>
                     <div className="footer bottom p-3">
                         <p>
