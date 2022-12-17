@@ -39,10 +39,10 @@ export default function DashboardLayout(props) {
                         </div>
                         <hr />
                         <form className="d-flex mb-3" role="search" action="#">
-                            <input className="form-control form-control-xs me-2" type="search" placeholder="Search" aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
-                            <button className="btn btn-outline-light" type="submit">
+                            <input className="form-control form-control-xs" type="search" placeholder="Search" aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
+                            {/* <button className="btn btn-outline-light ms-2" type="submit">
                                 <i className="fas fa-search"></i>
-                            </button>
+                            </button> */}
                         </form>
 
                         <SideBarMenu search={search} />
