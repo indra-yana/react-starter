@@ -10,6 +10,7 @@ import ButtonDelete from "../../../../components/button/ButtonDelete";
 import ButtonEdit from "../../../../components/button/ButtonEdit";
 import Card from "../../../../components/utility/Card";
 import DataTable from 'react-data-table-component';
+import ButtonCreate from "../../../../components/button/ButtonCreate";
 
 export default function ManageUser(props) {
     const columns = [
@@ -35,7 +36,7 @@ export default function ManageUser(props) {
             button: true,
             cell: (row) =>
                 <>
-                    <ButtonEdit onClick={(e) => handleEdit(row)} />
+                    <ButtonEdit onClick={(e) => navigate(`edit/${row.id}`)} />
                     {user.id !== row.id && <ButtonDelete onClick={(e) => handleDelete(row)} />}
                 </>
         },
@@ -101,10 +102,6 @@ export default function ManageUser(props) {
         list();
     }, []);
 
-    function handleEdit(row) {
-        navigate(`edit/${row.id}`);
-    }
-
     function handleDelete(row) {
         Toast.delete().then(async (result) => {
             if (result.isConfirmed) {
@@ -123,10 +120,7 @@ export default function ManageUser(props) {
                 <div className="row">
                     <div className="col-md-12">
                         <Card title="Registered User">
-                            <NavLink to={'create'} className={'btn btn-sm btn-warning m-1'}>
-                                <i className="fas fa-pencil-alt me-2"></i>
-                                Create New
-                            </NavLink>
+                            <ButtonCreate text="Create New" onClick={(e) => navigate(`create`)} />
                             <DataTable
                                 columns={columns}
                                 data={userList}
