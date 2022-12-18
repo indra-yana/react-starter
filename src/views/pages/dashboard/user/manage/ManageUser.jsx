@@ -48,7 +48,7 @@ export default function ManageUser(props) {
     const { auth } = useAuthContext();
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { isLogin = false, user = {} } = auth;
-    const { listState, list } = UserService();
+    const { listState, deleteState, list, deleteData } = UserService();
     const [userList, setUserList] = useState([]);
 
     useEffect(() => {
@@ -70,21 +70,49 @@ export default function ManageUser(props) {
             Toast.error(message);
         }
     }, [listState]);
+    
+    useEffect(() => {
+        setIsLoading(listState.LOADING);
+
+        if (deleteState.SUCCESS) {
+            const { message, data = {} } = deleteState.RESULT;
+
+            setAlert({
+                show: true,
+                type: 'success',
+                autoClose: true,
+                message,
+            });
+            Toast.success(message);
+
+            list();
+        } else if (deleteState.ERROR) {
+            const { message, error = {} } = deleteState.RESULT;
+
+            setAlert({
+                show: true,
+                type: 'error',
+                message,
+            });
+
+            Toast.error(message);
+        }
+    }, [deleteState]);
 
     useEffect(() => {
         list();
     }, []);
-
-    function handleCreate() {
-        console.log('Create');
-    }
 
     function handleEdit(row) {
         console.log(row);
     }
 
     function handleDelete(row) {
-        console.log(row);
+        Toast.delete().then(async (result) => {
+            if (result.isConfirmed) {
+                await deleteData(row.id);
+            }
+        })
     }
 
     return (

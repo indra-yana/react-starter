@@ -44,5 +44,10 @@ export const Toast = {
 			title: message
 		});
 	},
-	confirmDelete: ToastDelete,
+	delete: (title = undefined, message = undefined) => {
+		return ToastDelete.fire({
+			title: title || 'Confirm to Delete',
+			html: message || 'Are you sure you want delete this data?'
+		});
+	},
 };
