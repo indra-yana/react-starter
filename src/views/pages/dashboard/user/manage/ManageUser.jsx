@@ -1,18 +1,15 @@
+import { NavLink, useNavigate, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../../../utils/alert";
 import { useAuthContext } from "../../../../../hooks/useAuthContext";
 import { useEffect, useState } from "react";
-import { NavLink, useOutletContext } from "react-router-dom";
 import { usePageTitle } from "../../../../../hooks/usePageTitle"
 import { UserService } from "../../../../../core/service/UserService";
 import Breadcrumb from "../../../../components/utility/Breadcrumb";
 import BreadcrumbItem from "../../../../components/utility/BreadcrumbItem";
-import DataTable from 'react-data-table-component';
-import ButtonEdit from "../../../../components/button/ButtonEdit";
 import ButtonDelete from "../../../../components/button/ButtonDelete";
-import ButtonCreate from "../../../../components/button/ButtonCreate";
+import ButtonEdit from "../../../../components/button/ButtonEdit";
 import Card from "../../../../components/utility/Card";
-
-
+import DataTable from 'react-data-table-component';
 
 export default function ManageUser(props) {
     const columns = [
@@ -39,7 +36,7 @@ export default function ManageUser(props) {
             cell: (row) =>
                 <>
                     <ButtonEdit onClick={(e) => handleEdit(row)} />
-                    <ButtonDelete onClick={(e) => handleDelete(row)} />
+                    {user.id !== row.id && <ButtonDelete onClick={(e) => handleDelete(row)} />}
                 </>
         },
     ];
@@ -50,6 +47,7 @@ export default function ManageUser(props) {
     const { isLogin = false, user = {} } = auth;
     const { listState, deleteState, list, deleteData } = UserService();
     const [userList, setUserList] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoading(listState.LOADING);
@@ -104,7 +102,7 @@ export default function ManageUser(props) {
     }, []);
 
     function handleEdit(row) {
-        console.log(row);
+        navigate(`/dashboard/user/manage/edit/${row.id}`);
     }
 
     function handleDelete(row) {

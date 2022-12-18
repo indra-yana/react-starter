@@ -29,6 +29,7 @@ import Dashboard from './views/pages/dashboard/index/Dashboard';
 import ManageUser from './views/pages/dashboard/user/manage/ManageUser';
 import Role from './views/pages/dashboard/user/role/Role';
 import CreateUser from './views/pages/dashboard/user/manage/CreateUser';
+import EditUser from './views/pages/dashboard/user/manage/EditUser';
 
 const router = createBrowserRouter([
 	{
@@ -107,6 +108,13 @@ const router = createBrowserRouter([
 								element: <CreateUser />,
 								handle: {
 									routeName: 'dashboard.user.manage.create'
+								},
+							},
+							{
+								path: 'user/manage/edit/:id',
+								element: <EditUser />,
+								handle: {
+									routeName: 'dashboard.user.manage.edit'
 								},
 							},
 							{

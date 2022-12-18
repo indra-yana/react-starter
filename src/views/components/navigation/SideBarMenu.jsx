@@ -21,7 +21,7 @@ export const menuItems = [
                 to: '/dashboard/user/manage',
                 routeAction: [
                     'create',
-                    'update',
+                    'edit',
                     'detail',
                 ]
             },
