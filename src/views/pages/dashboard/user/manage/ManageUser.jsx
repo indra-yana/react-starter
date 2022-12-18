@@ -102,7 +102,7 @@ export default function ManageUser(props) {
     }, []);
 
     function handleEdit(row) {
-        navigate(`/dashboard/user/manage/edit/${row.id}`);
+        navigate(`edit/${row.id}`);
     }
 
     function handleDelete(row) {
