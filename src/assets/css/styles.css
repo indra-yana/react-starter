@@ -48,10 +48,10 @@ a {
     text-decoration: none !important;
 }
 
-button {
+/* button {
     color: #3992ff;
     font-weight: 500;
-}
+} */
 
 textarea:hover,
 input:hover,
@@ -496,6 +496,14 @@ i {
 }
 
 /* DASHBOARD */
+.btn-toggle {
+    background-color: #f8b739;
+}
+
+.btn-toggle:hover {
+    background-color: #eb9d03;
+}
+
 .img {
     background-size: cover;
     background-repeat: no-repeat;
@@ -512,7 +520,7 @@ i {
     height: calc(100% - 50px);
     position: fixed;
     /* margin-left: -300px; */
-    background: #1d1919;
+    background: #003e79;
     color: #fff;
     -webkit-transition: all 0.3s;
     -o-transition: all 0.3s;

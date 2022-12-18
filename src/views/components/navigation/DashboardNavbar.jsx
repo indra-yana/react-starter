@@ -12,7 +12,7 @@ export default function DashboardNavbar(props) {
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light rounded shadow">
                 <div className="container-fluid">
-                    <button type="button" id="sidebarCollapse" className="btn btn-dark" onClick={handleToggleMenuClick}>
+                    <button type="button" id="sidebarCollapse" className="btn btn-warning" onClick={handleToggleMenuClick}>
                         <i className="text-white fa-solid fa-bars"></i>
                         <span className="sr-only">Toggle Menu</span>
                     </button>
