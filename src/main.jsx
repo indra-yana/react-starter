@@ -28,6 +28,7 @@ import DashboardLayout from './views/layouts/DashboardLayout';
 import Dashboard from './views/pages/dashboard/index/Dashboard';
 import ManageUser from './views/pages/dashboard/user/manage/ManageUser';
 import Role from './views/pages/dashboard/user/role/Role';
+import CreateUser from './views/pages/dashboard/user/manage/CreateUser';
 
 const router = createBrowserRouter([
 	{
@@ -99,6 +100,13 @@ const router = createBrowserRouter([
 								element: <ManageUser />,
 								handle: {
 									routeName: 'dashboard.user.manage'
+								},
+							},
+							{
+								path: 'user/manage/create',
+								element: <CreateUser />,
+								handle: {
+									routeName: 'dashboard.user.manage.create'
 								},
 							},
 							{

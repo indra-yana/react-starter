@@ -1,7 +1,7 @@
 import { Toast } from "../../../../../utils/alert";
 import { useAuthContext } from "../../../../../hooks/useAuthContext";
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { NavLink, useOutletContext } from "react-router-dom";
 import { usePageTitle } from "../../../../../hooks/usePageTitle"
 import { UserService } from "../../../../../core/service/UserService";
 import Breadcrumb from "../../../../components/utility/Breadcrumb";
@@ -96,8 +96,11 @@ export default function ManageUser(props) {
                 </Breadcrumb>
                 <div className="row">
                     <div className="col-md-12">
-                        <Card title="User Management">
-                            <ButtonCreate text="Add New" onClick={handleCreate} />
+                        <Card title="Registered User">
+                            <NavLink to={'create'} className={'btn btn-sm btn-warning m-1'}>
+                                <i className="fas fa-pencil-alt me-2"></i>
+                                Create New
+                            </NavLink>
                             <DataTable
                                 columns={columns}
                                 data={userList}

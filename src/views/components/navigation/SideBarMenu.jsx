@@ -19,6 +19,11 @@ export const menuItems = [
                 label: 'Manage',
                 name: 'dashboard.user.manage',
                 to: '/dashboard/user/manage',
+                routeAction: [
+                    'create',
+                    'update',
+                    'detail',
+                ]
             },
             {
                 label: 'Role',
@@ -48,12 +53,19 @@ export default function SideBarMenu(props) {
         setMenus(search ? filteredMenu : menuItems);
     }, [search]);
 
-    function subMenuChild(subMenu, currentRouteName) {
+    function hasSubMenu(subMenu, currentRouteName) {
         const subMenuName = [];
         subMenu.forEach(item => {
-            subMenuName.push(item.name)
+            const { name, routeAction = [] } = item;
+            subMenuName.push(name);
+    
+            if (routeAction.length > 0) {
+                routeAction.forEach(action => {
+                    subMenuName.push(name.concat(`.${action}`))
+                });
+            }
         });
-
+    
         return subMenuName.includes(currentRouteName);
     }
 
@@ -64,12 +76,12 @@ export default function SideBarMenu(props) {
                     <Fragment key={menu.name}>
                         {menu.subMenu 
                             ?
-                            <li className={subMenuChild(menu.subMenu, currentRouteName) ? 'active' : ''}>
+                            <li className={hasSubMenu(menu.subMenu, currentRouteName) ? 'active' : ''}>
                                 <a className="nav-main dropdown-toggle" href={`#pageSubmenu-${menu.label}`} data-bs-toggle="collapse" aria-expanded="false">
                                     <i className={`side-icon ${menu.icon} `}></i>
                                     {menu.label}
                                 </a>
-                                <ul className={`collapse list-unstyled ${subMenuChild(menu.subMenu, currentRouteName) ? 'show' : ''}`} id={`pageSubmenu-${menu.label}`}>
+                                <ul className={`collapse list-unstyled ${hasSubMenu(menu.subMenu, currentRouteName) ? 'show' : ''}`} id={`pageSubmenu-${menu.label}`}>
                                     {menu.subMenu.map((sub) =>
                                         <MenuItem key={sub.name} menu={sub} currentRouteName={currentRouteName} className="nav-link nav-sub" />
                                     )}
@@ -88,8 +100,21 @@ export default function SideBarMenu(props) {
 function MenuItem(props) {
     const { menu, currentRouteName, className = "nav-main" } = props;
 
+    function hasRouteAction(menu, parentName, currentRouteName) {
+        const subActionName = [];
+        const { routeAction = [] } = menu;
+
+        if (routeAction.length > 0) {
+            routeAction.forEach(action => {
+                subActionName.push(parentName.concat(`.${action}`))
+            });
+        }
+
+        return subActionName.includes(currentRouteName);
+    }
+
     return (
-        <li className={currentRouteName === menu.name ? 'active' : ''}>
+        <li className={currentRouteName === menu.name || hasRouteAction(menu, menu.name, currentRouteName) ? 'active' : ''}>
             <NavLink to={menu.to} className={className}>
                 {menu.icon &&
                     <i className={`side-icon ${menu.icon}`}></i>

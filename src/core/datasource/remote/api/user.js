@@ -9,11 +9,15 @@ export async function show(id) {
 }
 
 export async function create(payloads) {
-    return await apiClient.post('/v1/user/create', payloads);
+    return await apiClient.post('/v1/user/create', payloads, { 
+        headers: {'Content-Type': 'multipart/form-data' }
+    });
 }
 
 export async function update(payloads) {
-    return await apiClient.put('/v1/user/update', payloads);
+    return await apiClient.put('/v1/user/update', payloads, { 
+        headers: {'Content-Type': 'multipart/form-data' }
+    });
 }
 
 export async function deleteData(id) {
