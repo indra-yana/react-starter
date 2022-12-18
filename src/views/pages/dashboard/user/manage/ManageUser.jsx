@@ -1,13 +1,91 @@
-import { useLocation } from "react-router-dom";
+import { Toast } from "../../../../../utils/alert";
 import { useAuthContext } from "../../../../../hooks/useAuthContext";
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { usePageTitle } from "../../../../../hooks/usePageTitle"
+import { UserService } from "../../../../../core/service/UserService";
 import Breadcrumb from "../../../../components/utility/Breadcrumb";
 import BreadcrumbItem from "../../../../components/utility/BreadcrumbItem";
+import DataTable from 'react-data-table-component';
+import ButtonEdit from "../../../../components/button/ButtonEdit";
+import ButtonDelete from "../../../../components/button/ButtonDelete";
+import ButtonCreate from "../../../../components/button/ButtonCreate";
+import Card from "../../../../components/utility/Card";
+
+
 
 export default function ManageUser(props) {
+    const columns = [
+        {
+            name: 'Name',
+            selector: (row) => row.name,
+        },
+        {
+            name: 'Email',
+            selector: (row) => row.email,
+        },
+        {
+            name: 'Username',
+            selector: (row) => row.username,
+        },
+        {
+            name: 'Verified At',
+            selector: (row) => row.emailVerifiedAt,
+            cell: (row) => row.emailVerifiedAt ?? 'N/A',
+        },
+        {
+            name: 'Actions',
+            button: true,
+            cell: (row) =>
+                <>
+                    <ButtonEdit onClick={(e) => handleEdit(row)} />
+                    <ButtonDelete onClick={(e) => handleDelete(row)} />
+                </>
+        },
+    ];
+
     usePageTitle('Manage User');
     const { auth } = useAuthContext();
+    const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { isLogin = false, user = {} } = auth;
+    const { listState, list } = UserService();
+    const [userList, setUserList] = useState([]);
+
+    useEffect(() => {
+        setIsLoading(listState.LOADING);
+
+        if (listState.SUCCESS) {
+            const { message, data = {} } = listState.RESULT;
+            setUserList(data);
+        } else if (listState.ERROR) {
+            const { message, error = {} } = listState.RESULT;
+            setValidation(error);
+
+            setAlert({
+                show: true,
+                type: 'error',
+                message,
+            });
+
+            Toast.error(message);
+        }
+    }, [listState]);
+
+    useEffect(() => {
+        list();
+    }, []);
+
+    function handleCreate() {
+        console.log('Create');
+    }
+
+    function handleEdit(row) {
+        console.log(row);
+    }
+
+    function handleDelete(row) {
+        console.log(row);
+    }
 
     return (
         <>
@@ -18,12 +96,18 @@ export default function ManageUser(props) {
                 </Breadcrumb>
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="card">
-                            <h5 className="card-header">User Management</h5>
-                            <div className="card-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </div>
-                        </div>
+                        <Card title="User Management">
+                            <ButtonCreate text="Add New" onClick={handleCreate} />
+                            <DataTable
+                                columns={columns}
+                                data={userList}
+                                highlightOnHover
+                                striped
+                                pagination
+                                responsive
+                                progressPending={isLoading}
+                            />
+                        </Card>
                     </div>
                 </div>
             </section>

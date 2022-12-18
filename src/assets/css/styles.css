@@ -30,8 +30,9 @@ body {
 }
 
 textarea,
-input,
-button {
+input
+/* button  */
+{
     font-size: 1rem;
     font-family: inherit;
     border: none;
