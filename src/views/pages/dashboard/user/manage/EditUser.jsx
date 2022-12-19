@@ -1,5 +1,6 @@
 import { handleInputType } from "../../../../../utils/input-helper";
 import { Toast } from "../../../../../utils/alert";
+import { useAuthContext } from "../../../../../hooks/useAuthContext";
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { usePageTitle } from "../../../../../hooks/usePageTitle"
@@ -23,6 +24,7 @@ export default function EditUser(props) {
     usePageTitle('Edit User');
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { updateState, showState, show, update } = UserService();
+    const { auth, setAuth } = useAuthContext();
 
     const [avatarPreview, setAvatarPreview] = useState(defaultPreview);
     const [validation, setValidation] = useState({});
@@ -47,6 +49,28 @@ export default function EditUser(props) {
             });
 
             Toast.success(message);
+
+            const {
+                id,
+                name,
+                username,
+                email,
+                avatar,
+            } = data;
+
+            if (avatar && auth.user.id === id) {
+                setAuth((prevAuth) => ({
+                    ...prevAuth,
+                    user: {
+                        ...auth.user,
+                        name,
+                        username,
+                        email,
+                        avatar
+                    }
+                }));
+            }
+
             setTimeout(() => navigate('/dashboard/user/manage'), 2000);
         } else if (updateState.ERROR) {
             const { message, error = {} } = updateState.RESULT;
@@ -72,6 +96,7 @@ export default function EditUser(props) {
                 name,
                 username,
                 email,
+                avatar,
             } = data;
 
             setForm((prevState) => ({
@@ -81,6 +106,10 @@ export default function EditUser(props) {
                 username,
                 email,
             }));
+
+            if (avatar) {
+                setAvatarPreview(avatar);
+            }
         } else if (showState.ERROR) {
             const { message, error = {} } = showState.RESULT;
             setValidation(error);
