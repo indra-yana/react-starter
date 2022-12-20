@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://127.0.0.1:3000';
-const REST_API = `${BASE_URL}/api`;
+const REST_API = import.meta.env.VITE_APP_BE_URL || `${BASE_URL}/api`;
 
 const apiClient = axios.create({
 	baseURL: REST_API,
