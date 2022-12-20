@@ -27,6 +27,10 @@
 
 		"rate_limit_exceeded": "Terlalu banyak permintaan masuk. Silahkan coba lagi dalam {{after}}"
 	},
+	"label": {
+		"login": "Masuk",
+		"logout": "Keluar"
+	},
 	"auth": {
 		"failed": "Identitas tersebut tidak cocok dengan data kami.",
 		"password": "Kata sandi yang diberikan salah.",

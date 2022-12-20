@@ -27,6 +27,10 @@
 
 		"rate_limit_exceeded": "To many request. Please retry in {{after}}"
 	},
+	"label": {
+		"login": "Login",
+		"logout": "Logout"
+	},
 	"auth": {
 		"failed": "These credentials do not match our records.",
 		"password": "The provided password is incorrect.",
