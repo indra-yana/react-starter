@@ -1,5 +1,6 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import LangSwitcher from "../utility/LangSwitcher";
+import React from "react";
 
 export default function DashboardNavbar(props) {
 
@@ -23,7 +24,7 @@ export default function DashboardNavbar(props) {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="nav navbar-nav ms-auto">
                             <li className="nav-item">
-                                <NavLink to={'/'} className="nav-link text-center fw-bold">
+                                <NavLink to={'/'} className="nav-link fw-bold">
                                     Home
                                 </NavLink>
                             </li>
@@ -31,6 +32,9 @@ export default function DashboardNavbar(props) {
                                 <NavLink to={'/help'} className="nav-link fw-bold">
                                     Help?
                                 </NavLink>
+                            </li>
+                            <li className="nav-item my-auto">
+                                <LangSwitcher/>
                             </li>
                         </ul>
                     </div>
