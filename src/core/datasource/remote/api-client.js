@@ -14,8 +14,8 @@ const apiClient = axios.create({
 
 const requestHandler = (request) => {
 	const auth = JSON.parse(localStorage.getItem('auth'));
+	const lang = localStorage.getItem('i18nextLng') || 'en';
 	const { accessToken = '' } = auth.token || {};
-	const { lang = 'id' } = auth.setting || {};
 
 	request.headers['Authorization'] = `Bearer ${accessToken}`;
 	request.headers['Accept-Language'] = lang;
