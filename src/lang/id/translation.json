@@ -1,6 +1,6 @@
 {
 	"message": {
-		"welcome_back": "Selamat datang kembali! {{name}}",
+		"welcome_back": "Selamat datang! {{name}}",
 		"created": "Data berhasil disimpan.",
 		"updated": "Data berhasil diperbarui.",
 		"deleted": "Data berhasil dihapus.",
