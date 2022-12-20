@@ -1,12 +1,37 @@
 import { useOutletContext } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 
 export function useAuthContext() {
-    const { auth, setAuth } = useOutletContext();
-    return { 
-        auth: auth || {
+    let { auth, setAuth } = useOutletContext();
+    if (Object.keys(auth || {}).length === 0) {
+       auth =  {
             isLogin: false,
-            user: {}
-        },
+            user: {},
+            token: {},
+        }
+    }
+
+    const token = auth.token.accessToken;
+    const now = Date.now();
+    let expired = 0;
+
+    if (token) {
+        const decoded = jwt_decode(token);
+        expired = decoded.exp * 1000;
+    }
+
+    useEffect(() => {
+        if (expired < now) {
+            console.log('Authorization token expired!');
+            if (Object.keys(auth).length !== 0) {
+                setAuth({});
+            }
+        }
+    }, []);
+
+    return { 
+        auth,
         setAuth 
     };
 }
