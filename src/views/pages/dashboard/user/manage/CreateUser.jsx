@@ -9,6 +9,7 @@ import BreadcrumbItem from "../../../../components/utility/BreadcrumbItem";
 import ButtonSpinner from "../../../../components/button/ButtonSpinner";
 import Card from "../../../../components/utility/Card";
 import ValidationFeedback from "../../../../components/form/ValidationFeedback";
+import { useTranslation } from "react-i18next";
 
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {
@@ -24,6 +25,7 @@ export default function CreateUser(props) {
     usePageTitle('Create User');
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { createState, create } = UserService();
+    const { t } = useTranslation();
     
     const [avatarPreview, setAvatarPreview] = useState(defaultPreview);
     const [validation, setValidation] = useState({});
@@ -97,7 +99,7 @@ export default function CreateUser(props) {
                 </Breadcrumb>
                 <div className="row">
                     <div className="col-md-12">
-                        <Card title="Create New User" onBackHandler={'/dashboard/user/manage'}>
+                        <Card title={t('label.create_new_user')} onBackHandler={'/dashboard/user/manage'}>
                             <form onSubmit={handleSubmit} autoComplete="off">
                                 <div className="form-outline mb-4">
                                     <label className="form-label" htmlFor="name">Name <span className="text-danger">*</span></label>
@@ -144,7 +146,7 @@ export default function CreateUser(props) {
 
                                 <hr />
                                 <div className="text-center text-lg-start mt-4 pt-2">
-                                    <ButtonSpinner type="submit" variant="btn-success" isLoading={isLoading} text="Save Changes" />
+                                    <ButtonSpinner type="submit" variant="btn-success" isLoading={isLoading} text={t('label.save_changes')} />
                                 </div>
                             </form>
                         </Card>

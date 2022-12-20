@@ -28,8 +28,27 @@
 		"rate_limit_exceeded": "Terlalu banyak permintaan masuk. Silahkan coba lagi dalam {{after}}"
 	},
 	"label": {
+		"actions": "Aksi",
+		"avatar": "Avatar",
+		"create_new_user": "Buat Pengguna Baru",
+		"create_new": "Buat Baru",
+		"create": "Buat",
+		"delete_confirm": "Konfirmasi Hapus",
+		"delete_no": "Tidak, batal!",
+		"delete_sure": "Apakah kamu yakin ingin menghapus data?",
+		"delete_yes": "Ya, hapus!",
+		"delete": "Hapus",
+		"edit_user": "Ubah User",
+		"edit": "Ubah",
+		"email_address": "Alamat Email",
+		"email": "Email",
 		"login": "Masuk",
-		"logout": "Keluar"
+		"logout": "Keluar",
+		"name": "Nama",
+		"registered_user": "User Teregistrasi",
+		"save_changes": "Simpan Perubahan",
+		"username": "Username",
+		"verified_at": "Verifikasi Pada"
 	},
 	"auth": {
 		"failed": "Identitas tersebut tidak cocok dengan data kami.",

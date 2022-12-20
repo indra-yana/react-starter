@@ -1,4 +1,5 @@
 import Swal from "sweetalert2";
+import i18n from "../lang/i18n";
 
 export const SwalMixin = Swal.mixin({
 	toast: true,
@@ -16,8 +17,6 @@ const ToastDelete = Swal.mixin({
 	icon: "warning",
 	showCancelButton: true,
 	showConfirmButton: true,
-	confirmButtonText: "Yes, delete it!",
-	cancelButtonText: 'No, cancel!',
 	customClass: {
 		confirmButton: 'btn btn-danger me-3',
 		cancelButton: 'btn btn-secondary'
@@ -46,8 +45,10 @@ export const Toast = {
 	},
 	delete: (title = undefined, message = undefined) => {
 		return ToastDelete.fire({
-			title: title || 'Confirm to Delete',
-			html: message || 'Are you sure you want delete this data?'
+			title: title || i18n.t('label.delete_confirm'),
+			html: message || i18n.t('label.delete_sure'),
+			confirmButtonText: i18n.t('label.delete_yes'),
+			cancelButtonText: i18n.t('label.delete_no'),
 		});
 	},
 };

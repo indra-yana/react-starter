@@ -11,28 +11,31 @@ import ButtonEdit from "../../../../components/button/ButtonEdit";
 import Card from "../../../../components/utility/Card";
 import DataTable from 'react-data-table-component';
 import ButtonCreate from "../../../../components/button/ButtonCreate";
+import { useTranslation } from "react-i18next";
 
 export default function ManageUser(props) {
+    const { t } = useTranslation();
+
     const columns = [
         {
-            name: 'Name',
+            name: t('label.name'),
             selector: (row) => row.name,
         },
         {
-            name: 'Email',
+            name: t('label.email'),
             selector: (row) => row.email,
         },
         {
-            name: 'Username',
+            name: t('label.username'),
             selector: (row) => row.username,
         },
         {
-            name: 'Verified At',
+            name: t('label.verified_at'),
             selector: (row) => row.emailVerifiedAt,
             cell: (row) => row.emailVerifiedAt ?? 'N/A',
         },
         {
-            name: 'Actions',
+            name: t('label.actions'),
             button: true,
             cell: (row) =>
                 <>
@@ -119,8 +122,8 @@ export default function ManageUser(props) {
                 </Breadcrumb>
                 <div className="row">
                     <div className="col-md-12">
-                        <Card title="Registered User">
-                            <ButtonCreate text="Create New" onClick={(e) => navigate(`create`)} />
+                        <Card title={t('label.registered_user')}>
+                            <ButtonCreate text={t('label.create_new')} onClick={(e) => navigate(`create`)} />
                             <DataTable
                                 columns={columns}
                                 data={userList}

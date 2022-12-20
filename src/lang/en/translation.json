@@ -28,8 +28,27 @@
 		"rate_limit_exceeded": "To many request. Please retry in {{after}}"
 	},
 	"label": {
+		"actions": "Actions",
+		"avatar": "Avatar",
+		"create_new_user": "Create New User",
+		"create_new": "Create New",
+		"create": "Create",
+		"delete_confirm": "Confirm to Delete",
+		"delete_no": "No, cancel!",
+		"delete_sure": "Are you sure you want delete this data?",
+		"delete_yes": "Yes, delete it!",
+		"delete": "Delete",
+		"edit_user": "Edit User",
+		"edit": "Edit",
+		"email_address": "Email Address",
+		"email": "Email",
 		"login": "Login",
-		"logout": "Logout"
+		"logout": "Logout",
+		"name": "Name",
+		"registered_user": "Registered User",
+		"save_changes": "Save Changes",
+		"username": "Username",
+		"verified_at": "Verified At"
 	},
 	"auth": {
 		"failed": "These credentials do not match our records.",
