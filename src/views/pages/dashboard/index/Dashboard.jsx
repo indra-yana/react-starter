@@ -3,6 +3,7 @@ import { usePageTitle } from "../../../../hooks/usePageTitle"
 import { useTranslation } from 'react-i18next';
 import Breadcrumb from "../../../components/utility/Breadcrumb";
 import BreadcrumbItem from "../../../components/utility/BreadcrumbItem";
+import { Link } from "react-router-dom";
 
 export default function Dashboard(props) {
     usePageTitle('Dashboard');
@@ -20,13 +21,11 @@ export default function Dashboard(props) {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="card">
-                            <h5 className="card-header">Overview</h5>
+                            <h5 className="card-header">{t('label.overview')}</h5>
                             <div className="card-body">
-                                <h5 className="card-title">{t('message.welcome_back', {name: user.name || ''})}</h5>
-                                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <a href="#" className="btn btn-primary">Go somewhere</a>
+                                <h5 className="card-title">{t('message.welcome_back', { name: user.name || '' })}</h5>
+                                <p className="card-text">{t('label.help_description')}</p>
+                                <Link to={'/help'} className="btn btn-primary">{t('label.help')}</Link>
                             </div>
                         </div>
                     </div>
