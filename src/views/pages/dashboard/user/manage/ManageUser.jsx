@@ -61,7 +61,6 @@ export default function ManageUser(props) {
             setUserList(data);
         } else if (listState.ERROR) {
             const { message, error = {} } = listState.RESULT;
-            setValidation(error);
 
             setAlert({
                 show: true,
