@@ -3,10 +3,13 @@ import { Link, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../utils/alert";
 import { useEffect } from "react";
 import { usePageTitle } from "../../../hooks/usePageTitle";
+import { useTranslation } from "react-i18next";
 import AuthService from "../../../core/service/AuthService";
+import AvatarPreview from "../../components/utility/AvatarPreview";
 import ButtonSpinner from "../../components/button/ButtonSpinner";
+import FormInput from "../../components/form/FormInput";
 import React, { useState } from "react";
-import ValidationFeedback from "../../components/form/ValidationFeedback";
+import SocialLogin from "../../components/utility/SocialLogin";
 
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {
@@ -22,6 +25,7 @@ export default function Register(props) {
     usePageTitle('Register');
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { registerState, register } = AuthService();
+    const { t } = useTranslation();
 
     const [validation, setValidation] = useState({});
     const [avatarPreview, setAvatarPreview] = useState(defaultPreview);
@@ -93,67 +97,28 @@ export default function Register(props) {
                     </div>
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 py-4">
                         <form onSubmit={handleSubmit}>
-                            <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                <p className="lead fw-normal mb-0 me-3">Register Using</p>
-                                <button type="button" className="btn btn-primary btn-floating mx-1">
-                                    <i className="fab fa-facebook-f text-white"></i>
-                                </button>
 
-                                <button type="button" className="btn btn-primary btn-floating mx-1">
-                                    <i className="fab fa-twitter text-white"></i>
-                                </button>
+                            <SocialLogin />
 
-                                <button type="button" className="btn btn-primary btn-floating mx-1">
-                                    <i className="fab fa-linkedin-in text-white"></i>
-                                </button>
-                            </div>
+                            <FormInput type="text" name="name" handleId="name" value={form.name} onChange={handleInputChange} validation={validation} label={t('label.name')} placeholder={t('placeholder.name')} required />
 
-                            <div className="divider d-flex align-items-center my-4">
-                                <p className="text-center fw-bold mx-3 mb-0">Or</p>
-                            </div>
+                            <FormInput ype="text" name="username" handleId="username" value={form.username} onChange={handleInputChange} validation={validation} label={t('label.username')} placeholder={t('placeholder.username')} required />
 
-                            <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="name">Name <span className="text-danger">*</span></label>
-                                <input type="text" name="name" id="name" value={form.name} onChange={handleInputChange} className={`form-control ${validation.name && 'is-invalid'}`} placeholder="Enter your name" required />
-                                <ValidationFeedback validation={validation.name} />
-                            </div>
+                            <FormInput type="email" name="email" handleId="email" value={form.email} onChange={handleInputChange} validation={validation} label={t('label.email')} placeholder={t('placeholder.email_address')} required autoComplete="new-password" />
 
-                            <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="username">Username <span className="text-danger">*</span></label>
-                                <input type="text" name="username" id="username" value={form.username} onChange={handleInputChange} className={`form-control ${validation.username && 'is-invalid'}`} placeholder="Enter your unique name" required />
-                                <ValidationFeedback validation={validation.username} />
-                            </div>
+                            <FormInput type="password" name="password" handleId="password" value={form.password} onChange={handleInputChange} validation={validation} label={t('label.password')} placeholder={t('placeholder.password')} required autoComplete="new-password" />
 
-                            <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="email">Email address <span className="text-danger">*</span></label>
-                                <input type="email" name="email" id="email" value={form.email} onChange={handleInputChange} className={`form-control ${validation.email && 'is-invalid'}`} placeholder="Enter a valid email address" required />
-                                <ValidationFeedback validation={validation.email} />
-                            </div>
+                            <FormInput type="password" name="password_confirmation" handleId="password_confirmation" value={form.password_confirmation} onChange={handleInputChange} validation={validation} label={t('label.password_confirmation')} placeholder={t('placeholder.password_confirmation')} required autoComplete="new-password" />
 
-                            <div className="form-outline mb-3">
-                                <label className="form-label" htmlFor="password">Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password" id="password" value={form.password} onChange={handleInputChange} className={`form-control ${validation.password && 'is-invalid'}`} placeholder="Enter password" required />
-                                <ValidationFeedback validation={validation.password} />
-                            </div>
-
-                            <div className="form-outline mb-3">
-                                <label className="form-label" htmlFor="password_confirmation">Repeat Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password_confirmation" id="password_confirmation" value={form.password_confirmation} onChange={handleInputChange} className={`form-control ${validation.password_confirmation && 'is-invalid'}`} placeholder="Enter password confirmation" required />
-                                <ValidationFeedback validation={validation.password_confirmation} />
-                            </div>
-
-                            <div className="form-outline mb-3">
-                                <label className="form-label" htmlFor="avatar">Avatar</label>
-                                <input type="file" name="avatar" id="avatar" onChange={handleInputChange} className={`form-control ${validation.avatar && 'is-invalid'}`} accept="image/*" />
-                                <ValidationFeedback validation={validation.avatar} />
-                                <br />
-                                <img className="img-fluid rounded-circle border border-1 border-secondary avatar-95" src={avatarPreview} id="img-preview" alt="Avatar" />
+                            <div className="mb-3">
+                                <FormInput type="file" name="avatar" handleId="avatar-preview" onChange={handleInputChange} label={t('label.avatar')} accept="image/*" />
+                                <AvatarPreview src={avatarPreview} handleId={'avatar-preview'} />
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <ButtonSpinner type="submit" isLoading={isLoading} text="Register" />
-                                <p className="small fw-bold mt-2 pt-1 mb-0">Already have an account?
-                                    <Link to={'/auth/login'} className="link-danger"> Login</Link>
+                                <ButtonSpinner type="submit" isLoading={isLoading} text={t('label.register')} />
+                                <p className="small fw-bold mt-2 pt-1 mb-0">{t('label.already_have_account')}
+                                    <Link to={'/auth/login'} className="link-danger"> {t('label.login')}</Link>
                                 </p>
                             </div>
                         </form>

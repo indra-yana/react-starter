@@ -1,11 +1,12 @@
 import { handleInputType } from "../../../../utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
+import { t } from "i18next";
 import { Toast } from "../../../../utils/alert";
 import { usePageTitle } from "../../../../hooks/usePageTitle";
 import AuthService from "../../../../core/service/AuthService";
 import ButtonSpinner from "../../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
-import ValidationFeedback from "../../../components/form/ValidationFeedback";
+import FormInput from "../../../components/form/FormInput";
 
 const defaultForm = {
     password: "",
@@ -79,19 +80,15 @@ export default function Confirm(props) {
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleSubmit}>
                             <div className="divider d-flex align-items-center my-4">
-                                <p className="text-center fw-bold mx-3 mb-0 fs-5">Password Confirmation</p>
+                                <p className="text-center fw-bold mx-3 mb-0 fs-5">{t('label.password_confirm')}</p>
                             </div>
 
-                            <div className="form-outline mb-3">
-                                <label className="form-label" htmlFor="password">Password <span className="text-danger">*</span></label>
-                                <input type="password" name="password" value={form.password} onChange={handleInputChange} id="password" className={`form-control ${validation.password ? 'is-invalid' : ''}`} placeholder="Enter your password" required autoComplete="new-password" />
-                                <ValidationFeedback validation={validation.password} />
-                            </div>
+                            <FormInput type="password" name="password" value={form.password} onChange={handleInputChange} validation={validation} handleId="password" label={t('label.password')} placeholder={t('placeholder.password')} required />
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <ButtonSpinner type="submit" isLoading={isLoading} text="Confirm" />
-                                <p className="small fw-bold mt-2 pt-1 mb-0">Forgot your password?
-                                    <Link to={'/auth/forgot'} className="link-danger"> Reset Password</Link>
+                                <ButtonSpinner type="submit" isLoading={isLoading} text={t('label.confirm')} />
+                                <p className="small fw-bold mt-2 pt-1 mb-0">{t('label.forgot_password_question')}
+                                    <Link to={'/auth/forgot'} className="link-danger"> {t('label.reset_password')}</Link>
                                 </p>
                             </div>
                         </form>

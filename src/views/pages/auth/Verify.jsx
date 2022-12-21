@@ -2,6 +2,7 @@ import { Toast } from "../../../utils/alert";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import { usePageTitle } from "../../../hooks/usePageTitle";
+import { useTranslation } from "react-i18next";
 import AuthService from "../../../core/service/AuthService";
 import ButtonSpinner from "../../components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
@@ -17,6 +18,7 @@ export default function Verify(props) {
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { verifyState, sendVerificationLinkState, verify, sendVerificationLink } = AuthService();
     const { token } = useParams();
+    const { t } = useTranslation();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -137,24 +139,24 @@ export default function Verify(props) {
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleVerify}>
                             <div className="divider d-flex align-items-center my-4">
-                                <p className="text-center fw-bold mx-3 mb-0 fs-5">Verify Account</p>
+                                <p className="text-center fw-bold mx-3 mb-0 fs-5">{t('label.verify_account')}</p>
                             </div>
                             <div className="row mb-3">
                                 <div className="col-sm-12 col-form-label text-md-right">
-                                    <h5>Hi <span className="fst-italic">{email}</span></h5>
-                                    <h5>Before continuing, please check your email for a verification link.</h5>
-                                    <p className="m-0">If you did not receive the email, click <cite>Resend</cite> verification bellow.</p>
+                                    <h5>{t('label.hi')} <span className="fst-italic">{email}</span></h5>
+                                    <h5>{t('label.verify_account_desc_1')}</h5>
+                                    <p className="m-0">{t('label.verify_account_desc_1')}</p>
                                 </div>
                             </div>
                             
                             {token !== 'undefined' 
                                 ? (<div className="text-center text-lg-start mt-4 pt-2">
-                                    <ButtonSpinner type="submit" isLoading={isLoading} text="Verify" />
-                                    <p className="small fw-bold mt-2 pt-1 mb-0 me-2">Or resend verification link.&nbsp;
-                                        <a type="button" className="link-danger" onClick={handleResendVerificationLink}> Resend</a>
+                                    <ButtonSpinner type="submit" isLoading={isLoading} text={t('label.verify')} />
+                                    <p className="small fw-bold mt-2 pt-1 mb-0 me-2">{t('label.verify_resend_link')}&nbsp;
+                                        <a type="button" className="link-danger" onClick={handleResendVerificationLink}> {t('label.resend')}</a>
                                     </p>
                                     </div>)
-                                : (<ButtonSpinner type="button" isLoading={isLoading} text="Resend" onClick={handleResendVerificationLink}/>)
+                                : (<ButtonSpinner type="button" isLoading={isLoading} text={t('label.resend')} onClick={handleResendVerificationLink}/>)
                             }
                         </form>
                     </div>

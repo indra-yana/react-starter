@@ -2,8 +2,10 @@ import { handleInputType } from "../../../../utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
 import { Toast } from "../../../../utils/alert";
 import { usePageTitle } from "../../../../hooks/usePageTitle";
+import { useTranslation } from "react-i18next";
 import AuthService from "../../../../core/service/AuthService";
 import ButtonSpinner from "../../../components/button/ButtonSpinner";
+import FormInput from "../../../components/form/FormInput";
 import React, { useEffect, useState } from "react";
 
 const defaultForm = {
@@ -14,6 +16,7 @@ export default function Forgot(props) {
     usePageTitle('Forgot Password');
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { sendResetLinkState, sendResetPasswordLink } = AuthService();
+    const { t } = useTranslation();
 
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
@@ -47,7 +50,7 @@ export default function Forgot(props) {
         }
 
     }, [sendResetLinkState])
-    
+
     function handleInputChange(e) {
         const { name } = e.target;
         const value = handleInputType(e);
@@ -80,18 +83,15 @@ export default function Forgot(props) {
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form onSubmit={handleSubmit}>
                             <div className="divider d-flex align-items-center my-4">
-                                <p className="text-center fw-bold mx-3 mb-0 fs-5">Forgot Password</p>
+                                <p className="text-center fw-bold mx-3 mb-0 fs-5">{t('label.forgot_password')}</p>
                             </div>
 
-                            <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="email">Email address <span className="text-danger">*</span></label>
-                                <input type="email" name="email" id="email" value={form.email} onChange={handleInputChange} className="form-control form-control-md" placeholder="Enter a valid email address" required />
-                            </div>
+                            <FormInput type="email" name="email" handleId="email" value={form.email} onChange={handleInputChange} validation={validation} label={t('label.email_address')} placeholder={t('placeholder.email_address')} required />
 
                             <div className="text-center text-lg-start mt-4 pt-2">
-                                <ButtonSpinner type="submit" isLoading={isLoading} text="Send Reset Link" />
-                                <p className="small fw-bold mt-2 pt-1 mb-0">Already remember your password?
-                                    <Link to={'/auth/login'} className="link-danger"> Back to Login</Link>
+                                <ButtonSpinner type="submit" isLoading={isLoading} text={t('label.send_reset_link')} />
+                                <p className="small fw-bold mt-2 pt-1 mb-0">{t('label.already_remember_password_question')}
+                                    <Link to={'/auth/login'} className="link-danger"> {t('label.back_to_login')}</Link>
                                 </p>
                             </div>
                         </form>

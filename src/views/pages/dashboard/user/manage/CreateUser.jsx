@@ -114,7 +114,7 @@ export default function CreateUser(props) {
 
                                 <div className="row">
                                     <div className="col-lg-6 col-md-12">
-                                        <FormInput type="file" name="avatar" handleId="avatar" onChange={handleInputChange} validation={validation} label={t('label.avatar')} accept="image/*" />
+                                        <FormInput type="file" name="avatar" handleId="avatar-preview" onChange={handleInputChange} validation={validation} label={t('label.avatar')} accept="image/*" />
                                     </div>
                                     <div className="col-lg-6 col-md-12">
                                         <AvatarPreview src={avatarPreview} handleId={'avatar-preview'} />
