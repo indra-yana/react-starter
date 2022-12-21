@@ -60,10 +60,11 @@ export default function DashboardLayout(props) {
                 <div id="content" className="p-2 p-md-3">
                     <DashboardNavbar />
                     <main id="main" className="py-5">
-                        <Alert className="mt-4" alert={alert} onAlertCloseClick={() => setAlert({})} />
+                        <Alert className="my-2" alert={alert} onAlertCloseClick={() => setAlert({})} />
                         <Outlet context={{
                             setNavTitle,
                             setAlert,
+                            alert,
                             setIsLoading,
                             isLoading,
                             auth,

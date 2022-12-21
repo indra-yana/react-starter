@@ -24,7 +24,7 @@ const defaultForm = {
 
 export default function EditUser(props) {
     usePageTitle('Edit User');
-    const { isLoading, setIsLoading, setAlert } = useOutletContext();
+    const { isLoading, setIsLoading, alert, setAlert } = useOutletContext();
     const { updateState, showState, show, update } = UserService();
     const { auth, setAuth } = useAuthContext();
     const { t } = useTranslation();
