@@ -48,10 +48,21 @@
 		"logout": "Keluar",
 		"name": "Nama",
 		"overview": "Ihtisar",
+		"password": "Kata Sandi",
+		"password_confirmation": "Ulangi Kata Sandi",
 		"registered_user": "User Teregistrasi",
 		"save_changes": "Simpan Perubahan",
 		"username": "Username",
 		"verified_at": "Verifikasi Pada"
+	},
+	"placeholder": {
+		"name": "Masukan nama",
+		"email": "Masukan email",
+		"email_address": "Masukan alamat email yang valid",
+		"username": "Masukan username",
+		"password": "Masukan kata sandi",
+		"password_confirmation": "Ulangi kata sandi",
+		"avatar": "Unggah avatar"
 	},
 	"auth": {
 		"failed": "Identitas tersebut tidak cocok dengan data kami.",

@@ -48,10 +48,21 @@
 		"logout": "Logout",
 		"name": "Name",
 		"overview": "Overview",
+		"password": "Password",
+		"password_confirmation": "Repeat Password",
 		"registered_user": "Registered User",
 		"save_changes": "Save Changes",
 		"username": "Username",
 		"verified_at": "Verified At"
+	},
+	"placeholder": {
+		"name": "Enter your name",
+		"email": "Enter your email",
+		"email_address": "Enter your valid email address",
+		"username": "Enter your username",
+		"password": "Enter your password",
+		"password_confirmation": "Repeat your password",
+		"avatar": "Upload your avatar"
 	},
 	"auth": {
 		"failed": "These credentials do not match our records.",
