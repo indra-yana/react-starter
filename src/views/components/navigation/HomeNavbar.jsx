@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import LangSwitcher from "../utility/LangSwitcher";
 import ProfileControl from "../utility/ProfileControl";
 import React, { useState } from "react";
 import reactLogo from "../../../assets/react.svg"
@@ -14,8 +15,11 @@ export default function HomeNavbar(props) {
                     <a className="navbar-brand ">
                         <img src={reactLogo} alt="avatar" width="32" height="32" className="rounded-circle border border-1 border-secondary" />
                     </a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon "></span>
+                    </button> */}
+                    <button className="btn btn-outline-light d-inline-block d-md-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i className="fa-solid fa-ellipsis-vertical"></i>
                     </button>
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -41,7 +45,7 @@ export default function HomeNavbar(props) {
                                 </li> */}
                         </ul>
 
-                        <ul className="navbar-nav ms-auto">
+                        <ul className="navbar-nav ms-auto gap-2 my-auto">
                             <li className="nav-item me-3 mt-2 mt-sm-0">
                                 <form className="d-flex">
                                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
@@ -49,13 +53,16 @@ export default function HomeNavbar(props) {
                                 </form>
                             </li>
                             {!auth.isLogin &&
-                                <li className="nav-item mt-2 mt-sm-0">
-                                    <div className="d-flex gap-2">
-                                        <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
-                                        <NavLink to={'/auth/register'} className="btn btn-warning">Sign-up</NavLink>
-                                    </div>
-                                </li>}
-                            <li className="nav-item dropdown mt-2 mt-sm-0 ms-2">
+                            <li className="nav-item my-auto">
+                                <div className="d-flex gap-2">
+                                    <NavLink to={'/auth/login'} className="btn btn-outline-light">Login</NavLink>
+                                    <NavLink to={'/auth/register'} className="btn btn-warning">Sign-up</NavLink>
+                                </div>
+                            </li>}
+                            <li className="nav-item my-auto">
+                                <LangSwitcher />
+                            </li>
+                            <li className="nav-item dropdown my-auto">
                                 <ProfileControl />
                             </li>
                         </ul>
