@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { usePageTitle } from "../../../../../hooks/usePageTitle"
 import { UserService } from "../../../../../core/service/UserService";
+import { useTranslation } from "react-i18next";
+import AvatarPreview from "../../../../components/utility/AvatarPreview";
 import Breadcrumb from "../../../../components/utility/Breadcrumb";
 import BreadcrumbItem from "../../../../components/utility/BreadcrumbItem";
 import ButtonSpinner from "../../../../components/button/ButtonSpinner";
 import Card from "../../../../components/utility/Card";
-import ValidationFeedback from "../../../../components/form/ValidationFeedback";
-import { useTranslation } from "react-i18next";
+import FormInput from "../../../../components/form/FormInput";
 
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {
@@ -158,34 +159,18 @@ export default function EditUser(props) {
                     <div className="col-md-12">
                         <Card title={t('label.edit_user')} onBackHandler={'/dashboard/user/manage'}>
                             <form onSubmit={handleSubmit} autoComplete="off">
-                                <div className="form-outline mb-4">
-                                    <label className="form-label" htmlFor="name">Name <span className="text-danger">*</span></label>
-                                    <input type="text" name="name" id="name" value={form.name} onChange={handleInputChange} className={`form-control ${validation.name && 'is-invalid'}`} placeholder="Enter your name" required />
-                                    <ValidationFeedback validation={validation.name} />
-                                </div>
+                                <FormInput type="text" name="name" handleId="name" value={form.name} onChange={handleInputChange} validation={validation} label={t('label.name')} placeholder={t('placeholder.name')} required />
 
-                                <div className="form-outline mb-4">
-                                    <label className="form-label" htmlFor="username">Username <span className="text-danger">*</span></label>
-                                    <input type="text" name="username" id="username" value={form.username} onChange={handleInputChange} className={`form-control ${validation.username && 'is-invalid'}`} placeholder="Enter your unique name" required autoComplete="new-password" />
-                                    <ValidationFeedback validation={validation.username} />
-                                </div>
+                                <FormInput type="text" name="username" handleId="username" value={form.username} onChange={handleInputChange} validation={validation} label={t('label.username')} placeholder={t('placeholder.username')} required autoComplete="new-password" />
 
-                                <div className="form-outline mb-4">
-                                    <label className="form-label" htmlFor="email">Email address <span className="text-danger">*</span></label>
-                                    <input type="email" name="email" id="email" value={form.email} onChange={handleInputChange} className={`form-control ${validation.email && 'is-invalid'}`} placeholder="Enter a valid email address" required />
-                                    <ValidationFeedback validation={validation.email} />
-                                </div>
+                                <FormInput type="email" name="email" handleId="email" value={form.email} onChange={handleInputChange} validation={validation} label={t('label.email_address')} placeholder={t('placeholder.email_address')} required />
 
                                 <div className="row">
                                     <div className="col-lg-6 col-md-12">
-                                        <div className="form-outline mb-3">
-                                            <label className="form-label" htmlFor="avatar">Avatar</label>
-                                            <input type="file" name="avatar" id="avatar" onChange={handleInputChange} className={`form-control ${validation.avatar && 'is-invalid'}`} accept="image/*" />
-                                            <ValidationFeedback validation={validation.avatar} />
-                                        </div>
+                                        <FormInput type="file" name="avatar" handleId="avatar" onChange={handleInputChange} validation={validation} label={t('label.avatar')} accept="image/*" />
                                     </div>
                                     <div className="col-lg-6 col-md-12">
-                                        <img className="img-fluid rounded-circle border border-1 border-secondary avatar-95" src={avatarPreview} id="img-preview" alt="Avatar" />
+                                        <AvatarPreview src={avatarPreview} handleId={'avatar-preview'} />
                                     </div>
                                 </div>
 
