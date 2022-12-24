@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getItem } from '../local/local-storage';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 const REST_API = import.meta.env.VITE_APP_BE_URL || `${BASE_URL}/api`;
@@ -13,7 +14,7 @@ const apiClient = axios.create({
 });
 
 const requestHandler = (request) => {
-	const auth = JSON.parse(localStorage.getItem('auth'));
+	const auth = getItem('auth', true);
 	const lang = localStorage.getItem('i18nextLng') || 'en';
 	const { accessToken = '' } = auth.token || {};
 

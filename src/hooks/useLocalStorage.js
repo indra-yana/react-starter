@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { getItem, setItem } from "../core/datasource/local/local-storage";
 
 export function useLocalStorage(key, initialValue) {
     const [value, setValue] = useState(() => {
-        const storedValue = localStorage.getItem(key);
+        const storedValue = getItem(key) || null;
         return storedValue === null ? initialValue : JSON.parse(storedValue);
     });
 
@@ -22,7 +23,7 @@ export function useLocalStorage(key, initialValue) {
     const setValueInLocalStorage = (newValue) => {
         setValue((currentValue) => {
             const res = typeof newValue === 'function' ? newValue(currentValue) : newValue;
-            localStorage.setItem(key, JSON.stringify(res));
+            setItem(key, JSON.stringify(res));
             return res;
         })
     }

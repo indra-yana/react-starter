@@ -1,6 +1,7 @@
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { removeItem } from "../../../core/datasource/local/local-storage";
 
 export default function ProfileControl(props) {
     const {
@@ -16,6 +17,11 @@ export default function ProfileControl(props) {
     function handleLogout(e) {
         e.preventDefault();
         setAuth({});
+
+        setTimeout(() => {
+            removeItem('auth');
+        }, 1000);
+        
         navigate('/auth/login');
     }
 
