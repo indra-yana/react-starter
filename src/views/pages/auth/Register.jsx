@@ -111,7 +111,7 @@ export default function Register(props) {
                             <FormInput type="password" name="password_confirmation" handleId="password_confirmation" value={form.password_confirmation} onChange={handleInputChange} validation={validation} label={t('label.password_confirmation')} placeholder={t('placeholder.password_confirmation')} required autoComplete="new-password" />
 
                             <div className="mb-3">
-                                <FormInput type="file" name="avatar" handleId="avatar-preview" onChange={handleInputChange} label={t('label.avatar')} accept="image/*" />
+                                <FormInput type="file" name="avatar" handleId="avatar-preview"  validation={validation} onChange={handleInputChange} label={t('label.avatar')} accept="image/*" />
                                 <AvatarPreview src={avatarPreview} handleId={'avatar-preview'} />
                             </div>
 
