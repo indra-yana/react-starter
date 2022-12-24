@@ -99,24 +99,29 @@ const router = createBrowserRouter([
 							},
 							{
 								path: 'user/manage',
-								element: <ManageUser />,
-								handle: {
-									routeName: 'dashboard.user.manage'
-								},
-							},
-							{
-								path: 'user/manage/create',
-								element: <CreateUser />,
-								handle: {
-									routeName: 'dashboard.user.manage.create'
-								},
-							},
-							{
-								path: 'user/manage/edit/:id',
-								element: <EditUser />,
-								handle: {
-									routeName: 'dashboard.user.manage.edit'
-								},
+								children: [
+									{
+										index: true,
+										element: <ManageUser />,
+										handle: {
+											routeName: 'dashboard.user.manage'
+										},
+									},
+									{
+										path: 'create',
+										element: <CreateUser />,
+										handle: {
+											routeName: 'dashboard.user.manage.create'
+										},
+									},
+									{
+										path: 'edit/:id',
+										element: <EditUser />,
+										handle: {
+											routeName: 'dashboard.user.manage.edit'
+										},
+									},
+								]
 							},
 							{
 								path: 'user/role',
