@@ -33,6 +33,7 @@ import CreateUser from './views/pages/dashboard/user/manage/CreateUser';
 import EditUser from './views/pages/dashboard/user/manage/EditUser';
 import CreateRole from './views/pages/dashboard/user/role/CreateRole';
 import EditRole from './views/pages/dashboard/user/role/EditRole';
+import About from './views/pages/dashboard/about/About';
 
 const router = createBrowserRouter([
 	{
@@ -150,6 +151,13 @@ const router = createBrowserRouter([
 										},
 									},
 								]
+							},
+							{
+								path: 'about',
+								element: <About />,
+								handle: {
+									routeName: 'dashboard.about'
+								},
 							},
 						]
 					}
