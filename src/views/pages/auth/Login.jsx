@@ -113,13 +113,13 @@ export default function Login(props) {
                                         {t('label.remember_me')}
                                     </label>
                                 </div>
-                                <Link to={'/auth/forgot'} className="text-body"> {t('label.forgot_password_question')}</Link>
+                                <Link to={'/auth/forgot'} className="text-body" state={{from: 'login'}}> {t('label.forgot_password_question')}</Link>
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
                                 <ButtonSpinner type="submit" isLoading={isLoading} text={t('label.login')} />
                                 <p className="small fw-bold mt-2 pt-1 mb-0">{t('label.donot_have_account')}
-                                    <Link to={'/auth/register'} className="link-danger"> {t('label.register')}</Link>
+                                    <Link to={'/auth/register'} className="link-danger" state={{from: 'login'}}> {t('label.register')}</Link>
                                 </p>
                             </div>
                         </form>

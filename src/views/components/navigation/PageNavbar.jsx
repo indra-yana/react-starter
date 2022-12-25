@@ -1,16 +1,37 @@
+import { useLocation } from "react-router-dom";
 import BackControl from "../utility/BackControl";
 import LangSwitcher from "../utility/LangSwitcher";
 import ProfileControl from "../utility/ProfileControl";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function PageNavbar(props) {
+
+    const [navigateTo, setNavigateTo] = useState('/');
+    let location = useLocation();
+    const { from = '/' } = location.state || {};
+
+    useEffect(() => {
+        switch (from) {
+            case 'login':
+                setNavigateTo('/auth/login');
+                break;
+            case 'confirm':
+                setNavigateTo('/auth/confirm');
+                break;
+            default:
+                setNavigateTo('/');
+                break;
+        }
+    }, [from]);
+
+
     return (
         <>
             <div className="container sticky-top p-0">
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark shadow-sm mb-3 rounded px-3 ">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
-                            <BackControl />
+                            <BackControl navigateTo={navigateTo} />
                             <span className="fs-5 fw-semibold text-white text-center">{props.navTitle}</span>
                         </li>
                     </ul>

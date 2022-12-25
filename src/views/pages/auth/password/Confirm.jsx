@@ -88,7 +88,7 @@ export default function Confirm(props) {
                             <div className="text-center text-lg-start mt-4 pt-2">
                                 <ButtonSpinner type="submit" isLoading={isLoading} text={t('label.confirm')} />
                                 <p className="small fw-bold mt-2 pt-1 mb-0">{t('label.forgot_password_question')}
-                                    <Link to={'/auth/forgot'} className="link-danger"> {t('label.reset_password')}</Link>
+                                    <Link to={'/auth/forgot'} className="link-danger" state={{from: 'confirm'}}> {t('label.reset_password')}</Link>
                                 </p>
                             </div>
                         </form>
