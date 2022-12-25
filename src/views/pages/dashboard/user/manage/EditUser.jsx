@@ -153,7 +153,7 @@ export default function EditUser(props) {
                 <Breadcrumb>
                     <BreadcrumbItem title="User" link="/dashboard/user/manage" />
                     <BreadcrumbItem title="Manage" link="/dashboard/user/manage" />
-                    <BreadcrumbItem title="Create" active />
+                    <BreadcrumbItem title="Edit" active />
                 </Breadcrumb>
                 <div className="row">
                     <div className="col-md-12">
