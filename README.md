@@ -27,13 +27,13 @@ This project is purposed for building your awesome app that needed a starting po
     You must provide your own API before using this project, or you can see in the `core/remote/api/*.js` directory to see how endpoint used in this project. 
     The API Spec will described bellow:
 </p>
-<ul>
-    <li>TODO</li>
-</ul>
 
-Request :
+General Request :
 - Header :
-    - accessToken : "your access token key"
+    - Authorization : "accessToken key"
+    - Content-Type: application/json
+    - Accept: application/json
+    - Accept-Language: id|en
 
 ## Authentication
 
@@ -43,6 +43,7 @@ Request :
 - Header :
     - Content-Type: application/json
     - Accept: application/json
+    - Accept-Language: id|en
 - Body :
 
 ```json 
