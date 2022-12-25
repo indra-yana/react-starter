@@ -48,12 +48,12 @@ export default function DashboardLayout(props) {
                         <SideBarMenu search={search} />
 
                     </div>
-                    <div className="footer bottom p-3">
-                        <p>
+                    <div className="footer bottom px-3 pb-3 pt-2">
+                        <small className="text-muted">
                             Copyright &copy; All rights reserved | This template is made with <i className="text-white fas fa-coffee mx-1" aria-hidden="true"></i>
                             <br />
-                            by <a className="text-white fst-italic" href="mailto:indra.ndra26@gmail.com"> -- Indra Yana</a>
-                        </p>
+                            by <a className="text-white fst-italic text-muted" href="mailto:indra.ndra26@gmail.com"> -- Indra Yana</a>
+                        </small>
                     </div>
                 </nav>
 

@@ -12,6 +12,7 @@ import Card from "../../../../components/utility/Card";
 import DataTable from 'react-data-table-component';
 import ButtonCreate from "../../../../components/button/ButtonCreate";
 import { useTranslation } from "react-i18next";
+import { dateFormat } from "../../../../../utils/dateformater";
 
 export default function ManageUser(props) {
     const { t } = useTranslation();
@@ -32,7 +33,7 @@ export default function ManageUser(props) {
         {
             name: t('label.verified_at'),
             selector: (row) => row.emailVerifiedAt,
-            cell: (row) => row.emailVerifiedAt ?? 'N/A',
+            cell: (row) => dateFormat(row.emailVerifiedAt, true),
         },
         {
             name: t('label.actions'),

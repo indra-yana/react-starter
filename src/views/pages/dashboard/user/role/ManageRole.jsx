@@ -11,6 +11,7 @@ import ButtonDelete from "../../../../components/button/ButtonDelete";
 import ButtonEdit from "../../../../components/button/ButtonEdit";
 import Card from "../../../../components/utility/Card";
 import DataTable from "react-data-table-component";
+import { dateFormat } from "../../../../../utils/dateformater";
 
 export default function ManageRole(props) {
     usePageTitle('Manage Role');
@@ -24,7 +25,7 @@ export default function ManageRole(props) {
         {
             name: t('label.created_at'),
             selector: (row) => row.createdAt,
-            cell: (row) => row.createdAt ?? 'N/A',
+            cell: (row) => dateFormat(row.createdAt),
         },
         {
             name: t('label.actions'),
