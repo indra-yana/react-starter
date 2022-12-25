@@ -3,7 +3,7 @@ import { getItem, setItem } from "../core/datasource/local/local-storage";
 
 export function useLocalStorage(key, initialValue) {
     const [value, setValue] = useState(() => {
-        const storedValue = getItem(key) || null;
+        const storedValue = getItem(key);
         return storedValue === null ? initialValue : JSON.parse(storedValue);
     });
 

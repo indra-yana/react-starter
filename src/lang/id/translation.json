@@ -72,6 +72,8 @@
 		"send_reset_link": "Kirim Tautan",
 		"sign_in_with": "Masuk dengan",
 		"username": "Username",
+		"user_management": "Manajemen Pengguna",
+		"role_management": "Manajemen Role",
 		"verified_at": "Verifikasi Pada",
 		"verify_account_desc_1": "Sebelum melanjutkan, silahkan periksa email untuk tautan verifikasi.",
 		"verify_account_desc_2": "Jika kamu tidak menerima email yang berisi tautan verifikasi, klik Kirim Ulang di bawah.",

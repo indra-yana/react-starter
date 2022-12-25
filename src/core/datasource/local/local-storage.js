@@ -20,8 +20,8 @@ export function setItem(key, value) {
 
 export function getItem(key, isJson = false) {
     return APP_ENV === 'production'
-        ? (isJson ? JSON.parse(ls.get(key) || {}) : ls.get(key) || null)
-        : (isJson ? JSON.parse(localStorage.getItem(key) || {}) : localStorage.getItem(key));
+        ? (isJson ? JSON.parse(ls.get(key) || '{}') : ls.get(key) || null)
+        : (isJson ? JSON.parse(localStorage.getItem(key) || '{}') : localStorage.getItem(key));
 }
 
 export function removeItem(key) {

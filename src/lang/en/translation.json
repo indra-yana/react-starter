@@ -72,6 +72,8 @@
 		"send_reset_link": "Send Reset Link",
 		"sign_in_with": "Sign in with",
 		"username": "Username",
+		"user_management": "User Management",
+		"role_management": "Role Management",
 		"verified_at": "Verified At",
 		"verify_account_desc_1": "Before continuing, please check your email for a verification link.",
 		"verify_account_desc_2": "If you did not receive the email, click Resend verification bellow.",

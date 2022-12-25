@@ -121,7 +121,7 @@ export default function ManageUser(props) {
                 </Breadcrumb>
                 <div className="row">
                     <div className="col-md-12">
-                        <Card title={t('label.registered_user')}>
+                        <Card title={t('label.user_management')}>
                             <ButtonCreate text={t('label.create_new')} onClick={(e) => navigate(`create`)} />
                             <DataTable
                                 columns={columns}

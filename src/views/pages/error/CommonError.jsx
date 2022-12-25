@@ -12,7 +12,7 @@ function CommonError(props) {
                 <i>{error.statusText || error.message}</i>
             </p>
             <Link to={`/`}>
-                <button type="button">Home</button>
+                <button type="button" className="btn btn-outline-warning">Home</button>
             </Link>
         </div>
     )
