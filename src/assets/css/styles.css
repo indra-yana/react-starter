@@ -705,3 +705,10 @@ a[data-toggle="collapse"] {
     bottom: 0;
     left: 0;
 }
+
+.btn-social:hover > i {
+    color: #e3e3e3 !important;
+    -webkit-transition: all 0.8s;
+    -o-transition: all 0.8s;
+    transition: all 0.8s;
+}
