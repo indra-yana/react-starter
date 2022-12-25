@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 export default function PageNavbar(props) {
 
     const [navigateTo, setNavigateTo] = useState('/');
-    let location = useLocation();
+    const location = useLocation();
     const { from = '/' } = location.state || {};
 
     useEffect(() => {
