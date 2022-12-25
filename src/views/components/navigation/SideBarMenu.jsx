@@ -22,13 +22,16 @@ export const menuItems = [
                 routeAction: [
                     'create',
                     'edit',
-                    'detail',
                 ]
             },
             {
                 label: 'Role',
                 name: 'dashboard.user.role',
                 to: '/dashboard/user/role',
+                routeAction: [
+                    'create',
+                    'edit',
+                ]
             },
         ],
     },

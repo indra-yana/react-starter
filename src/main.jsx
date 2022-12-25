@@ -28,9 +28,11 @@ import Verify from './views/pages/auth/Verify';
 import DashboardLayout from './views/layouts/DashboardLayout';
 import Dashboard from './views/pages/dashboard/index/Dashboard';
 import ManageUser from './views/pages/dashboard/user/manage/ManageUser';
-import Role from './views/pages/dashboard/user/role/Role';
+import ManageRole from './views/pages/dashboard/user/role/ManageRole';
 import CreateUser from './views/pages/dashboard/user/manage/CreateUser';
 import EditUser from './views/pages/dashboard/user/manage/EditUser';
+import CreateRole from './views/pages/dashboard/user/role/CreateRole';
+import EditRole from './views/pages/dashboard/user/role/EditRole';
 
 const router = createBrowserRouter([
 	{
@@ -125,10 +127,29 @@ const router = createBrowserRouter([
 							},
 							{
 								path: 'user/role',
-								element: <Role />,
-								handle: {
-									routeName: 'dashboard.user.role'
-								},
+								children: [
+									{
+										index: true,
+										element: <ManageRole />,
+										handle: {
+											routeName: 'dashboard.user.role'
+										},
+									},
+									{
+										path: 'create',
+										element: <CreateRole />,
+										handle: {
+											routeName: 'dashboard.user.role.create'
+										},
+									},
+									{
+										path: 'edit/:id',
+										element: <EditRole />,
+										handle: {
+											routeName: 'dashboard.user.role.edit'
+										},
+									},
+								]
 							},
 						]
 					}
