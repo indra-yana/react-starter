@@ -33,7 +33,7 @@ export default function About(props) {
                         The API Spec will described bellow:
                     </p>
                     <ul>
-                        <li>TODO</li>
+                        <li>TODO: See README.md on this repository.</li>
                     </ul>
                     <p className="mt-5">
                         <Link to={'/dashboard'}>

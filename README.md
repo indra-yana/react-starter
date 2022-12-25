@@ -28,7 +28,7 @@ This project is purposed for building your awesome app that needed a starting po
     The API Spec will described bellow:
 </p>
 
-General Request :
+General Header Request :
 - Header :
     - Authorization : "accessToken key"
     - Content-Type: application/json
@@ -54,13 +54,13 @@ Request :
 }
 ```
 
-Response :
+- Response Success :
 
 ```json 
 {
     "statusCode": 200,
     "status": "success",
-    "message": "Login successfully.",
+    "message": "string",
     "data": {
         "user": {
             "id": "string",
@@ -76,6 +76,19 @@ Response :
             "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....",
             "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....."
         }
+    }
+}
+```
+
+- Response Error :
+
+```json 
+{
+    "statusCode": 400,
+    "status": "error",
+    "message": "string",
+    "error": {
+        "error_data"
     }
 }
 ```
