@@ -73,7 +73,7 @@ export default function ManageUser(props) {
     }, [listState]);
     
     useEffect(() => {
-        setIsLoading(listState.LOADING);
+        setIsLoading(deleteState.LOADING);
 
         if (deleteState.SUCCESS) {
             const { message, data = {} } = deleteState.RESULT;
