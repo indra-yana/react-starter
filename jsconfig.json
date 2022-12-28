@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "baseUrl": "./"
+    },
+    "include": [
+        "src",
+        "public",
+    ],
+    "exclude": [
+        "node_modules",
+        "build",
+        "dist",
+    ]
+}

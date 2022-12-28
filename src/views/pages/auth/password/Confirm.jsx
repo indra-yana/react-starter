@@ -1,12 +1,12 @@
-import { handleInputType } from "../../../../utils/input-helper";
+import { handleInputType } from "src/utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
 import { t } from "i18next";
-import { Toast } from "../../../../utils/alert";
-import { usePageTitle } from "../../../../hooks/usePageTitle";
-import AuthService from "../../../../core/service/AuthService";
-import ButtonSpinner from "../../../components/button/ButtonSpinner";
+import { Toast } from "src/utils/alert";
+import { usePageTitle } from "src/hooks/usePageTitle";
+import AuthService from "src/core/service/AuthService";
+import ButtonSpinner from "src/views/components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
-import FormInput from "../../../components/form/FormInput";
+import FormInput from "src/views/components/form/FormInput";
 
 const defaultForm = {
     password: "",

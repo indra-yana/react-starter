@@ -1,18 +1,18 @@
+import { dateFormat } from "src/utils/dateformater";
 import { NavLink, useNavigate, useOutletContext } from "react-router-dom";
-import { Toast } from "../../../../../utils/alert";
-import { useAuthContext } from "../../../../../hooks/useAuthContext";
+import { Toast } from "src/utils/alert";
+import { useAuthContext } from "src/hooks/useAuthContext";
 import { useEffect, useState } from "react";
-import { usePageTitle } from "../../../../../hooks/usePageTitle"
-import { UserService } from "../../../../../core/service/UserService";
-import Breadcrumb from "../../../../components/utility/Breadcrumb";
-import BreadcrumbItem from "../../../../components/utility/BreadcrumbItem";
-import ButtonDelete from "../../../../components/button/ButtonDelete";
-import ButtonEdit from "../../../../components/button/ButtonEdit";
-import Card from "../../../../components/utility/Card";
-import DataTable from 'react-data-table-component';
-import ButtonCreate from "../../../../components/button/ButtonCreate";
+import { usePageTitle } from "src/hooks/usePageTitle"
+import { UserService } from "src/core/service/UserService";
 import { useTranslation } from "react-i18next";
-import { dateFormat } from "../../../../../utils/dateformater";
+import Breadcrumb from "src/views/components/utility/Breadcrumb";
+import BreadcrumbItem from "src/views/components/utility/BreadcrumbItem";
+import ButtonCreate from "src/views/components/button/ButtonCreate";
+import ButtonDelete from "src/views/components/button/ButtonDelete";
+import ButtonEdit from "src/views/components/button/ButtonEdit";
+import Card from "src/views/components/utility/Card";
+import DataTable from 'react-data-table-component';
 
 export default function ManageUser(props) {
     const { t } = useTranslation();

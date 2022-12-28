@@ -1,10 +1,10 @@
-import { Toast } from "../../../utils/alert";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import { Toast } from "src/utils/alert";
+import { useAuthContext } from "src/hooks/useAuthContext";
 import { useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom";
-import { usePageTitle } from "../../../hooks/usePageTitle";
+import { usePageTitle } from "src/hooks/usePageTitle";
 import { useTranslation } from "react-i18next";
-import AuthService from "../../../core/service/AuthService";
-import ButtonSpinner from "../../components/button/ButtonSpinner";
+import AuthService from "src/core/service/AuthService";
+import ButtonSpinner from "src/views/components/button/ButtonSpinner";
 import React, { useEffect, useState } from "react";
 
 const defaultForm = {

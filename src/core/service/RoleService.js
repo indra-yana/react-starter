@@ -1,5 +1,5 @@
 import { RepositoryFactory } from "../repository/RepositoryFactory";
-import { STATE } from "../../utils/view-state";
+import { STATE } from "src/utils/view-state";
 import { useState } from "react";
 
 const roleRepository = RepositoryFactory.get('role');

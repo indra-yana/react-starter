@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { useLoadingState } from "../../hooks/useLoadingState";
-import BottomAppBar from "../components/navigation/BottomAppBar";
-import HomeNavbar from "../components/navigation/HomeNavbar";
+import { useLoadingState } from "src/hooks/useLoadingState";
+import BottomAppBar from "src/views/components/navigation/BottomAppBar";
+import HomeNavbar from "src/views/components/navigation/HomeNavbar";
 import React from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "src/hooks/useAuthContext";
 
 export default function HomeLayout(props) {
     const { auth, setAuth } = useAuthContext();

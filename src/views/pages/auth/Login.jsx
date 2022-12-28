@@ -1,14 +1,14 @@
-import { handleInputType } from "../../../utils/input-helper";
+import { handleInputType } from "src/utils/input-helper";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import { Toast } from "../../../utils/alert";
-import { useAuthContext } from "../../../hooks/useAuthContext";
-import { usePageTitle } from "../../../hooks/usePageTitle";
+import { Toast } from "src/utils/alert";
+import { useAuthContext } from "src/hooks/useAuthContext";
+import { usePageTitle } from "src/hooks/usePageTitle";
 import { useTranslation } from "react-i18next";
-import AuthService from "../../../core/service/AuthService";
-import ButtonSpinner from "../../components/button/ButtonSpinner";
-import FormInput from "../../components/form/FormInput";
+import AuthService from "src/core/service/AuthService";
+import ButtonSpinner from "src/views/components/button/ButtonSpinner";
+import FormInput from "src/views/components/form/FormInput";
 import React, { useEffect, useState } from "react";
-import SocialLogin from "../../components/utility/SocialLogin";
+import SocialLogin from "src/views/components/utility/SocialLogin";
 
 const defaultForm = {
     credential: "",

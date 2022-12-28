@@ -1,15 +1,15 @@
-import { handleInputType } from "../../../utils/input-helper";
+import { handleInputType } from "src/utils/input-helper";
 import { Link, useOutletContext } from "react-router-dom";
-import { Toast } from "../../../utils/alert";
+import { Toast } from "src/utils/alert";
 import { useEffect } from "react";
-import { usePageTitle } from "../../../hooks/usePageTitle";
+import { usePageTitle } from "src/hooks/usePageTitle";
 import { useTranslation } from "react-i18next";
-import AuthService from "../../../core/service/AuthService";
-import AvatarPreview from "../../components/utility/AvatarPreview";
-import ButtonSpinner from "../../components/button/ButtonSpinner";
-import FormInput from "../../components/form/FormInput";
+import AuthService from "src/core/service/AuthService";
+import AvatarPreview from "src/views/components/utility/AvatarPreview";
+import ButtonSpinner from "src/views/components/button/ButtonSpinner";
+import FormInput from "src/views/components/form/FormInput";
 import React, { useState } from "react";
-import SocialLogin from "../../components/utility/SocialLogin";
+import SocialLogin from "src/views/components/utility/SocialLogin";
 
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {

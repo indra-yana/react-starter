@@ -1,16 +1,16 @@
-import { handleInputType } from "../../../../../utils/input-helper";
-import { Toast } from "../../../../../utils/alert";
+import { handleInputType } from "src/utils/input-helper";
+import { Toast } from "src/utils/alert";
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { usePageTitle } from "../../../../../hooks/usePageTitle"
-import { UserService } from "../../../../../core/service/UserService";
+import { usePageTitle } from "src/hooks/usePageTitle"
+import { UserService } from "src/core/service/UserService";
 import { useTranslation } from "react-i18next";
-import Breadcrumb from "../../../../components/utility/Breadcrumb";
-import BreadcrumbItem from "../../../../components/utility/BreadcrumbItem";
-import ButtonSpinner from "../../../../components/button/ButtonSpinner";
-import Card from "../../../../components/utility/Card";
-import FormInput from "../../../../components/form/FormInput";
-import AvatarPreview from "../../../../components/utility/AvatarPreview";
+import AvatarPreview from "src/views/components/utility/AvatarPreview";
+import Breadcrumb from "src/views/components/utility/Breadcrumb";
+import BreadcrumbItem from "src/views/components/utility/BreadcrumbItem";
+import ButtonSpinner from "src/views/components/button/ButtonSpinner";
+import Card from "src/views/components/utility/Card";
+import FormInput from "src/views/components/form/FormInput";
 
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {

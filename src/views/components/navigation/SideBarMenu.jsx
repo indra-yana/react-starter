@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useActiveMenu } from "../../../hooks/useActiveMenu";
+import { useActiveMenu } from "src/hooks/useActiveMenu";
 import { useEffect } from "react";
 
 export const menuItems = [

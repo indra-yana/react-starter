@@ -1,9 +1,9 @@
-import { useAuthContext } from "../../../../hooks/useAuthContext";
-import { usePageTitle } from "../../../../hooks/usePageTitle"
-import { useTranslation } from 'react-i18next';
-import Breadcrumb from "../../../components/utility/Breadcrumb";
-import BreadcrumbItem from "../../../components/utility/BreadcrumbItem";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "src/hooks/useAuthContext";
+import { usePageTitle } from "src/hooks/usePageTitle"
+import { useTranslation } from 'react-i18next';
+import Breadcrumb from "src/views/components/utility/Breadcrumb";
+import BreadcrumbItem from "src/views/components/utility/BreadcrumbItem";
 
 export default function Dashboard(props) {
     usePageTitle('Dashboard');

@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useLoadingState } from "../../hooks/useLoadingState";
-import Alert from "../components/utility/Alert";
-import PageNavbar from "../components/navigation/PageNavbar";
+import { useAuthContext } from "src/hooks/useAuthContext";
+import { useLoadingState } from "src/hooks/useLoadingState";
+import Alert from "src/views/components/utility/Alert";
+import PageNavbar from "src/views/components/navigation/PageNavbar";
 import React, { useState } from "react";
 
 export default function AuthLayout(props) {

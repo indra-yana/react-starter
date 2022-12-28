@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useAuthContext } from "src/hooks/useAuthContext";
 import LangSwitcher from "../utility/LangSwitcher";
 import ProfileControl from "../utility/ProfileControl";
 import React, { useState } from "react";

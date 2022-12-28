@@ -1,17 +1,17 @@
-import { RoleService } from "../../../../../core/service/RoleService";
-import { Toast } from "../../../../../utils/alert";
+import { dateFormat } from "src/utils/dateformater";
+import { RoleService } from "src/core/service/RoleService";
+import { Toast } from "src/utils/alert";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { usePageTitle } from "../../../../../hooks/usePageTitle"
+import { usePageTitle } from "src/hooks/usePageTitle"
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import Breadcrumb from "../../../../components/utility/Breadcrumb";
-import BreadcrumbItem from "../../../../components/utility/BreadcrumbItem";
-import ButtonCreate from "../../../../components/button/ButtonCreate";
-import ButtonDelete from "../../../../components/button/ButtonDelete";
-import ButtonEdit from "../../../../components/button/ButtonEdit";
-import Card from "../../../../components/utility/Card";
+import Breadcrumb from "src/views/components/utility/Breadcrumb";
+import BreadcrumbItem from "src/views/components/utility/BreadcrumbItem";
+import ButtonCreate from "src/views/components/button/ButtonCreate";
+import ButtonDelete from "src/views/components/button/ButtonDelete";
+import ButtonEdit from "src/views/components/button/ButtonEdit";
+import Card from "src/views/components/utility/Card";
 import DataTable from "react-data-table-component";
-import { dateFormat } from "../../../../../utils/dateformater";
 
 export default function ManageRole(props) {
     usePageTitle('Manage Role');

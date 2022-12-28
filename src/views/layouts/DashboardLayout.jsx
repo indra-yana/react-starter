@@ -1,12 +1,12 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "src/hooks/useAuthContext";
 import { useEffect } from "react";
-import { useLoadingState } from "../../hooks/useLoadingState";
+import { useLoadingState } from "src/hooks/useLoadingState";
 import { useState } from "react";
-import Alert from "../components/utility/Alert";
-import DashboardNavbar from "../components/navigation/DashboardNavbar";
-import ProfileControl from "../components/utility/ProfileControl";
-import SideBarMenu from "../components/navigation/SideBarMenu";
+import Alert from "src/views/components/utility/Alert";
+import DashboardNavbar from "src/views/components/navigation/DashboardNavbar";
+import ProfileControl from "src/views/components/utility/ProfileControl";
+import SideBarMenu from "src/views/components/navigation/SideBarMenu";
 
 export default function DashboardLayout(props) {
     const [navTitle, setNavTitle] = useState("");

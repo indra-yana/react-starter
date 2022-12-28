@@ -1,4 +1,4 @@
-import { error, success } from "../../utils/response";
+import { error, success } from "src/utils/response";
 import { authSession } from "../datasource/local/local-storage";
 import { 
     confirmPassword,

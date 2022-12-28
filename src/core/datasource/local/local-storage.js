@@ -1,4 +1,4 @@
-import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { useLocalStorage } from "src/hooks/useLocalStorage";
 import SecureLS from "secure-ls";
 
 const APP_ENV = import.meta.env.VITE_APP_ENV;

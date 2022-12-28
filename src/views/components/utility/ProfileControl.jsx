@@ -1,7 +1,7 @@
-import { useAuthContext } from "../../../hooks/useAuthContext";
+import { useAuthContext } from "src/hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { removeItem } from "../../../core/datasource/local/local-storage";
+import { removeItem } from "src/core/datasource/local/local-storage";
 
 export default function ProfileControl(props) {
     const {
