@@ -34,6 +34,7 @@ import EditUser from 'src/views/pages/dashboard/user/manage/EditUser';
 import CreateRole from 'src/views/pages/dashboard/user/role/CreateRole';
 import EditRole from 'src/views/pages/dashboard/user/role/EditRole';
 import About from 'src/views/pages/dashboard/about/About';
+import { link } from './router/links';
 
 const router = createBrowserRouter([
 	{
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
 		action: rootAction,
 		children: [
 			{
-				path: '/',
+				path: link.getPath('home'),
 				element: <HomeLayout />,
 				children: [
 					{
@@ -51,43 +52,42 @@ const router = createBrowserRouter([
 						element: <Landing />,
 					},
 					{
-						path: 'help',
+						path: link.getPath('help'),
 						element: <Help />,
 					},
 				]
 			},
 			{
-				path: 'auth',
 				element: <AuthLayout />,
 				children: [
 					{
-						path: 'login',
+						path: link.getPath('login'),
 						element: <Login />,
 					},
 					{
-						path: 'register',
+						path: link.getPath('register'),
 						element: <Register />,
 					},
 					{
-						path: 'forgot',
+						path: link.getPath('forgot'),
 						element: <Forgot />,
 					},
 					{
-						path: 'reset/:token',
+						path: link.getPath('reset'),
 						element: <Reset />,
 					},
 					{
-						path: 'confirm',
+						path: link.getPath('confirm'),
 						element: <Confirm />,
 					},
 					{
-						path: 'verify/:token',
+						path: link.getPath('verify'),
 						element: <Verify />,
 					},
 				]
 			},
 			{
-				path: 'dashboard',
+				path: link.getPath('dashboard'),
 				element: <DashboardLayout />,
 				children: [
 					{
@@ -97,66 +97,66 @@ const router = createBrowserRouter([
 								index: true,
 								element: <Dashboard />,
 								handle: {
-									routeName: 'dashboard.index'
+									routeName: link.getName('dashboard'),
 								},
 							},
 							{
-								path: 'user/manage',
+								path: link.getPath('manage_user'),
 								children: [
 									{
 										index: true,
 										element: <ManageUser />,
 										handle: {
-											routeName: 'dashboard.user.manage'
+											routeName: link.getName('manage_user'),
 										},
 									},
 									{
-										path: 'create',
+										path: link.getPath('create_user'),
 										element: <CreateUser />,
 										handle: {
-											routeName: 'dashboard.user.manage.create'
+											routeName: link.getName('create_user'),
 										},
 									},
 									{
-										path: 'edit/:id',
+										path: link.getPath('edit_user'),
 										element: <EditUser />,
 										handle: {
-											routeName: 'dashboard.user.manage.edit'
+											routeName: link.getName('edit_user'),
 										},
 									},
 								]
 							},
 							{
-								path: 'user/role',
+								path: link.getPath('manage_role'),
 								children: [
 									{
 										index: true,
 										element: <ManageRole />,
 										handle: {
-											routeName: 'dashboard.user.role'
+											routeName: link.getName('manage_role'),
 										},
 									},
 									{
-										path: 'create',
+										path: link.getPath('create_role'),
 										element: <CreateRole />,
 										handle: {
-											routeName: 'dashboard.user.role.create'
+											routeName: link.getName('create_role'),
 										},
 									},
 									{
-										path: 'edit/:id',
+										path: link.getPath('edit_role'),
 										element: <EditRole />,
 										handle: {
-											routeName: 'dashboard.user.role.edit'
+											routeName: link.getName('edit_role'),
 										},
 									},
 								]
 							},
 							{
-								path: 'about',
+								path: link.getPath('about'),
 								element: <About />,
 								handle: {
-									routeName: 'dashboard.about'
+									routeName: link.getName('about'),
 								},
 							},
 						]
