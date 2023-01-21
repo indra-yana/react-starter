@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useActiveMenu } from "src/hooks/useActiveMenu";
 import { useEffect } from "react";
+import { link } from "src/router/navlinks";
 
 export const menuItems = [
     {
@@ -34,6 +35,12 @@ export const menuItems = [
                 ]
             },
         ],
+    },
+    {
+        label: 'Settings',
+        name: link.getName('setting'),
+        to: link.getPath('setting'),
+        icon: 'fas fa-cog',
     },
     {
         label: 'About',

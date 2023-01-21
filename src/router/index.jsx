@@ -27,6 +27,7 @@ import Reset from 'src/views/pages/auth/password/Reset';
 import Root, { loader as rootLoader, action as rootAction } from 'src/views/layouts/Root';
 import ShowContact, { loader as contactLoader, action as contactAction } from 'src/views/pages/contact/ShowContact';
 import Verify from 'src/views/pages/auth/Verify';
+import Setting from 'src/views/pages/dashboard/setting/Setting';
 
 const router = createBrowserRouter([
     {
@@ -143,6 +144,13 @@ const router = createBrowserRouter([
                                         },
                                     },
                                 ]
+                            },
+                            {
+                                path: link.getPath('setting'),
+                                element: <Setting />,
+                                handle: {
+                                    routeName: link.getName('setting'),
+                                },
                             },
                             {
                                 path: link.getPath('about'),

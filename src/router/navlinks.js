@@ -69,6 +69,12 @@ const LINKS = {
         name: 'dashboard.user.role.edit',
     },
 
+    // Setting
+    setting: {
+        path: '/dashboard/setting',
+        name: 'dashboard.setting',
+    },
+
     // About
     about: {
         path: '/dashboard/about',
