@@ -1,6 +1,6 @@
 import ValidationFeedback from "./ValidationFeedback";
 
-export default function FormPlain(props) {
+export default function FormInputPlain(props) {
 
     const {
         name = '',

@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import AvatarPreview from "src/views/components/utility/AvatarPreview";
 import ButtonSpinner from "src/views/components/button/ButtonSpinner";
 import FormInput from "src/views/components/form/FormInput";
-import FormPlain from "src/views/components/form/FormPlain";
+import FormInputPlain from "src/views/components/form/FormInputPlain";
 
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {
@@ -184,10 +184,10 @@ export default function ManageProfile(props) {
 
                             <div className="row mt-2">
                                 <div className="col-lg-6 col-md-12">
-                                    <FormPlain label={t('label.registered_at')} value={dateFormat(form.createdAt, true)} />
+                                    <FormInputPlain label={t('label.registered_at')} value={dateFormat(form.createdAt, true)} />
                                 </div>
                                 <div className="col-lg-6 col-md-12">
-                                    <FormPlain label={t('label.last_updated_at')} value={dateFormat(form.updatedAt, true)} />
+                                    <FormInputPlain label={t('label.last_updated_at')} value={dateFormat(form.updatedAt, true)} />
                                 </div>
                             </div>
 
