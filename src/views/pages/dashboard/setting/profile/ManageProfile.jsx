@@ -61,7 +61,7 @@ export default function ManageProfile(props) {
                 createdAt,
             } = data;
 
-            if (avatar && user.id === id) {
+            if (user.id === id) {
                 setAuth((prevAuth) => ({
                     ...prevAuth,
                     user: {
