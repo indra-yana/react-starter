@@ -24,13 +24,13 @@ This project is purposed for building your awesome app that needed a starting po
     <li>Secure Local Storage Using <a href="https://github.com/softvar/secure-ls" target="_blank">secure ls</a></li>
 </ul>
 <p>
-    You must provide your own API before using this project, or you can see in the `core/remote/api/*.js` directory to see how endpoint used in this project. 
+    You must provide your own API before using this project, or you can use my<a href="https://github.com/indra-yana/fastify-kit" target="__blank">Fasity-Kit</a> REST Porject and integrated with it.
     The API Spec will described bellow:
 </p>
 
-General Header Request :
+### General Header Request :
 - Header :
-    - Authorization : "accessToken key"
+    - Authorization: "jwt.token"
     - Content-Type: application/json
     - Accept: application/json
     - Accept-Language: id|en
@@ -39,18 +39,15 @@ General Header Request :
 
 Request :
 - Method : POST
-- Endpoint : `api/v1/auth/login`
-- Header :
-    - Content-Type: application/json
-    - Accept: application/json
-    - Accept-Language: id|en
+- Endpoint : `/api/v1/auth/login`
+- Header : [General Header](#general-header-request)
 - Body :
 
 ```json 
 {
-    "credential": "string|email|username|unique",
-    "password": "string|password",
-    "remember": "boolean",
+    "credential": "john.doe@gmail.com",
+    "password": "secret",
+    "remember": true|false,
 }
 ```
 
@@ -60,22 +57,9 @@ Request :
 {
     "statusCode": 200,
     "status": "success",
-    "message": "string",
+    "message": "Success Message",
     "data": {
-        "user": {
-            "id": "string",
-            "name": "string",
-            "username": "string|unique",
-            "email": "string|email",
-            "emailVerifiedAt": "iso_date|null",
-            "createdAt": "iso_date|2022-09-04T13:54:28.953Z",
-            "updatedAt": "iso_date|2022-09-04T13:54:28.953Z",
-            "avatar": "url|string"
-        },
-        "token": {
-            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....",
-            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....."
-        }
+        "success_data"
     }
 }
 ```
@@ -84,9 +68,9 @@ Request :
 
 ```json 
 {
-    "statusCode": 400,
+    "statusCode": 500,
     "status": "error",
-    "message": "string",
+    "message": "Error Message",
     "error": {
         "error_data"
     }

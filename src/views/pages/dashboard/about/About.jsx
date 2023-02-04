@@ -29,7 +29,7 @@ export default function About(props) {
                         <li>Secure Local Storage Using <a href="https://github.com/softvar/secure-ls" target="_blank">secure ls</a></li>
                     </ul>
                     <p>
-                        You must provide your own API before using this project, or you can see in the `core/remote/api/*.js` directory to see how endpoint used in this project. 
+                        You must provide your own API before using this project, or you can use my<a href="https://github.com/indra-yana/fastify-kit" target="__blank">Fasity-Kit</a> REST Porject and integrated with it.
                         The API Spec will described bellow:
                     </p>
                     <ul>
