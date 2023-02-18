@@ -23,10 +23,11 @@ This project is purposed for building your awesome app that needed a starting po
     <li>Multi Language Using <a href="https://www.i18next.com" target="_blank">i18next</a> and <a href="https://react.i18next.com">react i18next</a> </li>
     <li>Secure Local Storage Using <a href="https://github.com/softvar/secure-ls" target="_blank">secure ls</a></li>
 </ul>
-<p>
-    You must provide your own API before using this project, or you can use my <a href="https://github.com/indra-yana/fastify-kit" target="__blank">Fasity-Kit</a> REST Porject and integrated with it.
-    The API Spec will described bellow:
-</p>
+
+# API
+
+This project use the <a href="https://github.com/indra-yana/fastify-kit" target="__blank">Fasity-Kit</a> REST API Porject to work with this project.
+The API Spec will described bellow:
 
 ### General Header Request :
 - Header :
