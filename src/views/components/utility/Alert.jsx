@@ -38,7 +38,7 @@ export default function Alert(props) {
         if (show && toast) {
             Toast[type](message);
         }
-    })
+    }, []);
 
     useEffect(() => {
         let closeTimeout = null;
@@ -53,7 +53,7 @@ export default function Alert(props) {
                 clearTimeout(closeTimeout);
             }
         };
-    });
+    }, []);
 
     return(
         <>
