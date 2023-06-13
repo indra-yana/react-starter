@@ -1,7 +1,13 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import { useTranslation } from "react-i18next"
 
 export default function SocialLogin(props) {
     const { t } = useTranslation();
+    const googleLogin = useGoogleLogin({
+        onSuccess: async (response) => console.log(response),
+        onError: (error) => console.log(error),
+        // flow: 'auth-code',
+    });
 
     return (
         <>
@@ -9,21 +15,21 @@ export default function SocialLogin(props) {
                 <div className="d-flex flex-column flex-md-row align-items-center gap-3">
                     <p className="fw-normal mb-0">{t('label.sign_in_with')}</p>
                     <div className="d-flex gap-3">
-                        <a href="#" className="btn btn-outline-danger btn-social btn-circle shadow-sm" title="Google">
+                        <button className="btn btn-outline-danger btn-social btn-circle shadow-sm" title="Google" onClick={() => googleLogin()}>
                             <i className="fab fa-google"> </i>
-                        </a>
+                        </button>
 
-                        <a href="#" className="btn btn-outline-primary btn-social btn-circle shadow-sm" title="Facebook">
+                        <button className="btn btn-outline-primary btn-social btn-circle shadow-sm" title="Facebook">
                             <i className="fab fa-facebook"></i>
-                        </a>
+                        </button>
 
-                        <a href="#" className="btn btn-outline-info btn-social btn-circle shadow-sm" title="Twitter">
+                        <button className="btn btn-outline-info btn-social btn-circle shadow-sm" title="Twitter">
                             <i className="fab fa-twitter"> </i>
-                        </a>
+                        </button>
 
-                        <a href="#" className="btn btn-outline-secondary btn-social btn-circle shadow-sm" title="Github">
+                        <button className="btn btn-outline-secondary btn-social btn-circle shadow-sm" title="Github">
                             <i className="fab fa-github"> </i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
