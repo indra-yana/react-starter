@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.1",
     "react-router-dom": "^6.4.3",
+    "reactjs-social-login": "^2.6.2",
     "secure-ls": "^1.2.6",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.6.15"
