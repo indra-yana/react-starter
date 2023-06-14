@@ -111,7 +111,7 @@ export default function SocialLogin(props) {
                             isOnlyGetToken
                             client_id={MICROSOFT_CLIENT_ID || ''}
                             redirect_uri={REDIRECT_URI}
-                            scope="profile openid email https://graph.microsoft.com/User.Read https://graph.microsoft.com/User.Read.All"
+                            scope="profile openid email User.Read User.Read.All"
                             onResolve={({ provider, data }) => {
                                 setProvider(provider)
                                 setProfile(data)
