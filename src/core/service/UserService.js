@@ -11,10 +11,10 @@ export function UserService() {
     const [updateState, setUpdateState] = useState(STATE.Default);
     const [deleteState, setDeleteState] = useState(STATE.Default);
 
-    async function list() {
+    async function list(page = 1, limit = 10) {
         setListState(STATE.Loading);
         
-        const result = await userRepository.list();
+        const result = await userRepository.list(page, limit);
         if (result.error) {
             setListState(STATE.Error(result));
             return;

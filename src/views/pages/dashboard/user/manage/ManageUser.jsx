@@ -1,8 +1,8 @@
 import { dateFormat } from "src/utils/dateformater";
-import { NavLink, useNavigate, useOutletContext } from "react-router-dom";
 import { Toast } from "src/utils/alert";
 import { useAuthContext } from "src/hooks/useAuthContext";
 import { useEffect, useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { usePageTitle } from "src/hooks/usePageTitle"
 import { UserService } from "src/core/service/UserService";
 import { useTranslation } from "react-i18next";
@@ -32,8 +32,8 @@ export default function ManageUser(props) {
         },
         {
             name: t('label.verified_at'),
-            selector: (row) => row.emailVerifiedAt,
-            cell: (row) => dateFormat(row.emailVerifiedAt, true),
+            selector: (row) => row.email_verified_at,
+            cell: (row) => dateFormat(row.email_verified_at, true),
         },
         {
             name: t('label.actions'),
@@ -54,12 +54,28 @@ export default function ManageUser(props) {
     const [userList, setUserList] = useState([]);
     const navigate = useNavigate();
 
+    const [totalRows, setTotalRows] = useState(0);
+	const [page, setPage] = useState(1);
+	const [perPage, setPerPage] = useState(10);
+
+    const handlePageChange = async(page) => {
+        await list(page, perPage);
+        setPage(page);
+	};
+
+	const handlePerRowsChange = async (limit, page) => {
+        await list(page, limit);
+        setPage(page);
+		setPerPage(limit);
+	};
+
     useEffect(() => {
         setIsLoading(listState.LOADING);
 
         if (listState.SUCCESS) {
             const { message, data = {} } = listState.RESULT;
-            setUserList(data);
+            setUserList(data.data);
+            setTotalRows(data.meta.totalRows);
         } else if (listState.ERROR) {
             const { message, error = {} } = listState.RESULT;
 
@@ -87,7 +103,7 @@ export default function ManageUser(props) {
             });
             Toast.success(message);
 
-            list();
+            list(page, perPage);
         } else if (deleteState.ERROR) {
             const { message, error = {} } = deleteState.RESULT;
 
@@ -102,7 +118,7 @@ export default function ManageUser(props) {
     }, [deleteState]);
 
     useEffect(() => {
-        list();
+        list(page, perPage);
     }, []);
 
     function handleDelete(row) {
@@ -130,6 +146,10 @@ export default function ManageUser(props) {
                                 highlightOnHover
                                 striped
                                 pagination
+                                paginationServer
+                                paginationTotalRows={totalRows}
+                                onChangeRowsPerPage={handlePerRowsChange}
+                                onChangePage={handlePageChange}
                                 responsive
                                 progressPending={isLoading}
                             />

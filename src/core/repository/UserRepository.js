@@ -8,8 +8,8 @@ import {
 } from "../datasource/remote/api/user";
 
 export default class UserRepository {
-    async list() {
-        return await list()
+    async list(page, limit) {
+        return await list(page, limit)
             .then(success)
             .catch(error);
     }

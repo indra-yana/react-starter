@@ -1,7 +1,7 @@
 import apiClient from "../api-client";
 
-export async function list() {
-    return await apiClient.get('/v1/user/list');
+export async function list(page, limit) {
+    return await apiClient.get(`/v1/user/list?page=${page}&limit=${limit}`);
 }
 
 export async function show(id) {
