@@ -1,12 +1,10 @@
+import { LoginSocialGoogle, LoginSocialFacebook, LoginSocialGithub, LoginSocialMicrosoft, LoginSocialTwitter, } from 'reactjs-social-login';
+import { Toast } from "src/utils/alert";
+import { useAuthContext } from "src/hooks/useAuthContext";
 import { useEffect, useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {
-    LoginSocialGoogle,
-    LoginSocialFacebook,
-    LoginSocialGithub,
-    LoginSocialMicrosoft,
-    LoginSocialTwitter,
-} from 'reactjs-social-login';
+import AuthService from "src/core/service/AuthService";
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const FB_CLIENT_ID = import.meta.env.VITE_FB_CLIENT_ID;
@@ -22,17 +20,100 @@ const MICROSOFT_CLIENT_ID = import.meta.env.VITE_MICROSOFT_CLIENT_ID;
 const REDIRECT_URI = window.location.href;
 
 export default function SocialLogin(props) {
+    const navigate = useNavigate();
     const [provider, setProvider] = useState('')
     const [profile, setProfile] = useState(null)
+    const { isLoading, setIsLoading, setAlert } = useOutletContext();
+    const { auth, setAuth } = useAuthContext();
+    const { loginState, whoamiState, socialLogin, whoami } = AuthService();
+
     const { t } = useTranslation();
 
     useEffect(() => {
-        console.log(provider);
-    }, [provider])
+        console.log(provider, profile);
+        if (!isLoading && provider && profile) {
+            socialLogin(profile, provider);
+        }
+    }, [profile, provider])
 
     useEffect(() => {
-        console.log(profile);
-    }, [profile])
+        setIsLoading(loginState.LOADING);
+
+        if (loginState.SUCCESS) {
+            const { message, data = {} } = loginState.RESULT;
+            
+            setAlert({
+                show: true,
+                type: 'success',
+                autoClose: true,
+                message,
+            });
+
+            Toast.success(message);
+
+            console.log(data);
+            setAuth({
+                ...data,
+            });
+
+            whoami();
+        } else if (loginState.ERROR) {
+            const { message, error = {} } = loginState.RESULT;
+            console.log(error);
+
+            setAlert({
+                show: true,
+                type: 'error',
+                message,
+            });
+
+            Toast.error(message);
+        }
+
+    }, [loginState]);
+   
+    useEffect(() => {
+        setIsLoading(whoamiState.LOADING);
+
+        if (whoamiState.SUCCESS) {
+            const { message, data = {} } = whoamiState.RESULT;
+            
+            setAlert({
+                show: true,
+                type: 'success',
+                autoClose: true,
+                message,
+            });
+
+            Toast.success(message);
+
+            console.log(data);
+
+            setAuth((prevState) => ({
+                ...prevState,
+                isLogin: true,
+                user: data,
+            }));
+        } else if (whoamiState.ERROR) {
+            const { message, error = {} } = whoamiState.RESULT;
+            console.log(error);
+
+            setAlert({
+                show: true,
+                type: 'error',
+                message,
+            });
+
+            Toast.error(message);
+        }
+
+    }, [whoamiState]);
+
+    useEffect(() => {
+        if (auth.isLogin) {
+            setTimeout(() => navigate('/dashboard'), 2000);
+        }
+    }, [auth]);
 
     return (
         <>
@@ -55,6 +136,24 @@ export default function SocialLogin(props) {
                                 <i className="fab fa-google"> </i>
                             </button>
                         </LoginSocialGoogle>
+
+                        <LoginSocialMicrosoft
+                            isOnlyGetToken
+                            client_id={MICROSOFT_CLIENT_ID || ''}
+                            redirect_uri={REDIRECT_URI}
+                            scope="profile openid email User.Read User.Read.All"
+                            onResolve={({ provider, data }) => {
+                                setProvider(provider)
+                                setProfile(data)
+                            }}
+                            onReject={(err) => {
+                                console.log(err)
+                            }}
+                        >
+                            <button type="button" className="btn btn-outline-info btn-social btn-circle shadow-sm" title="Microsoft">
+                                <i className="fab fa-microsoft"> </i>
+                            </button>
+                        </LoginSocialMicrosoft>
 
                         <LoginSocialFacebook
                             isOnlyGetToken
@@ -106,25 +205,6 @@ export default function SocialLogin(props) {
                                 <i className="fab fa-github"> </i>
                             </button>
                         </LoginSocialGithub>
-
-                        <LoginSocialMicrosoft
-                            isOnlyGetToken
-                            client_id={MICROSOFT_CLIENT_ID || ''}
-                            redirect_uri={REDIRECT_URI}
-                            scope="profile openid email User.Read User.Read.All"
-                            onResolve={({ provider, data }) => {
-                                setProvider(provider)
-                                setProfile(data)
-                            }}
-                            onReject={(err) => {
-                                console.log(err)
-                            }}
-                        >
-                            <button type="button" className="btn btn-outline-info btn-social btn-circle shadow-sm" title="Microsoft">
-                                <i className="fab fa-microsoft"> </i>
-                            </button>
-                        </LoginSocialMicrosoft>
-
                     </div>
                 </div>
             </div>

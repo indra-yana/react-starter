@@ -21,7 +21,7 @@ export default function AuthService() {
         setSendResetLinkState(STATE.Loading);
 
         const result = await authRepository.sendResetPasswordLink(email);
-        if (result.status === 'error') {
+        if (result.error) {
             setSendResetLinkState(STATE.Error(result));
             return;
         }
@@ -33,7 +33,7 @@ export default function AuthService() {
         setResetPasswordState(STATE.Loading);
 
         const result = await authRepository.resetPassword(payloads);
-        if (result.status === 'error') {
+        if (result.error) {
             setResetPasswordState(STATE.Error(result));
             return;
         }
@@ -45,7 +45,7 @@ export default function AuthService() {
         setConfirmPasswordState(STATE.Loading);
 
         const result = await authRepository.confirmPassword(password);
-        if (result.status === 'error') {
+        if (result.error) {
             setConfirmPasswordState(STATE.Error(result));
             return;
         }
@@ -57,7 +57,19 @@ export default function AuthService() {
         setLoginState(STATE.Loading);
 
         const result = await authRepository.login(credential, password);
-        if (result.status === 'error') {
+        if (result.error) {
+            setLoginState(STATE.Error(result));
+            return;
+        }
+
+        setLoginState(STATE.Success(result));
+    }
+
+    async function socialLogin(credential, provider) {
+        setLoginState(STATE.Loading);
+
+        const result = await authRepository.socialLogin(credential, provider);
+        if (result.error) {
             setLoginState(STATE.Error(result));
             return;
         }
@@ -69,7 +81,7 @@ export default function AuthService() {
         setLogoutState(STATE.Loading);
 
         const result = await authRepository.logout();
-        if (result.status === 'error') {
+        if (result.error) {
             setLogoutState(STATE.Error(result));
             return;
         }
@@ -81,7 +93,7 @@ export default function AuthService() {
         setRegisterState(STATE.Loading);
 
         const result = await authRepository.register(payloads);
-        if (result.status === 'error') {
+        if (result.error) {
             setRegisterState(STATE.Error(result));
             return;
         }
@@ -93,7 +105,7 @@ export default function AuthService() {
         setSendVerificationLinkState(STATE.Loading);
 
         const result = await authRepository.sendVerificationLink(email);
-        if (result.status === 'error') {
+        if (result.error) {
             setSendVerificationLinkState(STATE.Error(result));
             return;
         }
@@ -105,7 +117,7 @@ export default function AuthService() {
         setVerifyState(STATE.Loading);
 
         const result = await authRepository.verify(token, email);
-        if (result.status === 'error') {
+        if (result.error) {
             setVerifyState(STATE.Error(result));
             return;
         }
@@ -117,7 +129,7 @@ export default function AuthService() {
         setRefreshTokenState(STATE.Loading);
 
         const result = await authRepository.refreshToken(refreshToken);
-        if (result.status === 'error') {
+        if (result.error) {
             setRefreshTokenState(STATE.Error(result));
             return;
         }
@@ -129,7 +141,7 @@ export default function AuthService() {
         setWhoamiState(STATE.Loading);
 
         const result = await authRepository.whoami();
-        if (result.status === 'error') {
+        if (result.error) {
             setWhoamiState(STATE.Error(result));
             return;
         }
@@ -154,6 +166,7 @@ export default function AuthService() {
 
         // Method
         login,
+        socialLogin,
         logout,
         register,
         sendResetPasswordLink,

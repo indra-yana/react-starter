@@ -7,6 +7,14 @@ export async function login(credential, password) {
     });
 }
 
+export async function socialLogin(credential, provider = null) {
+    const { access_token } = credential;
+
+    return await apiClient.post(`/v1/auth/login/${provider}`, {
+        access_token,
+    });
+}
+
 export async function logout() {
     return await apiClient.post('/v1/auth/logout');
 }

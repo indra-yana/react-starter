@@ -15,7 +15,7 @@ export function UserService() {
         setListState(STATE.Loading);
         
         const result = await userRepository.list();
-        if (result.status === 'error') {
+        if (result.error) {
             setListState(STATE.Error(result));
             return;
         }
@@ -27,7 +27,7 @@ export function UserService() {
         setShowState(STATE.Loading);
         
         const result = await userRepository.show(id);
-        if (result.status === 'error') {
+        if (result.error) {
             setShowState(STATE.Error(result));
             return;
         }
@@ -39,7 +39,7 @@ export function UserService() {
         setCreateState(STATE.Loading);
         
         const result = await userRepository.create(payloads);
-        if (result.status === 'error') {
+        if (result.error) {
             setCreateState(STATE.Error(result));
             return;
         }
@@ -51,7 +51,7 @@ export function UserService() {
         setUpdateState(STATE.Loading);
         
         const result = await userRepository.update(payloads);
-        if (result.status === 'error') {
+        if (result.error) {
             setUpdateState(STATE.Error(result));
             return;
         }
@@ -63,7 +63,7 @@ export function UserService() {
         setDeleteState(STATE.Loading);
         
         const result = await userRepository.deleteData(id);
-        if (result.status === 'error') {
+        if (result.error) {
             setDeleteState(STATE.Error(result));
             return;
         }

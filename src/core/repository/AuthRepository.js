@@ -8,6 +8,7 @@ import {
     resetPassword, 
     sendResetPasswordLink, 
     sendVerificationLink, 
+    socialLogin, 
     verify, 
     whoami 
 } from "../datasource/remote/api/auth";
@@ -15,6 +16,12 @@ import {
 export default class AuthRepository {
     async login(credential, password) {
         return await login(credential, password)
+            .then(success)
+            .catch(error);
+    }
+
+    async socialLogin(credential, provider) {
+        return await socialLogin(credential, provider)
             .then(success)
             .catch(error);
     }

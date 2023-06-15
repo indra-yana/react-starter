@@ -15,7 +15,7 @@ export function RoleService() {
         setListState(STATE.Loading);
         
         const result = await roleRepository.list();
-        if (result.status === 'error') {
+        if (result.error) {
             setListState(STATE.Error(result));
             return;
         }
@@ -27,7 +27,7 @@ export function RoleService() {
         setShowState(STATE.Loading);
         
         const result = await roleRepository.show(id);
-        if (result.status === 'error') {
+        if (result.error) {
             setShowState(STATE.Error(result));
             return;
         }
@@ -39,7 +39,7 @@ export function RoleService() {
         setCreateState(STATE.Loading);
         
         const result = await roleRepository.create(payloads);
-        if (result.status === 'error') {
+        if (result.error) {
             setCreateState(STATE.Error(result));
             return;
         }
@@ -51,7 +51,7 @@ export function RoleService() {
         setUpdateState(STATE.Loading);
         
         const result = await roleRepository.update(payloads);
-        if (result.status === 'error') {
+        if (result.error) {
             setUpdateState(STATE.Error(result));
             return;
         }
@@ -63,7 +63,7 @@ export function RoleService() {
         setDeleteState(STATE.Loading);
         
         const result = await roleRepository.deleteData(id);
-        if (result.status === 'error') {
+        if (result.error) {
             setDeleteState(STATE.Error(result));
             return;
         }
