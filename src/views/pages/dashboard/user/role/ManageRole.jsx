@@ -24,8 +24,8 @@ export default function ManageRole(props) {
         },
         {
             name: t('label.created_at'),
-            selector: (row) => row.createdAt,
-            cell: (row) => dateFormat(row.createdAt),
+            selector: (row) => row.created_at,
+            cell: (row) => dateFormat(row.created_at),
         },
         {
             name: t('label.actions'),

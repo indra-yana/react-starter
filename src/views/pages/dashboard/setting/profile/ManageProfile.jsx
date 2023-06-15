@@ -58,7 +58,7 @@ export default function ManageProfile(props) {
                 email,
                 avatar,
                 updatedAt,
-                createdAt,
+                created_at,
             } = data;
 
             if (user.id === id) {
@@ -71,7 +71,7 @@ export default function ManageProfile(props) {
                         email,
                         avatar,
                         updatedAt,
-                        createdAt,
+                        created_at,
                     }
                 }));
             }
@@ -79,7 +79,7 @@ export default function ManageProfile(props) {
             setForm((prevState) => ({
                 ...prevState,
                 updatedAt,
-                createdAt,
+                created_at,
             }));
         } else if (updateState.ERROR) {
             const { message, error = {} } = updateState.RESULT;
@@ -107,7 +107,7 @@ export default function ManageProfile(props) {
                 email,
                 avatar,
                 updatedAt,
-                createdAt,
+                created_at,
             } = data;
 
             setForm((prevState) => ({
@@ -117,7 +117,7 @@ export default function ManageProfile(props) {
                 username,
                 email,
                 updatedAt,
-                createdAt,
+                created_at,
             }));
 
             if (avatar) {
@@ -154,7 +154,7 @@ export default function ManageProfile(props) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        delete form.createdAt;
+        delete form.created_at;
         delete form.updatedAt;
 
         await update(form);
@@ -184,7 +184,7 @@ export default function ManageProfile(props) {
 
                             <div className="row mt-2">
                                 <div className="col-lg-6 col-md-12">
-                                    <FormInputPlain label={t('label.registered_at')} value={dateFormat(form.createdAt, true)} />
+                                    <FormInputPlain label={t('label.registered_at')} value={dateFormat(form.created_at, true)} />
                                 </div>
                                 <div className="col-lg-6 col-md-12">
                                     <FormInputPlain label={t('label.last_updated_at')} value={dateFormat(form.updatedAt, true)} />

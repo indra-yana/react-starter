@@ -54,7 +54,7 @@ export default function Verify(props) {
             });
 
             const { user = {} } = data;
-            if (user.emailVerifiedAt) {
+            if (user.email_verified_at) {
                 redirectToDashboard(user);
             }
 
@@ -87,7 +87,7 @@ export default function Verify(props) {
             });
 
             const { user = {} } = data;
-            if (user.emailVerifiedAt) {
+            if (user.email_verified_at) {
                 redirectToDashboard(user);
             }
 
@@ -112,7 +112,7 @@ export default function Verify(props) {
             ...prevAuth,
             user: {
                 ...auth.user,
-                emailVerifiedAt: newUser.emailVerifiedAt,
+                email_verified_at: newUser.email_verified_at,
             }
         }));
         
