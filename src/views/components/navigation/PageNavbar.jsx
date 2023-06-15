@@ -31,7 +31,7 @@ export default function PageNavbar(props) {
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark shadow-sm mb-3 rounded px-3 ">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
-                            <BackControl navigateTo={navigateTo} />
+                            <BackControl navigateTo={navigateTo} className="navbar-brand" />
                             <span className="fs-5 fw-semibold text-white text-center">{props.navTitle}</span>
                         </li>
                     </ul>

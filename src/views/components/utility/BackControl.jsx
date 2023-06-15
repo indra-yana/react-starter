@@ -6,8 +6,8 @@ export default function BackControl(props) {
 
     return (
         <>
-            <a type="button" className="navbar-brand" onClick={() => navigate(navigateTo)} title="Back">
-                <i className={`fas fa-arrow-left ${className}`}></i>
+            <a type="button" className={`${className}`} onClick={() => navigate(navigateTo)} title="Back">
+                <i className={`fas fa-arrow-left`}></i>
             </a>
         </>
     )
