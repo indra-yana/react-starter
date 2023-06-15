@@ -113,10 +113,10 @@ export default function AuthService() {
         setSendVerificationLinkState(STATE.Success(result));
     }
 
-    async function verify(token, email) {
+    async function verify(expire, token, email) {
         setVerifyState(STATE.Loading);
 
-        const result = await authRepository.verify(token, email);
+        const result = await authRepository.verify(expire, token, email);
         if (result.error) {
             setVerifyState(STATE.Error(result));
             return;

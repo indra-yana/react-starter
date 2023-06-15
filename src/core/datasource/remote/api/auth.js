@@ -31,8 +31,9 @@ export async function sendVerificationLink(email) {
     });
 }
 
-export async function verify(token, email) {
+export async function verify(expire, token, email) {
     return await apiClient.put('/v1/auth/verify', {
+        expire,
         token,
         email
     });

@@ -17,7 +17,7 @@ export default function Verify(props) {
     const { auth, setAuth } = useAuthContext();
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { verifyState, sendVerificationLinkState, verify, sendVerificationLink } = AuthService();
-    const { token } = useParams();
+    const { expire, token } = useParams();
     const { t } = useTranslation();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -35,6 +35,7 @@ export default function Verify(props) {
     useEffect(() => {
         if (token !== 'undefined') {
             setForm({
+                expire,
                 token,
                 email,
             });
@@ -53,9 +54,9 @@ export default function Verify(props) {
                 message,
             });
 
-            const { user = {} } = data;
-            if (user.email_verified_at) {
-                redirectToDashboard(user);
+            const { email_verified_at } = data;
+            if (email_verified_at) {
+                redirectToDashboard(email_verified_at);
             }
 
             Toast.success(message);
@@ -86,9 +87,9 @@ export default function Verify(props) {
                 message,
             });
 
-            const { user = {} } = data;
-            if (user.email_verified_at) {
-                redirectToDashboard(user);
+            const { email_verified_at } = data;
+            if (email_verified_at) {
+                redirectToDashboard(email_verified_at);
             }
 
             Toast.success(message);
@@ -107,12 +108,12 @@ export default function Verify(props) {
         }
     }, [sendVerificationLinkState]);
 
-    function redirectToDashboard(newUser) {
+    function redirectToDashboard(email_verified_at) {
         setAuth((prevAuth) => ({
             ...prevAuth,
             user: {
                 ...auth.user,
-                email_verified_at: newUser.email_verified_at,
+                email_verified_at,
             }
         }));
         
@@ -121,7 +122,7 @@ export default function Verify(props) {
 
     async function handleVerify(e) {
         e.preventDefault();
-        await verify(form.token, form.email);
+        await verify(form.expire, form.token, form.email);
     }
 
     async function handleResendVerificationLink(e) {

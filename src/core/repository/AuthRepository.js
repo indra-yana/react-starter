@@ -44,8 +44,8 @@ export default class AuthRepository {
             .catch(error);
     }
 
-    async verify(token, email) {
-        return await verify(token, email)
+    async verify(expire, token, email) {
+        return await verify(expire, token, email)
             .then(success)
             .catch(error);
     }
