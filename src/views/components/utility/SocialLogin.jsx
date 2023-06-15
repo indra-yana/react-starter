@@ -21,8 +21,8 @@ const REDIRECT_URI = window.location.href;
 
 export default function SocialLogin(props) {
     const navigate = useNavigate();
-    const [provider, setProvider] = useState('')
-    const [profile, setProfile] = useState(null)
+    const [provider, setProvider] = useState('');
+    const [authResponse, setAuthResponse] = useState(null);
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { auth, setAuth } = useAuthContext();
     const { loginState, whoamiState, socialLogin, whoami } = AuthService();
@@ -30,11 +30,11 @@ export default function SocialLogin(props) {
     const { t } = useTranslation();
 
     useEffect(() => {
-        console.log(provider, profile);
-        if (!isLoading && provider && profile) {
-            socialLogin(profile, provider);
+        console.log(provider, authResponse);
+        if (!isLoading && provider && authResponse) {
+            socialLogin(authResponse, provider);
         }
-    }, [profile, provider])
+    }, [authResponse, provider])
 
     useEffect(() => {
         setIsLoading(loginState.LOADING);
@@ -115,6 +115,16 @@ export default function SocialLogin(props) {
         }
     }, [auth]);
 
+    function onAuthError(error) {
+        Toast.error(error);
+
+        setAlert({
+            show: true,
+            type: 'error',
+            message: error,
+        });
+    }
+
     return (
         <>
             <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
@@ -126,11 +136,9 @@ export default function SocialLogin(props) {
                             client_id={GOOGLE_CLIENT_ID || ''}
                             onResolve={({ provider, data }) => {
                                 setProvider(provider)
-                                setProfile(data)
+                                setAuthResponse(data)
                             }}
-                            onReject={(err) => {
-                                console.log(err)
-                            }}
+                            onReject={onAuthError}
                         >
                             <button type="button" className="btn btn-outline-danger btn-social btn-circle shadow-sm" title="Google">
                                 <i className="fab fa-google"> </i>
@@ -144,13 +152,11 @@ export default function SocialLogin(props) {
                             scope="profile openid email User.Read User.Read.All"
                             onResolve={({ provider, data }) => {
                                 setProvider(provider)
-                                setProfile(data)
+                                setAuthResponse(data)
                             }}
-                            onReject={(err) => {
-                                console.log(err)
-                            }}
+                            onReject={onAuthError}
                         >
-                            <button type="button" className="btn btn-outline-info btn-social btn-circle shadow-sm" title="Microsoft">
+                            <button type="button" className="btn btn-outline-success btn-social btn-circle shadow-sm" title="Microsoft">
                                 <i className="fab fa-microsoft"> </i>
                             </button>
                         </LoginSocialMicrosoft>
@@ -160,7 +166,7 @@ export default function SocialLogin(props) {
                             appId={FB_CLIENT_ID || ''}
                             onResolve={({ provider, data }) => {
                                 setProvider(provider)
-                                setProfile(data)
+                                setAuthResponse(data)
                             }}
                             onReject={(err) => {
                                 console.log(err)
@@ -177,7 +183,7 @@ export default function SocialLogin(props) {
                             redirect_uri={REDIRECT_URI}
                             onResolve={({ provider, data }) => {
                                 setProvider(provider)
-                                setProfile(data)
+                                setAuthResponse(data)
                             }}
                             onReject={(err) => {
                                 console.log(err)
@@ -195,7 +201,7 @@ export default function SocialLogin(props) {
                             redirect_uri={REDIRECT_URI}
                             onResolve={({ provider, data }) => {
                                 setProvider(provider)
-                                setProfile(data)
+                                setAuthResponse(data)
                             }}
                             onReject={(err) => {
                                 console.log(err)
