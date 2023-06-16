@@ -26,7 +26,7 @@ This project is purposed for building your awesome app that needed a starting po
 
 # API
 
-This project use the <a href="https://github.com/indra-yana/fastify-kit" target="__blank">Fasity-Kit</a> REST API Porject to work with this project.
+This project can integrated with backend service project <a href="https://github.com/indra-yana/nestjs-starter" target="__blank">NestJS-Starter</a> as REST API Project.
 The API Spec will described bellow:
 
 ### General Header Request :
