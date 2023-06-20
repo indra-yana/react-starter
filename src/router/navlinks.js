@@ -31,7 +31,7 @@ const LINKS = {
         name: 'auth.confirm',
     },
     verify: {
-        path: '/auth/verify/:token',
+        path: '/auth/verify/:expire/:token',
         name: 'auth.verify',
     },
 
