@@ -199,6 +199,7 @@ export default function SocialLogin(props) {
                             client_id={GITHUB_CLIENT_ID || ''}
                             client_secret={GITHUB_CLIENT_SECRET || ''}
                             redirect_uri={REDIRECT_URI}
+                            scope="gist,repo,user"
                             onResolve={({ provider, data }) => {
                                 setProvider(provider)
                                 setAuthResponse(data)
