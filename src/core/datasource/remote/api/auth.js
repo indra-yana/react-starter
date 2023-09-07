@@ -46,7 +46,7 @@ export async function sendResetPasswordLink(email) {
 }
 
 export async function resetPassword(payloads) {
-    return await apiClient.post('/v1/auth/password/reset', payloads);
+    return await apiClient.put('/v1/auth/password/reset', payloads);
 }
 
 export async function confirmPassword(password) {
