@@ -1,8 +1,8 @@
-import { RepositoryFactory } from "../repository/RepositoryFactory";
 import { STATE } from "src/utils/view-state";
 import { useState } from "react";
+import AuthRepository from "src/core/repository/AuthRepository";
 
-const authRepository = RepositoryFactory.get('auth');
+const authRepository = new AuthRepository();
 
 export default function AuthService() {
     const [sendResetLinkState, setSendResetLinkState] = useState(STATE.Default);
@@ -161,7 +161,7 @@ export default function AuthService() {
         verifyState,
         refreshTokenState,
         whoamiState,
-        auth, 
+        auth,
         setAuth,
 
         // Method

@@ -1,8 +1,8 @@
-import { RepositoryFactory } from "../repository/RepositoryFactory";
 import { STATE } from "src/utils/view-state";
 import { useState } from "react";
+import UserRepository from "src/core/repository/UserRepository";
 
-const userRepository = RepositoryFactory.get('user');
+const userRepository = new UserRepository();
 
 export function UserService() {
     const [listState, setListState] = useState(STATE.Default);
@@ -13,7 +13,7 @@ export function UserService() {
 
     async function list(page = 1, limit = 10) {
         setListState(STATE.Loading);
-        
+
         const result = await userRepository.list(page, limit);
         if (result.error) {
             setListState(STATE.Error(result));
@@ -25,7 +25,7 @@ export function UserService() {
 
     async function show(id) {
         setShowState(STATE.Loading);
-        
+
         const result = await userRepository.show(id);
         if (result.error) {
             setShowState(STATE.Error(result));
@@ -37,7 +37,7 @@ export function UserService() {
 
     async function create(payloads) {
         setCreateState(STATE.Loading);
-        
+
         const result = await userRepository.create(payloads);
         if (result.error) {
             setCreateState(STATE.Error(result));
@@ -46,10 +46,10 @@ export function UserService() {
 
         setCreateState(STATE.Success(result));
     }
-    
+
     async function update(payloads) {
         setUpdateState(STATE.Loading);
-        
+
         const result = await userRepository.update(payloads);
         if (result.error) {
             setUpdateState(STATE.Error(result));
@@ -58,10 +58,10 @@ export function UserService() {
 
         setUpdateState(STATE.Success(result));
     }
-    
+
     async function deleteData(id) {
         setDeleteState(STATE.Loading);
-        
+
         const result = await userRepository.deleteData(id);
         if (result.error) {
             setDeleteState(STATE.Error(result));
