@@ -1,18 +1,18 @@
+import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import { useEffect } from "react";
 
 export function useAuthContext() {
     let { auth, setAuth } = useOutletContext();
     if (Object.keys(auth || {}).length === 0) {
-       auth =  {
+        auth = {
             isLogin: false,
             user: {},
             token: {},
         }
     }
 
-    const token = auth.token.accessToken;
+    const token = auth?.token?.accessToken;
     const now = Date.now();
     let expired = 0;
 
@@ -30,8 +30,8 @@ export function useAuthContext() {
         }
     }, []);
 
-    return { 
+    return {
         auth,
-        setAuth 
+        setAuth
     };
 }

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
 import { getItem, setItem } from "src/core/datasource/local/local-storage";
+import { parseJsonOrString } from "src/utils/utility";
+import { useEffect, useState } from "react";
 
 export function useLocalStorage(key, initialValue) {
     const [value, setValue] = useState(() => {
         const storedValue = getItem(key);
-        return storedValue === null ? initialValue : JSON.parse(storedValue);
+        return storedValue === null ? initialValue : parseJsonOrString(storedValue);
     });
 
     useEffect(() => {

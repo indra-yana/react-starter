@@ -13,6 +13,7 @@ export function handleInputType(e) {
         case 'radio':
             return checked ? value : "";
         case 'text': 
+        case 'textarea': 
         case 'number': 
         case 'email':
         case 'select':
