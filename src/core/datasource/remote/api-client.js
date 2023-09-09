@@ -1,9 +1,12 @@
-import axios from 'axios';
 import { getItem } from '../local/local-storage';
+import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:3000';
-const REST_API = import.meta.env.VITE_APP_BE_URL || `${BASE_URL}/api`;
+const BASE_BE_URL = import.meta.env.VITE_APP_BE_URL;
+if (!BASE_BE_URL) {
+	throw new Error('Rest not defined!');
+}
 
+const REST_API = `${BASE_BE_URL}/api`;
 const apiClient = axios.create({
 	baseURL: REST_API,
 	headers: {
