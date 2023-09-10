@@ -1,15 +1,11 @@
+import { handleUploadedFile } from "src/utils/utility";
+import { removeItem } from "src/core/datasource/local/local-storage";
 import { useAuthContext } from "src/hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { removeItem } from "src/core/datasource/local/local-storage";
 
 export default function ProfileControl(props) {
-    const {
-        size = 'avatar-32',
-        title = false,
-        className = '',
-    } = props;
-
+    const { size = 'avatar-32', title = false, className = '', } = props;
     const { t } = useTranslation();
     const { auth, setAuth } = useAuthContext();
     const navigate = useNavigate();
@@ -21,8 +17,16 @@ export default function ProfileControl(props) {
         setTimeout(() => {
             removeItem('auth');
         }, 1000);
-        
+
         navigate('/auth/login');
+    }
+
+    function handleAvatar(avatar) {
+        return handleUploadedFile({
+            folder: 'avatar',
+            key: auth.user.id,
+            filename: avatar,
+        });
     }
 
     return (
@@ -30,7 +34,7 @@ export default function ProfileControl(props) {
             {auth.isLogin &&
                 <>
                     <a id="navbarDropdown" className="nav-link dropdown-toggle p-1" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        <img src={auth.user.avatar || "/assets/img/avatar-profile.png"} alt="avatar" className={`img logo rounded-circle border border-1 border-secondary ${size} ${className}`} />
+                        <img src={handleAvatar(auth.user.avatar)} alt="avatar" className={`img logo rounded-circle border border-1 border-secondary ${size} ${className}`} />
                         {title && <span >{t('message.welcome_back', { name: auth.user.name || '' })}</span>}
                     </a>
                     <ul className="dropdown-menu dropdown-menu-end rounded-3 border-0 shadow p-2" aria-labelledby="navbarDropdown">

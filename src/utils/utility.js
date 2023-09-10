@@ -14,3 +14,27 @@ export function isJson(text) {
         return false;
     }
 }
+
+export function handleUploadedFile(config = {}) {
+    const { folder, key, filename } = config;
+
+    if (!isValidUrl(filename) && filename) {
+        const url = import.meta.env.VITE_APP_UPLOADED_URL;
+
+        return url.replace(':folder', folder).replace(':key', key).replace(':filename', filename);
+    }
+
+    if (!filename && folder === 'avatar') {
+        return "/assets/img/avatar-profile.png";
+    }
+
+    return filename;
+}
+
+export function isValidUrl(urlString) {
+    try {
+        return Boolean(new URL(urlString));
+    } catch (e) {
+        return false;
+    }
+}
