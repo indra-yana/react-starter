@@ -84,6 +84,7 @@
 		"verify_account_desc_1": "Before continuing, please check your email for a verification link.",
 		"verify_account_desc_2": "If you did not receive the email, click Resend verification bellow.",
 		"verify_account": "Verify Account",
+		"verify_account_action": "Please click the verification button bellow to continue.",
 		"verify_resend_link": "Or resend verification link.",
 		"verify": "Verify"
 	},

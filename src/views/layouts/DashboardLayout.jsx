@@ -23,7 +23,7 @@ export default function DashboardLayout(props) {
             navigate('/auth/login');
         } else {
             if (user.email_verified_at === null) {
-                navigate(`/auth/verify/undefined?email=${user.email}`);
+                navigate(`/auth/verify?email=${user.email}`);
             }
         }
     }, [auth.isLogin]);

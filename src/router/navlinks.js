@@ -31,8 +31,12 @@ const LINKS = {
         name: 'auth.confirm',
     },
     verify: {
-        path: '/auth/verify/:expire/:token',
+        path: '/auth/verify',
         name: 'auth.verify',
+    },
+    verify_action: {
+        path: '/auth/verify/:expire/:token',
+        name: 'auth.verify.action',
     },
 
     // Dashboard link

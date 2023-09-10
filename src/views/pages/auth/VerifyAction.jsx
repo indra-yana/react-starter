@@ -12,16 +12,16 @@ const defaultForm = {
     email: "",
 }
 
-export default function Verify(props) {
+export default function VerifyAction(props) {
     usePageTitle('Verify Account');
     const { auth, setAuth } = useAuthContext();
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
-    const { sendVerificationLinkState, sendVerificationLink } = AuthService();
+    const { verifyState, sendVerificationLinkState, verify, sendVerificationLink } = AuthService();
     const { expire, token } = useParams();
     const { t } = useTranslation();
-    const [searchParams] = useSearchParams();
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [validation, setValidation] = useState({});
     const [form, setForm] = useState(defaultForm);
     const email = auth.user ? auth.user.email : searchParams.get('email');
@@ -45,6 +45,39 @@ export default function Verify(props) {
             email,
         });
     }, []);
+
+    useEffect(() => {
+        setIsLoading(verifyState.LOADING);
+
+        if (verifyState.SUCCESS) {
+            const { message, data = {} } = verifyState.RESULT;
+            setAlert({
+                show: true,
+                type: 'success',
+                autoClose: true,
+                message,
+            });
+
+            const { email_verified_at } = data;
+            if (email_verified_at) {
+                redirectToDashboard(email_verified_at);
+            }
+
+            Toast.success(message);
+            console.log(data);
+        } else if (verifyState.ERROR) {
+            const { message, error = {} } = verifyState.RESULT;
+            setValidation(error);
+
+            setAlert({
+                show: true,
+                type: 'error',
+                message,
+            });
+
+            Toast.error(message);
+        }
+    }, [verifyState]);
 
     useEffect(() => {
         setIsLoading(sendVerificationLinkState.LOADING);
@@ -89,6 +122,11 @@ export default function Verify(props) {
         }));
     }
 
+    async function handleVerify(e) {
+        e.preventDefault();
+        await verify(form.expire, form.token, form.email);
+    }
+
     async function handleResendVerificationLink(e) {
         e.preventDefault();
         await sendVerificationLink(email);
@@ -102,18 +140,23 @@ export default function Verify(props) {
                         <img src="/assets/img/draw2.webp" className="img-fluid" alt="Sample image" />
                     </div>
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form onSubmit={() => false}>
+                        <form onSubmit={handleVerify}>
                             <div className="divider d-flex align-items-center my-4">
                                 <p className="text-center fw-bold mx-3 mb-0 fs-5">{t('label.verify_account')}</p>
                             </div>
                             <div className="row mb-3">
                                 <div className="col-sm-12 col-form-label text-md-right">
                                     <h5>{t('label.hi')} <span className="fst-italic">{email}</span></h5>
-                                    <p className="m-0">{t('label.verify_account_desc_1')}</p>
+                                    <p className="m-0">{t('label.verify_account_action')}</p>
                                 </div>
                             </div>
 
-                            <ButtonSpinner type="button" isLoading={isLoading} text={t('label.resend')} onClick={handleResendVerificationLink} />
+                            <div className="text-center text-lg-start mt-4 pt-2">
+                                <ButtonSpinner type="submit" isLoading={isLoading} text={t('label.verify')} />
+                                <p className="small fw-bold mt-2 pt-1 mb-0 me-2">{t('label.verify_resend_link')}&nbsp;
+                                    <a type="button" className="link-danger" onClick={handleResendVerificationLink}> {t('label.resend')}</a>
+                                </p>
+                            </div>
                         </form>
                     </div>
                 </div>

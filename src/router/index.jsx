@@ -25,9 +25,10 @@ import ManageUser from 'src/views/pages/dashboard/user/manage/ManageUser';
 import Register from 'src/views/pages/auth/Register';
 import Reset from 'src/views/pages/auth/password/Reset';
 import Root, { loader as rootLoader, action as rootAction } from 'src/views/layouts/Root';
+import Setting from 'src/views/pages/dashboard/setting/Setting';
 import ShowContact, { loader as contactLoader, action as contactAction } from 'src/views/pages/contact/ShowContact';
 import Verify from 'src/views/pages/auth/Verify';
-import Setting from 'src/views/pages/dashboard/setting/Setting';
+import VerifyAction from 'src/views/pages/auth/VerifyAction';
 
 const router = createBrowserRouter([
     {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
                     {
                         path: link.getPath('verify'),
                         element: <Verify />,
+                    },
+                    {
+                        path: link.getPath('verify_action'),
+                        element: <VerifyAction />,
                     },
                 ]
             },

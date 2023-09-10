@@ -84,6 +84,7 @@
 		"verify_account_desc_1": "Sebelum melanjutkan, silahkan periksa email untuk tautan verifikasi.",
 		"verify_account_desc_2": "Jika kamu tidak menerima email yang berisi tautan verifikasi, klik Kirim Ulang di bawah.",
 		"verify_account": "Verifikasi Akun",
+		"verify_account_action": "Klik tombol verifikasi di bawah untuk melanjutkan.",
 		"verify_resend_link": "Atau kirim ulang tautan verifikasi.",
 		"verify": "Verifikasi"
 	},
