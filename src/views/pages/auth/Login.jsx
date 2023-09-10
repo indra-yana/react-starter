@@ -21,7 +21,7 @@ export default function Login(props) {
     const navigate = useNavigate();
     const { isLoading, setIsLoading, setAlert } = useOutletContext();
     const { auth, setAuth } = useAuthContext();
-    const { loginState, login } = AuthService();
+    const { loginState, whoamiState, login, whoami } = AuthService();
     const { t } = useTranslation();
 
     const [validation, setValidation] = useState({});
@@ -32,6 +32,7 @@ export default function Login(props) {
 
         if (loginState.SUCCESS) {
             const { message, data = {} } = loginState.RESULT;
+
             setAlert({
                 show: true,
                 type: 'success',
@@ -40,13 +41,13 @@ export default function Login(props) {
             });
 
             Toast.success(message);
-            resetForm();
 
             console.log(data);
             setAuth({
                 ...data,
-                isLogin: true,
             });
+
+            whoami();
         } else if (loginState.ERROR) {
             const { message, error = {} } = loginState.RESULT;
             setValidation(error);
@@ -61,6 +62,32 @@ export default function Login(props) {
         }
 
     }, [loginState]);
+
+    useEffect(() => {
+        setIsLoading(whoamiState.LOADING);
+
+        if (whoamiState.SUCCESS) {
+            const { message, data = {} } = whoamiState.RESULT;
+
+            setAuth((prevState) => ({
+                ...prevState,
+                isLogin: true,
+                user: data,
+            }));
+        } else if (whoamiState.ERROR) {
+            const { message, error = {} } = whoamiState.RESULT;
+            console.log(error);
+
+            setAlert({
+                show: true,
+                type: 'error',
+                message,
+            });
+
+            Toast.error(message);
+        }
+
+    }, [whoamiState]);
 
     useEffect(() => {
         if (auth.isLogin) {
@@ -113,13 +140,13 @@ export default function Login(props) {
                                         {t('label.remember_me')}
                                     </label>
                                 </div>
-                                <Link to={'/auth/forgot'} className="text-body" state={{from: 'login'}}> {t('label.forgot_password_question')}</Link>
+                                <Link to={'/auth/forgot'} className="text-body" state={{ from: 'login' }}> {t('label.forgot_password_question')}</Link>
                             </div>
 
                             <div className="text-center text-lg-start mt-4 pt-2">
                                 <ButtonSpinner type="submit" isLoading={isLoading} text={t('label.login')} />
                                 <p className="small fw-bold mt-2 pt-1 mb-0">{t('label.donot_have_account')}
-                                    <Link to={'/auth/register'} className="link-danger" state={{from: 'login'}}> {t('label.register')}</Link>
+                                    <Link to={'/auth/register'} className="link-danger" state={{ from: 'login' }}> {t('label.register')}</Link>
                                 </p>
                             </div>
                         </form>

@@ -41,7 +41,7 @@ export default function SocialLogin(props) {
 
         if (loginState.SUCCESS) {
             const { message, data = {} } = loginState.RESULT;
-            
+
             setAlert({
                 show: true,
                 type: 'success',
@@ -71,23 +71,12 @@ export default function SocialLogin(props) {
         }
 
     }, [loginState]);
-   
+
     useEffect(() => {
         setIsLoading(whoamiState.LOADING);
 
         if (whoamiState.SUCCESS) {
             const { message, data = {} } = whoamiState.RESULT;
-            
-            setAlert({
-                show: true,
-                type: 'success',
-                autoClose: true,
-                message,
-            });
-
-            Toast.success(message);
-
-            console.log(data);
 
             setAuth((prevState) => ({
                 ...prevState,
