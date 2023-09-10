@@ -11,6 +11,7 @@ import AvatarPreview from "src/views/components/utility/AvatarPreview";
 import ButtonSpinner from "src/views/components/button/ButtonSpinner";
 import FormInput from "src/views/components/form/FormInput";
 import FormInputPlain from "src/views/components/form/FormInputPlain";
+import { handleUploadedFile } from "src/utils/utility";
 
 const defaultPreview = '/assets/img/user.png';
 const defaultForm = {
@@ -121,7 +122,13 @@ export default function ManageProfile(props) {
             }));
 
             if (avatar) {
-                setAvatarPreview(avatar);
+                const handleAvatar = handleUploadedFile({
+                    folder: 'avatar',
+                    key: auth.user.id,
+                    filename: avatar,
+                });
+
+                setAvatarPreview(handleAvatar);
             }
         } else if (showState.ERROR) {
             const { message, error = {} } = showState.RESULT;
