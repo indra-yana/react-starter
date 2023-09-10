@@ -1,4 +1,5 @@
 import { handleInputType } from "src/utils/input-helper";
+import { handleUploadedFile } from "src/utils/utility";
 import { Toast } from "src/utils/alert";
 import { useAuthContext } from "src/hooks/useAuthContext";
 import { useEffect, useState } from "react";
@@ -111,7 +112,13 @@ export default function EditUser(props) {
             }));
 
             if (avatar) {
-                setAvatarPreview(avatar);
+                const handleAvatar = handleUploadedFile({
+                    folder: 'avatar',
+                    key: id,
+                    filename: avatar,
+                });
+
+                setAvatarPreview(handleAvatar);
             }
         } else if (showState.ERROR) {
             const { message, error = {} } = showState.RESULT;

@@ -124,7 +124,7 @@ export default function ManageProfile(props) {
             if (avatar) {
                 const handleAvatar = handleUploadedFile({
                     folder: 'avatar',
-                    key: auth.user.id,
+                    key: id,
                     filename: avatar,
                 });
 
